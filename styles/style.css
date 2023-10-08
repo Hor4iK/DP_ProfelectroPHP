@@ -1,0 +1,167 @@
+.page {
+    background-color: #f8f8f9;
+}
+
+.header {
+    display: flex;
+}
+
+.header__menu-section {
+    width: 85px;
+    height: 56px;
+  display: flex;
+  align-items: center;
+    justify-content: center;
+  background-color: #13265f;
+}
+
+.header__menu-section-link {
+ display: block;
+ width: 40px;
+ height: 40px;
+}
+
+.header__menu-section-icon {
+    object-fit: cover;
+}
+
+.header__menu-list-block {
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
+ display: flex;
+ justify-content: space-between;
+ background-color: #fff;
+}
+
+.header__menu-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 40px;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.header__list-item-link {
+    text-decoration: none;
+}
+
+.header__user-logo {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.header__user-link {
+    display: block;
+    width: 26px;
+    height: 26px;
+}
+
+.header__user-image {
+    object-fit: cover;
+}
+
+.header__logo-link {
+    display: block;
+    width: 190px;
+    height: 55px;
+}
+
+.header__logo-image {
+    object-fit: cover;
+}
+
+.prewiev {
+
+}
+
+.sidebar-menu {
+    position: relative;
+}
+
+.sidebar-menu__block-static {
+    writing-mode: vertical-lr;
+    block-size: 81px;
+    padding: 400px 30px;
+    background-color: #183AA1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebar-menu__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-menu__text-title {
+    word-break: break-all;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 4.8px;
+    text-transform: uppercase;
+    text-orientation: upright;
+    white-space: pre;
+    color: #fff;
+}
+
+.sidebar-menu__text-img {
+    width: 13px;
+    height: 13px;
+    background-position: center;
+    background-size: cover;
+}
+
+/* СКРЫВАЕМЫЙ БЛОК МЕНЮ */
+
+.sidebar-menu__block-list {
+    width: 410px;
+    height: 953px;
+    padding: 40px;
+    padding-right: 20px;
+    position: absolute;
+    top: 0;
+    left: 81px;
+    background-color: #fff;
+}
+
+.sidebar-menu__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.sidebar-menu_list-item {
+    margin-right: 30px;
+    padding: 5px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sidebar-menu__content {
+    text-decoration: none;
+}
+
+.sidebar-menu__img-sign {
+
+}
+
+/* бЛОК БАНЕРА */
+
+.preview-banner-cards {
+    display: flex;
+    flex-direction: column;
+}
+
+.banner-view {
+
+}
