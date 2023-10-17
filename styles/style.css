@@ -82,7 +82,7 @@
 }
 
 .sidebar-menu {
-    position: relative;
+
 }
 
 .sidebar-menu:hover .sidebar-menu__block-static{
@@ -215,6 +215,7 @@
 
 .banner-view__list-item-title {
     margin-bottom: 60px;
+    max-width: 600px;
     font-size: 38px;
     font-style: normal;
     font-weight: 300;
@@ -309,13 +310,13 @@ box-shadow: 0px -150px 67px -75px rgba(0, 0, 0, 0.8) inset;
 .content__sidebar {
     writing-mode: vertical-lr;
     block-size: 75px;
-    inline-size: 100%;
     flex-shrink: 0;
     background-color: #fff;
     box-shadow: inset -2px 0px 0px 0px rgba(0,0,0,0.1);
 }
 
 .content__wrapper {
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -433,9 +434,180 @@ box-shadow: 0px -150px 67px -75px rgba(0, 0, 0, 0.8) inset;
 .offers__switches {
     position: absolute;
     top: 50%;
-    right: 10%;
+    right: 8%;
+    display: flex;
+    gap: 16px;
 }
 
 .offers__card-switch {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+}
 
+.button-type__light {
+    background-color: #fff;
+    box-shadow: 0px 8px 17px -5px rgba(0,0,0,0.18);
+}
+
+.button-type__color {
+    color: #fff;
+    background-color: #132d7c;
+}
+
+.content__big-cards {
+    padding: 30px 15px;
+    
+    background-color: #fff;
+}
+
+.big-cards__list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8vw;
+    list-style: none;
+}
+
+.big-cards__list-item {
+    width: calc(50% - 12vw);
+}
+
+.big-cards__link {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.big-cards__image {
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.big-cards__title {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 2px
+}
+
+.big-cards__description {
+    margin-bottom: 25px;
+    font-size: 20px;
+    font-weight: 200;
+    line-height: 1.18;
+    letter-spacing: 2px;
+}
+
+.footer {
+    padding: 35px;
+    background-color: #373737;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 1.4;
+    word-spacing: 2px;
+}
+
+.footer__content {
+    display: flex;
+    gap: 10vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer__content-link {
+    text-decoration: none;
+}
+
+.footer-button-subscribe {
+    position: relative;
+    left: -28px;
+    padding: 13px 25px;
+    margin-bottom: 18px;
+    background-color: #5f5c5c;
+    border-radius: 5px;
+    color: inherit;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.675px;
+    border: none;
+}
+
+.footer__content__list {
+    display: flex;
+    gap: 9vw;
+    justify-content: space-around;
+}
+
+.footer__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+}
+
+.footer__list-item {
+    
+}
+
+.footer__contact-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+}
+
+.footer__contact-list-item {
+
+}
+
+.footer__contact-link {
+    display: block;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    text-decoration: none;
+}
+
+.footer__contact-link[href^="tel:"] {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: 1.35px;
+}
+
+.footer__contact-list-item.footer__contact-link[href^="mailto:"]{
+    margin-bottom: 15px;
+}
+
+.footer__contact-link[href^="mailto:"]{
+    margin: 17px 0;
+}
+
+.contact__block-address {
+    margin-top: 4px;
+}
+
+.footer__offer {
+    font-size: 12px;
+    color: rgba(255, 253, 253, 0.65);
+}
+
+.footer__title {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.footer__only-title {
+    gap: 14px;
 }
