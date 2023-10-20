@@ -1,5 +1,8 @@
 .page {
   background-color: #f8f8f9;
+  --font-size: clamp(0.875rem, 0.787rem + 0.2817vw, 1.125rem);
+  --theme-color: #13265f;
+  --accent-color: #2548b9;
 }
 
 .header {
@@ -8,34 +11,42 @@
 
 .header__menu-section {
   width: 75px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
-  background-color: #13265f;
+  background-color: var(--theme-color);
+}
+
+.visible__none {
+  display: none;
 }
 
 .header__menu-section:hover {
-  background-color: #1f2e5b;
+  background-color: var(--accent-color);
 }
 
 .header__menu-section-link {
-  display: block;
-  width: 40px;
-  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .header__menu-section-icon {
   object-fit: cover;
+  width: 40px;
+  height: 40px;
 }
 
 .header__menu-list-block {
   width: 100%;
-  padding-left: 40px;
   padding-right: 40px;
   display: flex;
   justify-content: space-between;
   background-color: #fff;
+}
+
+.header__menu-section__menu-logo {
+  display: flex;
 }
 
 .header__menu-list {
@@ -43,7 +54,7 @@
   align-items: center;
   list-style: none;
   gap: 40px;
-  font-size: 16px;
+  font-size: var(--font-size);
   font-weight: 300;
 }
 
@@ -53,7 +64,7 @@
 
 .header__list-item-link:hover {
     transition: 220ms;
-    color: #2548b9;
+    color: var(--accent-color);
 }
 
 .header__user-logo {
@@ -76,7 +87,8 @@
 .header__logo-link {
   display: block;
   width: 190px;
-  height: 55px;
+  width:  clamp(6.25rem, 6.6053rem + 6.5789vw, 12.5rem);
+  margin-left: 20px;
 }
 
 .header__logo-image {
@@ -95,7 +107,7 @@
   writing-mode: vertical-lr;
   block-size: 75px;
   padding: 350px 30px;
-  background-color: #183aa1;
+  background-color: var(--accent-color);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -103,7 +115,7 @@
 
 .sidebar-menu:hover .sidebar-menu__block-static {
     transition: 700ms;
-    background-color: #2548b9;
+    background-color: var(--accent-color);
 }
 
 .sidebar-menu__text {
@@ -116,7 +128,7 @@
 .sidebar-menu__text-title {
   word-break: break-all;
   text-align: center;
-  font-size: 12px;
+  font-size: calc(var(--font-size) - 0.2em);
   font-weight: 500;
   line-height: 1.4;
   letter-spacing: 4.8px;
@@ -124,6 +136,7 @@
   text-orientation: upright;
   white-space: pre;
   color: #fff;
+  cursor: default;
 }
 
 .sidebar-menu__text-img {
@@ -180,6 +193,7 @@
 
 .banner-view {
   height: 100%;
+  min-height: 18em;
   width: 100%;
   padding: 10px 150px;
   background-color: #fff;
@@ -224,7 +238,7 @@
 .banner-view__list-item-button:hover {
   cursor: pointer;
   transition: 500ms;
-  background-color: #19358f;
+  background-color: var(--accent-color);
 }
 
 /*--    --*/
@@ -285,7 +299,8 @@
 }
 
 .preview__card-title {
-  font-size: 16px;
+  font-size: clamp(0.75rem, 0.566rem + 0.7362vw, 1.125rem);;
+  word-break: break-all;
   font-style: normal;
   font-weight: 100;
   line-height: 1.4;
@@ -317,6 +332,7 @@
 }
 
 .content__about {
+  width: 100%;
   display: flex;
   justify-items: center;
   padding: 50px 10px;
@@ -325,8 +341,9 @@
 }
 
 .content__about-list {
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, minmax(min-content, calc(25% - 5vw)));
+  grid-template-columns: repeat(auto-fit, minmax(min-content, calc(25% - 5vw)));
   justify-content: center;
   gap: 50px;
   list-style: none;
@@ -334,7 +351,13 @@
 }
 
 .about__card-item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 25px;
+  cursor: default;
 }
 
 .about__icon {
@@ -348,13 +371,13 @@
 
 .about__card-title {
   margin-bottom: 15px;
-  font-size: 18px;
+  font-size: calc(var(--font-size) + 0.05em);
   font-weight: 400;
   line-height: 1.4;
 }
 
 .about__card-paragraph {
-  font-size: 14px;
+  font-size: calc(var(--font-size) - 0.05em);
   font-weight: 300;
   line-height: 1.4;
 }
@@ -367,7 +390,7 @@
 
 .offers__title {
   margin-bottom: 50px;
-  font-size: 45px;
+  font-size: clamp(1.875rem, 1.6283rem + 0.9868vw, 2.8125rem);;
   font-weight: 300;
   line-height: 1.1;
 }
@@ -398,7 +421,7 @@
 
 .button-type__color {
   color: #fff;
-  background-color: #132d7c;
+  background-color: var(--theme-color);
 }
 
 .offers__cards-list {

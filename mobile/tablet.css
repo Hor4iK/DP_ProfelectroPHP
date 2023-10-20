@@ -1,0 +1,25 @@
+@media screen and (width <= 1215px) {
+    .header__menu-section {
+        display: none;
+    }
+
+    .sidebar-menu {
+        position: static;
+    }
+
+    .sidebar-menu__block-static {
+        display: none;
+    }
+
+    .header__menu-section {
+        flex-shrink: 1;
+    }
+
+    .visible__none {
+        display: flex;
+    }
+
+    .content__sidebar {
+        display: none;
+    }
+}
