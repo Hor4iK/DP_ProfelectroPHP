@@ -1,25 +1,63 @@
 @media screen and (width <= 1215px) {
-    .header__menu-section {
-        display: none;
-    }
+  .header__menu-section {
+    display: none;
+    flex-shrink: 1;
+  }
 
-    .sidebar-menu {
-        position: static;
-    }
+  .sidebar-menu {
+    position: static;
+  }
 
-    .sidebar-menu__block-static {
-        display: none;
-    }
+  .sidebar-menu__block-static {
+    display: none;
+  }
 
-    .header__menu-section {
-        flex-shrink: 1;
-    }
+  .visible__none {
+    display: flex;
+  }
 
-    .visible__none {
-        display: flex;
-    }
+  .content__sidebar {
+    display: none;
+  }
+}
 
-    .content__sidebar {
-        display: none;
-    }
+@media screen and (width < 786px) {
+  .type__hiding {
+    display: none;
+  }
+}
+
+@media (width <= 765px) {
+  .preview__list-cards {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 100%));
+  }
+
+  .footer__content {
+    flex-direction: column;
+  }
+
+  .footer__contact-list {
+    align-self: start;
+  }
+
+  .banner-view-link {
+    background-size: 100%;
+  }
+}
+
+@media (width <= 600px) {
+  .content__about-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about__card-item {
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .about__card-paragraph {
+    margin-left: 50px;
+  }
 }
