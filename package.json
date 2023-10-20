@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "prettier": "^3.0.3",
+    "stylelint": "^15.11.0"
+  },
+  "scripts": {
+    "checkedP": "prettier --check './**/*.{html,css,js}'",
+    "checkedS": "stylelint '**/*.css'",
+    "writeP": "prettier --write './**/*.{html,css,js}'",
+    "writeS": "stylelint '**/*.css' --fix",
+    "checkedAll": "npm run checkedP && npm run  checkedS",
+    "writeAll": "npm run writeP && npm run writeS"
+  }
+}
