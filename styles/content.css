@@ -1,0 +1,240 @@
+.content {
+}
+
+.sidebar {
+  background-color: var(--theme-color-light);
+  box-shadow: inset -2px 0 0 0 rgb(0 0 0 / 0.1);
+}
+
+.content__block {
+  margin-block-start: 3vw;
+  padding-inline-end: 5vw;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  background-color: var(--theme-color-light);
+}
+
+.content__block__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2vw;
+  position: relative;
+}
+
+.content__block__list-item {
+  position: sticky;
+  top: 5vw;
+}
+
+.t2 {
+  top: calc(5vw + 1rem + 42px);
+}
+
+.t3 {
+  top: calc(5vw + 1rem * 2 + 42px * 2);
+}
+
+.content__block__list-link {
+  max-width: 250px;
+  padding: 10px;
+  display: block;
+  background-color: var(--theme-color-light);
+  border: 2px solid var(--accent-color);
+  border-radius: 15px;
+  text-decoration: none;
+  text-align: center;
+  font-size: clamp(0.875rem, 0.787rem + 0.1817vw, 1.055rem);
+  font-weight: 600;
+  color: #444;
+}
+
+.content__block__list-link:hover {
+  scale: 1.05;
+}
+
+.conteiner-text {
+  padding-block: 6vw;
+  text-align: center;
+}
+
+.conteiner-text > :not(:last-child) {
+  margin-bottom: 18rem;
+}
+
+.conteiner-text > :has(h2) h2:not(:first-child) {
+  font-size: clamp(1.125rem, 0.9489rem + 0.5634vw, 1.625rem);
+  font-weight: 600;
+  margin: 40px 0;
+}
+
+.conteiner-text > :has(h2) :first-child {
+  margin-bottom: 40px;
+}
+
+.conteiner-text > :has(p) p {
+  font-size: clamp(0.9375rem, 0.8275rem + 0.4521vw, 1.4rem);
+  font-weight: 400;
+}
+
+.conteiner-text__payment {
+}
+
+.conteiner-text__delivery {
+}
+
+.conteiner-text__warranty {
+}
+
+.conteiner-text__about {
+  padding-inline: 6vw;
+}
+
+.content__block__contact {
+  width: 100%;
+  grid-template-columns: 2fr 3fr;
+}
+
+.content__block__text {
+  padding: 3vw 5vw;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.content__block__text-address-block {
+  white-space: pre-line;
+  margin-left: 1rem;
+}
+
+.content__block__text-contacts {
+
+}
+
+.content__block__text-contacts-title {
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-block-end: 6px;
+  font-weight: 600;
+}
+
+.content__block__contact__map {
+  padding-block: 3vw;
+}
+
+.panel-auto__background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(0 0 0/ 0.4);
+  backdrop-filter: blur(2px);
+}
+
+.panel-auto {
+  min-inline-size: 450px;
+  max-inline-size: 650px;
+  width: 60vw;
+  padding: 2vw 4vw;
+  background-color: var(--theme-color-light);
+  border-radius: 20px;
+  position: absolute;
+}
+
+.panel-auto-exit {
+  padding: 5px;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 1.8vw;
+  right: 3vw;
+  background: url(/img/cancel-close-cross.svg) center center;
+  background-size: cover;
+}
+
+.panel-auto__title {
+  font-weight: 500;
+  margin-block-end: 40px;
+}
+
+.panel-auto__login {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-block-end: 30px;
+  position: relative;
+}
+
+.incorrect-symbol {
+  color: #cf1b1b;
+  position: absolute;
+  left: 60px;
+  top: 4px;
+}
+
+.type__hide {
+  display: none;
+}
+
+.panel-auto__field {
+  width: 100%;
+  height: 3.5em;
+  padding-inline: 20px;
+  font-size: var(--font-size);
+  border-radius: 5px;
+  border: 1px solid rgb(0 0 0 / 0.1);
+  background-color: rgb(0 0 0 / 0.035);
+}
+
+.panel-auto__password {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-block-end: 50px;
+  position: relative;
+}
+
+.panel-auto__btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.panel-auto__btn {
+  padding: 20px 30px;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+
+  transition: all 0.8s ease 0s;
+  -webkit-transition: all 0.8s ease 0s;
+  -moz-transition: all 0.8s ease 0s;
+  -ms-transition: all 0.8s ease 0s;
+  -o-transition: all 0.8s ease 0s;
+}
+
+.panel-auto__btn-enter {
+  background-color: var(--theme-color);
+  color: #fff;
+}
+
+.panel-auto__btn-register {
+  color: var(--theme-color);
+  border: 1px solid var(--theme-color);
+}
+
+.panel-auto__btn:hover {
+  transform: scale(1.06);
+}
+
+.panel-auto__btn-enter:hover {
+  background-color: #13265fd8;
+}
+
+.panel-auto__btn-register:hover {
+  color: #fff;
+  background-color: var(--theme-color);
+}

@@ -25,6 +25,16 @@
   .type__hiding {
     display: none;
   }
+
+  .content__block {
+    display: flex;
+    flex-direction: column;
+    padding-inline-start: 5vw;
+  }
+
+  .content__block__list {
+    flex-direction: row;
+  }
 }
 
 @media (width <= 765px) {
@@ -42,22 +52,5 @@
 
   .banner-view-link {
     background-size: 100%;
-  }
-}
-
-@media (width <= 600px) {
-  .content__about-list {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .about__card-item {
-    flex-direction: row;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .about__card-paragraph {
-    margin-left: 50px;
   }
 }

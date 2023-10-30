@@ -1,0 +1,22 @@
+@media (width <= 600px) {
+  .content__about-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about__card-item {
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .about__card-paragraph {
+    margin-left: 50px;
+  }
+}
+
+@media (width <= 440px) {
+  .offers__switches {
+    flex-direction: column;
+  }
+}
