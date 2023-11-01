@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="../styles/style.css" />
   <link rel="stylesheet" href="../styles/content.css" />
   <link rel="stylesheet" media="(width <= 1215px)" href="../mobile/tablet.css" />
-  <link rel="stylesheet" media="" href="/mobile/mobile.css" />
+  <link rel="stylesheet" media="(width <= 600px)" href="/mobile/mobile.css" />
 </head>
 
 <body class="page">
@@ -23,16 +23,18 @@
       <div class="panel-auto__login">
         <label for="login">Логин</label>
         <span class="incorrect-symbol type__hiding" id="incorrect-symbol-log">*</span>
-        <input class="panel-auto__field" type="email" name="login" id="login">
+        <input class="panel-auto__field" type="email" name="login" id="login" />
       </div>
       <div class="panel-auto__password">
         <label for="password">Пароль</label>
         <span class="incorrect-symbol type__hiding" id="incorrect-symbol-log">*</span>
-        <input class="panel-auto__field" type="password" name="password" id="password">
+        <input class="panel-auto__field" type="password" name="password" id="password" />
       </div>
       <div class="panel-auto__btns">
         <button class="panel-auto__btn panel-auto__btn-enter">войти</button>
-        <button class="panel-auto__btn panel-auto__btn-register">регистрация</button>
+        <button class="panel-auto__btn panel-auto__btn-register">
+          регистрация
+        </button>
       </div>
     </div>
   </div>
@@ -81,7 +83,7 @@
     <div class="sidebar">
       <nav class="sidebar-menu">
         <div class="sidebar-menu__block-static">
-          <img src="img/four-point.png" class="sidebar-menu__text-img" />
+          <img src="../img/four-point.png" class="sidebar-menu__text-img" />
           <h3 class="sidebar-menu__text-title">Каталог</h3>
         </div>
         <div class="sidebar-menu__block-list">
@@ -359,20 +361,20 @@
       <div class="footer__content__list">
         <ul class="footer__list footer__only-title">
           <a href="#" class="footer__content-link footer__title">каталог</a>
-          <a href="#" class="footer__content-link footer__title">бренды</a>
+          <a href="#" class="footer__content-link footer__title visible__none">бренды</a>
         </ul>
         <ul class="footer__list">
           <li class="footer__list-item">
-            <a href="#" class="footer__content-link footer__title">компания</a>
+            <a href="../content/about.html" class="footer__content-link footer__title">компания</a>
           </li>
           <li class="footer__list-item">
-            <a href="#" class="footer__content-link">О компании</a>
+            <a href="../content/about.html" class="footer__content-link">О компании</a>
           </li>
-          <li class="footer__list-item">
+          <li class="footer__list-item visible__none">
             <a href="#" class="footer__content-link">Отзывы</a>
           </li>
           <li class="footer__list-item">
-            <a href="#" class="footer__content-link">Контакты</a>
+            <a href="../content/contacts.html" class="footer__content-link">Контакты</a>
           </li>
         </ul>
         <ul class="footer__list">
@@ -380,13 +382,13 @@
             <a href="#" class="footer__content-link footer__title">информация</a>
           </li>
           <li class="footer__list-item">
-            <a href="#" class="footer__content-link">Условия оплаты</a>
+            <a href="../content/howbuy.html" class="footer__content-link">Условия оплаты</a>
           </li>
           <li class="footer__list-item">
-            <a href="#" class="footer__content-link">Условия доставки</a>
+            <a href="../content/howbuy.html" class="footer__content-link">Условия доставки</a>
           </li>
           <li class="footer__list-item">
-            <a href="#" class="footer__content-link">Политика</a>
+            <a href="../content/politics.html" class="footer__content-link">Политика</a>
           </li>
           <li class="footer__list-item">
             <a href="#" class="footer__content-link">Реквизиты</a>
@@ -394,13 +396,13 @@
         </ul>
         <ul class="footer__list">
           <li class="footer__list-item">
-            <a href="#" class="footer__content-link footer__title">Помощь</a>
+            <a href="../content/howbuy.html" class="footer__content-link footer__title">Помощь</a>
           </li>
-          <li class="footer__list-item">
+          <li class="footer__list-item visible__none">
             <a href="#" class="footer__content-link">Вопрос-ответ</a>
           </li>
           <li class="footer__list-item">
-            <a href="#" class="footer__content-link">Гарантия на товар</a>
+            <a href="../content/howbuy.html" class="footer__content-link">Гарантия на товар</a>
           </li>
           <li class="footer__list-item">
             <a href="#" class="footer__content-link">Публичная оферта</a>
@@ -430,6 +432,12 @@
           <div class="contact__block-address">
             <p>Село Новобатайск,</p>
             <p>ул. Ленина 61б</p>
+          </div>
+        </li>
+        <li class="footer__contact-list-item">
+          <div class="contact__block-address">
+            <p>г. Батайск,</p>
+            <p>ул. Куйбышева 108</p>
           </div>
         </li>
         <li class="footer__contact-list-item footer__contact-list-item__block-svg">

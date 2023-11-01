@@ -68,7 +68,7 @@
   text-decoration: none;
 }
 
-.header__list-item-link:hover{
+.header__list-item-link:hover {
   transition: 220ms;
   color: var(--accent-color);
 }
@@ -163,7 +163,7 @@
   top: 0;
   left: -410px;
   background-color: var(--theme-color-light);
-  transition: left .25s linear;
+  transition: left 0.25s linear;
   display: block;
   z-index: -1;
 }
@@ -173,7 +173,6 @@
   -webkit-box-shadow: 17px 0 14px -12px rgb(0 0 0 / 0.27);
   -moz-box-shadow: 17px 0 14px -12px rgb(0 0 0 / 0.27);
   box-shadow: 17px 0 14px -12px rgb(0 0 0 / 0.27);
-  
 }
 
 .sidebar-menu__list {
@@ -423,7 +422,7 @@
 }
 
 .button-type__light {
-  background: var(--theme-color-light) url(/img/btn_left.png)  center center;
+  background: var(--theme-color-light) url(/img/btn_left.png) center center;
   background-size: cover;
   box-shadow: 0 8px 17px -7px rgb(0 0 0 / 0.4);
 }
@@ -544,6 +543,9 @@
 .big-cards__link:hover .big-cards__image {
   scale: 1.025;
   transition: 700ms;
+  -webkit-box-shadow: 0 4px 7px 0 rgb(0 0 0 / 0.25);
+  -moz-box-shadow: 0 4px 7px 0 rgb(0 0 0 / 0.25);
+  box-shadow: 0 4px 7px 0 rgb(0 0 0 / 0.25);
 }
 
 .big-cards__description {
@@ -669,4 +671,10 @@
 
 .footer__only-title {
   gap: 14px;
+}
+
+.politics {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 }

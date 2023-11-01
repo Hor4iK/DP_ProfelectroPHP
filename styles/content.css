@@ -9,6 +9,7 @@
 .content__block {
   margin-block-start: 3vw;
   padding-inline-end: 5vw;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 3fr;
   background-color: var(--theme-color-light);
@@ -77,13 +78,13 @@
   font-weight: 400;
 }
 
-.conteiner-text__payment {
+.type__frame {
+  border: 1px solid rgb(0 0 0 / 0.1);
 }
 
-.conteiner-text__delivery {
-}
-
-.conteiner-text__warranty {
+.conteiner-text__account {
+  padding: 3vw;
+  text-align: left;
 }
 
 .conteiner-text__about {
@@ -108,7 +109,6 @@
 }
 
 .content__block__text-contacts {
-
 }
 
 .content__block__text-contacts-title {
@@ -160,6 +160,14 @@
   margin-block-end: 40px;
 }
 
+.panel-auto__name {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-block-end: 30px;
+  position: relative;
+}
+
 .panel-auto__login {
   display: flex;
   flex-direction: column;
@@ -173,6 +181,10 @@
   position: absolute;
   left: 60px;
   top: 4px;
+}
+
+.conteiner-text__account .incorrect-symbol {
+  left: 120px;
 }
 
 .type__hide {
@@ -216,12 +228,12 @@
   -o-transition: all 0.8s ease 0s;
 }
 
-.panel-auto__btn-enter {
+.panel-auto__btn-color {
   background-color: var(--theme-color);
   color: #fff;
 }
 
-.panel-auto__btn-register {
+.panel-auto__btn-light {
   color: var(--theme-color);
   border: 1px solid var(--theme-color);
 }
