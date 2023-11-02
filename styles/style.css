@@ -1,5 +1,5 @@
 :root {
-  --font-family: ;
+  --font-family: 'Montserrat';
   --font-size: clamp(0.675rem, 0.787rem + 0.2817vw, 1.125rem);
   --font-color: ;
   --theme-color: #13265f;
@@ -476,7 +476,7 @@
 }
 
 .offers__card-title {
-  font-size: calc(var(--font-size) + 0.1em);
+  font-size: calc(var(--font-size) - 0.1em);
   font-style: normal;
   font-weight: 300;
   line-height: 1.4;
@@ -490,7 +490,7 @@
 }
 
 .offers__card-value {
-  font-size: calc(var(--font-size) + 0.1em);
+  font-size: calc(var(--font-size) - 0.05em);
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: 1.54px;
