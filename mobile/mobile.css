@@ -1,4 +1,13 @@
 @media (width <= 600px) {
+  .sidebar-menu__block-list {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .sidebar-menu__list {
+    font-size: inherit;
+  }
+
   .content__about-list {
     display: flex;
     flex-direction: column;
