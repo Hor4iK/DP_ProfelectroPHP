@@ -19,6 +19,10 @@
   .content__sidebar {
     display: none;
   }
+
+  .popup__close {
+    right: -2px;
+  }
 }
 
 @media screen and (width < 786px) {
@@ -58,5 +62,23 @@
 @media (width <= 700px) {
   .content__catalog-content {
     grid-template-columns: repeat(auto-fit, clamp(305px, calc(95% - 20px), 615px));
+  }
+
+  .popup__content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "title"
+      "provider"
+      "image "
+      "content";
+  }
+
+  .popup__title {
+    padding-inline-start: 0;
+  }
+
+  .popup__image {
+    padding-block-end: 0;
   }
 }

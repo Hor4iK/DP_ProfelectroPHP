@@ -26,26 +26,36 @@ if (empty($password)) {
 
 $pdo = getPDO();
 
-$stmt = $pdo->prepare(query:"SELECT * FROM users WHERE email = :email");
-$stmt->execute(['email' => $login]);
-$user = $stmt->fetch(mode: \PDO::FETCH_ASSOC);
+try {
+  $stmt = $pdo->prepare(query:"SELECT * FROM users WHERE email = :email");
+  $stmt->execute(['email' => $login]);
+  $user = $stmt->fetch(mode: \PDO::FETCH_ASSOC);
+  if(!$user) {
+    setMessage(key: 'error', message:"Пользователь $login не найден");
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    die();
+  }
+  if($user['email'] != $login) {
+    setMessage(key: 'error', message:"Пользователь $login не найден");
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    die();
+  }
+  if (!password_verify($password, $user['password'])) {
+    setMessage(key: 'error', message:"Неверный пароль");
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    die();
+  }
 
-if(!$user) {
-  setMessage(key: 'error', message:"Пользователь $login не найден");
+
+  $_SESSION['user']['id'] = $user['id'];
+  $_SESSION['user']['login'] = $user['email'];
+  $_SESSION['user']['password'] = $user['password'];
+
+  redirect(path: '../content/account.php');
+}
+catch(Exception $e) {
+  setMessage(key: 'error', message:"Error:" + $e->getMessage());
   header('Location: ' . $_SERVER['HTTP_REFERER']);
-  // die();
 }
 
-if (!password_verify($password, $user['password'])) {
-  setMessage(key: 'error', message:"Неверный пароль");
-  header('Location: ' . $_SERVER['HTTP_REFERER']);
-  // die();
-}
 
-
-$_SESSION['user']['id'] = $user['id'];
-$_SESSION['user']['login'] = $user['email'];
-$_SESSION['user']['password'] = $user['password'];
-
-
-redirect(path: '../content/account.php');

@@ -20,27 +20,26 @@
 </head>
 
 <body class="page">
-  <div id="panel-auto" class="panel-auto__background type__hide">
-    <form class="panel-auto" action="../action/login.php" method="post">
-      <button class="panel-auto-exit" id="panel-auto_exit" onclick="var block = document.getElementById('panel-auto');
-          block.classList.remove('type__visible__panel-auto');"></button>
+  <div id="panel-auto" class="popup panel-auto__background popup_is-animated ">
+    <form class="panel-auto" action="/action/login.php" method="post">
+      <button class="panel-auto-exit popup__close" id="panel-auto_exit" type="button"></button>
       <h1 class="panel-auto__title">Личный кабинет</h1>
       <?php if (hasMessage(key: 'error')) : ?>
-        <h2 style="font-size: 16px; color: #ce1111; position: absolute; top: 90px; left: 23%;"><?php echo getMessage(key: 'error') ?></h2>
+        <h2 class="panel-auto-error"><?php echo getMessage(key: 'error') ?></h2>
       <?php endif; ?>
       <div class="panel-auto__login">
         <label for="login">Логин</label>
         <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['login'])) echo ' type__visible' ?>" id="incorrect-symbol-log">*</span>
-        <input class="panel-auto__field" type="email" name="login" id="login" />
+        <input class="panel-auto__field" type="email" name="login" id="login" required />
       </div>
       <div class="panel-auto__password">
         <label for="password">Пароль</label>
         <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['password'])) echo ' type__visible' ?>" id="incorrect-symbol-log">*</span>
-        <input class="panel-auto__field" type="password" name="password" id="password" />
+        <input class="panel-auto__field" type="password" name="password" id="password" required />
       </div>
       <div class="panel-auto__btns">
         <button class="panel-auto__btn panel-auto__btn-color" type="submit" id="btn_enter">войти</button>
-        <button class="panel-auto__btn panel-auto__btn-light" type="button" onclick="window.location.replace('../content/register.php')" id="btn_register">
+        <button class="panel-auto__btn panel-auto__btn-light" type="button" onclick="window.location.replace('/action/register.php')" id="btn_register">
           регистрация
         </button>
       </div>
@@ -121,8 +120,7 @@
         </li>
         <li class="sidebar-menu_list-item">
           <button onclick="<?php if (empty($_SESSION['user'])) {
-                              echo "var block = document.getElementById('panel-auto');
-          block.classList.add('type__visible__panel-auto'); document.getElementById('top-menu').classList.remove('type__visible');";
+                              echo "openModal(panelAuthorization);";
                             } else {
                               echo "window.location.replace('./account.php')";
                             } ?>" class="sidebar-menu__content sidebar-menu__account-btn">
@@ -157,8 +155,7 @@
         </li>
         <li class="header__list-item">
           <button onclick="<?php if (empty($_SESSION['user'])) {
-                              echo "var block = document.getElementById('panel-auto');
-    block.classList.add('type__visible__panel-auto');";
+                              echo "openModal(panelAuthorization);";
                             } else {
                               echo "window.location.replace('../content/account.php')";
                             } ?>" class="header__user-link">
@@ -200,12 +197,12 @@
         } else { ?>
           <div class="content__catalog content__section">
             <? foreach ($products as $product) : ?>
+              <button class='content__catalog-button' type='button' onclick="window.location.replace('./catalog.php?Value=0')">Каталог</button>
               <h1 class="offers__title"><?= $product['category_name'] ?></h1>
             <? break;
             endforeach; ?>
             <?
             if (array_key_exists('Podcategory', $_GET)) {
-              // !!!
               $podcategories = getPodcategory($_GET['Podcategory']);
             } else {
               $podcategories = getPodcategories($value);
@@ -242,16 +239,16 @@
 
             <ul class="content__catalog-popular">
               <? foreach ($products as $product) : ?>
-                <li class="content__catalog-popular__card" data-id="<?= $product['good_id'] ?>">
+                <li class="content__catalog-popular__card card" data-id="<?= $product['good_id'] ?>">
                   <a href="#" class="content__catalog-popular__card-link">
                     <img src="<? if ($product['good_image']) echo ($product['good_image']);
-                              else echo ("../img/default-product-image.png") ?>" loading="lazy" class="content__catalog-popular__card-image" />
+                              else echo ("../img/default-product-image.png") ?>" loading="lazy" class="content__catalog-popular__card-image  card-image" />
                     <div class="content__catalog-popular__card-conteiner">
-                      <h6 class="content__catalog-popular__card-title">
+                      <h6 class="content__catalog-popular__card-title card-title">
                         <?= $product['good_name'] ?>
                       </h6>
-                      <span class="content__catalog-popular__card-provider"><?= $product['good_provider'] ?></span>
-                      <span class="content__catalog-popular__card-value"><?= $product['good_price'] ?> ₽</span>
+                      <span class="content__catalog-popular__card-provider card-provider"><?= $product['good_provider'] ?></span>
+                      <span class="content__catalog-popular__card-value card-value"><?= $product['good_price'] ?> ₽</span>
                     </div>
 
                   </a>
@@ -367,7 +364,57 @@
       характер и не является публичной офертой
     </p>
   </div>
+  <div class="popup popup_card-preview popup_is-animated" id="popup">
+    <div class="popup__content">
+      <button type="button" class="popup__close"></button>
+      <h4 class="popup__title">Name Good</h4>
+      <h4 class="popup__provider">Name Provider</h4>
+      <img src="/img/exgoods.png" alt="" class="popup__image">
+      <div class="popup__container">
+        <p class="popup__description">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+          Tempore cumque eos voluptatibus non quos ducimus quia dignissimos at fuga dolore neque dolor modi.
+        </p>
+        <form name="card-preview" class="popup__form">
+          <div class="popup__price">
+            <h5 class="popup__value">1234.5 $/м</h5>
+            <span class="popup__currency">₽</span>
+          </div>
+          <div class="popup__container_form">
+            <input type="number" name="count-goods" value="1" id="popup__input_type_count" class="popup__input popup__input_type_count">
+            <button class="button popup__button" type="submit">В корзину</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
   <script src="../script/script.js"></script>
+  <?
+  $arrayGoodsPHP = getGoods(0);
+  $goodsJSON = json_encode($arrayGoodsPHP);
+  ?>
+  <script>
+    const popupCardPreview = document.querySelector('.popup_card-preview');
+    const cardsList = document.querySelectorAll('.card');
+    const allPriceList = <?= $goodsJSON ?>;
+
+    const cardImage = popupCardPreview.querySelector('.popup__image');
+    const cardTitle = popupCardPreview.querySelector('.popup__title');
+    const cardProvider = popupCardPreview.querySelector('.popup__provider');
+    const cardDescription = popupCardPreview.querySelector('.popup__description');
+    const cardValue = popupCardPreview.querySelector('.popup__value');
+
+    const cardConfig = {
+      image: cardImage,
+      title: cardTitle,
+      provider: cardProvider,
+      description: cardDescription,
+      price: cardValue,
+    }
+
+    cardsList.forEach((card) => {
+      cardPreviewHandler(card, cardConfig);
+    })
+  </script>
 </body>
 
 </html>

@@ -19,27 +19,26 @@
 </head>
 
 <body class="page">
-  <div id="panel-auto" class="panel-auto__background type__hide">
-    <form class="panel-auto" action="../action/login.php" method="post">
-      <button class="panel-auto-exit" id="panel-auto_exit" onclick="var block = document.getElementById('panel-auto');
-          block.classList.remove('type__visible__panel-auto');"></button>
+<div id="panel-auto" class="popup panel-auto__background popup_is-animated ">
+    <form class="panel-auto" action="/action/login.php" method="post">
+      <button class="panel-auto-exit popup__close" id="panel-auto_exit" type="button"></button>
       <h1 class="panel-auto__title">Личный кабинет</h1>
       <?php if (hasMessage(key: 'error')) : ?>
-        <h2 style="font-size: 16px; color: #ce1111; position: absolute; top: 90px; left: 23%;"><?php echo getMessage(key: 'error') ?></h2>
+        <h2 class="panel-auto-error"><?php echo getMessage(key: 'error') ?></h2>
       <?php endif; ?>
       <div class="panel-auto__login">
         <label for="login">Логин</label>
         <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['login'])) echo ' type__visible' ?>" id="incorrect-symbol-log">*</span>
-        <input class="panel-auto__field" type="email" name="login" id="login" />
+        <input class="panel-auto__field" type="email" name="login" id="login" required/>
       </div>
       <div class="panel-auto__password">
         <label for="password">Пароль</label>
         <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['password'])) echo ' type__visible' ?>" id="incorrect-symbol-log">*</span>
-        <input class="panel-auto__field" type="password" name="password" id="password" />
+        <input class="panel-auto__field" type="password" name="password" id="password" required/>
       </div>
       <div class="panel-auto__btns">
         <button class="panel-auto__btn panel-auto__btn-color" type="submit" id="btn_enter">войти</button>
-        <button class="panel-auto__btn panel-auto__btn-light" type="button" onclick="window.location.replace('../content/register.php')" id="btn_register">
+        <button class="panel-auto__btn panel-auto__btn-light" type="button" onclick="window.location.replace('/action/register.php')" id="btn_register">
           регистрация
         </button>
       </div>
@@ -120,8 +119,7 @@
         </li>
         <li class="sidebar-menu_list-item">
           <button onclick="<?php if (empty($_SESSION['user'])) {
-                              echo "var block = document.getElementById('panel-auto');
-            block.classList.add('type__visible__panel-auto'); document.getElementById('top-menu').classList.remove('type__visible');";
+                              echo "openModal(panelAuthorization);";
                             } else {
                               echo "window.location.replace('./account.php')";
                             } ?>" class="sidebar-menu__content sidebar-menu__account-btn">
@@ -156,8 +154,7 @@
         </li>
         <li class="header__list-item">
           <button onclick="<?php if (empty($_SESSION['user'])) {
-                              echo "var block = document.getElementById('panel-auto');
-    block.classList.add('type__visible__panel-auto');";
+                              echo "openModal(panelAuthorization);";
                             } else {
                               echo "window.location.replace('../content/account.php')";
                             } ?>" class="header__user-link">

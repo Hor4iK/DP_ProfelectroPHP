@@ -24,7 +24,35 @@
   }
 }
 
+@media screen and (max-width: 568px) {
+  .popup__content {
+    margin: 0;
+    width: 100%;
+    max-width: calc(100% - 30px);
+    margin-top: 40px;
+    padding: 30px 20px;
+  }
+
+  .popup__title {
+    line-height: 30px;
+  }
+
+  .popup__button {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .popup__image {
+    padding: 20px;
+    width: 60%;
+  }
+}
+
 @media (width <= 440px) {
+  .panel-auto__title {
+    margin-block-end: 80px;
+  }
+
   .offers__switches {
     flex-direction: column;
   }
