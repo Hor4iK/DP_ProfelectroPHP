@@ -248,9 +248,12 @@
                         <?= $product['good_name'] ?>
                       </h6>
                       <span class="content__catalog-popular__card-provider card-provider"><?= $product['good_provider'] ?></span>
-                      <span class="content__catalog-popular__card-value card-value"><?= $product['good_price'] ?> ₽</span>
-                    </div>
+                      <div class="content__catalog-popular__card-price-cover">
+                        <span class="content__catalog-popular__card-value card-value"><?= $product['good_price'] ?> ₽</span>
+                        <span class="content__catalog-popular__card-unit card-unit"><?= $product['good_unit'] ?></span>
+                      </div>
 
+                    </div>
                   </a>
                 </li>
 
@@ -374,10 +377,11 @@
         <p class="popup__description">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
           Tempore cumque eos voluptatibus non quos ducimus quia dignissimos at fuga dolore neque dolor modi.
         </p>
-        <form name="card-preview" class="popup__form">
+        <form name="card-preview" action="./cart.php" method="POST" class="popup__form">
           <div class="popup__price">
             <h5 class="popup__value">1234.5 $/м</h5>
             <span class="popup__currency">₽</span>
+            <span class="popup__unit">\шт</span>
           </div>
           <div class="popup__container_form">
             <input type="number" name="count-goods" value="1" id="popup__input_type_count" class="popup__input popup__input_type_count">
@@ -402,6 +406,7 @@
     const cardProvider = popupCardPreview.querySelector('.popup__provider');
     const cardDescription = popupCardPreview.querySelector('.popup__description');
     const cardValue = popupCardPreview.querySelector('.popup__value');
+    const cardUnit = popupCardPreview.querySelector('.popup__unit');
 
     const cardConfig = {
       image: cardImage,
@@ -409,10 +414,11 @@
       provider: cardProvider,
       description: cardDescription,
       price: cardValue,
+      unit: cardUnit,
     }
 
     cardsList.forEach((card) => {
-      cardPreviewHandler(card, cardConfig);
+      cardPreviewHandler(card, cardConfig, allPriceList);
     })
   </script>
 </body>

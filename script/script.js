@@ -38,11 +38,11 @@ function openModal(modal) {
   modal.addEventListener('mousedown', closeModalOverlay);
 }
 
-function cardPreviewHandler(card, cardConfig) {
+function cardPreviewHandler(card, cardConfig, priceList) {
   card.addEventListener('click', () => {
     const idCard = card.dataset.id;
 
-    allPriceList.forEach(item => {
+    priceList.forEach(item => {
       if (item.good_id == idCard) {
         cardConfig.title.textContent = item.good_name;
         cardConfig.image.src = item.good_image;
@@ -50,8 +50,10 @@ function cardPreviewHandler(card, cardConfig) {
         cardConfig.provider.textContent = item.good_provider;
         cardConfig.description.textContent = item.good_overview;
         cardConfig.price.textContent = item.good_price;
+        cardConfig.unit.textContent = item.good_unit;
+        return;
       }
-    })
+    });
     openModal(popupCardPreview);
   })
 }

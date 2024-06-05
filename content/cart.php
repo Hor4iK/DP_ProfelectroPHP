@@ -99,7 +99,7 @@
           </a>
         </li>
         <li class="sidebar-menu_list-item list-item_option">
-          <a href="#" class="sidebar-menu__content header__list-item-link list-item-link__accent">
+          <a href="./catalog.php?Value=0" class="sidebar-menu__content header__list-item-link list-item-link__accent">
             Каталог
           </a>
         </li>
@@ -174,38 +174,88 @@
       </nav>
     </div>
 
-    <h1 align='center'>Корзина</h1>
-    <table height='85px' align='center'>
-      <tr>
-        <th>Наименование</th>
-        <th>Цена/ед</th>
-        <th>Количество</th>
-        <th>Стоимость</th>
-      </tr>
-      <? $sum = 0;
 
 
-      $products = getCart($_SESSION['user']['id']);
-
-      foreach ($products as $product) :
-
-        $sum += (float) $product['price'];
-      ?>
-        <tr>
-          <td><?= $product['good_name'] ?></td>
-          <td><?= $product['good_price'] ?> Руб</td>
-          <td><?= $product['good_count'] ?></td>
-          <td><?= $product['price'] ?> Руб</td>
-        </tr>
-      <?php
-      endforeach;
-
-      ?>
-
-    </table>
-    <h1 align='center'>К оплате <?= $sum ?> рублей</h1>
-
-    </div>
+    <div class="content__cart">
+      <h1 class="cart__title">Корзина</h1>
+      <ul class="cart__list">
+        <li class="cart__list-item">
+          <img src="/img/exgoods.png" alt="" class="cart__item-image">
+          <div class="cart__item-cover_middle">
+            <h5 class="cart__item-title">Заглушка канализационная 'Россия' (наружная) (110)</h5>
+            <div class="cart__item-cover_middle-down">
+              <input type="number" min="1" value="1" class="popup__input cart__item-input" required>
+              <!-- !!! сделать приписку цена за шт через бифор -->
+              <h6 class="cart__item-price">512$</h6>
+            </div>
+          </div>
+          <h5 class="cart__item-value">512$</h5>
+          <button type="button" class="cart__close"></button>
+        </li>
+        <li class="cart__list-item">
+          <img src="/img/exgoods.png" alt="" class="cart__item-image">
+          <div class="cart__item-cover_middle">
+            <h5 class="cart__item-title">Заглушка канализационная 'Россия' (наружная) (110) Заглушка канализационная 'Россия' (наружная) (110)</h5>
+            <div class="cart__item-cover_middle-down">
+              <input type="number" min="1" value="1" class="popup__input cart__item-input" required>
+              <!-- !!! сделать приписку цена за шт через бифор -->
+              <h6 class="cart__item-price">512$</h6>
+            </div>
+          </div>
+          <h5 class="cart__item-value">512$</h5>
+          <button type="button" class="cart__close"></button>
+        </li>
+        <li class="cart__list-item">
+          <img src="/img/exgoods.png" alt="" class="cart__item-image">
+          <div class="cart__item-cover_middle">
+            <h5 class="cart__item-title">Заглушка канализационная 'Россия' (наружная) (110)</h5>
+            <div class="cart__item-cover_middle-down">
+              <input type="number" min="1" value="1" class="popup__input cart__item-input" required>
+              <!-- !!! сделать приписку цена за шт через бифор -->
+              <h6 class="cart__item-price">512$</h6>
+            </div>
+          </div>
+          <h5 class="cart__item-value">512$</h5>
+          <button type="button" class="cart__close"></button>
+        </li>
+        <li class="cart__list-item">
+          <img src="/img/exgoods.png" alt="" class="cart__item-image">
+          <div class="cart__item-cover_middle">
+            <h5 class="cart__item-title">Заглушка канализационная 'Россия' (наружная) (110)</h5>
+            <div class="cart__item-cover_middle-down">
+              <input type="number" min="1" value="1" class="popup__input cart__item-input" required>
+              <!-- !!! сделать приписку цена за шт через бифор -->
+              <h6 class="cart__item-price">512$</h6>
+            </div>
+          </div>
+          <h5 class="cart__item-value">512$</h5>
+          <button type="button" class="cart__close"></button>
+        </li>
+      </ul>
+      <form class="card-order">
+        <h2 class="card-order__title">Ваш заказ</h2>
+        <div class="card-order__type-user">
+          <fieldset class="card-order__type-user-fieldset">
+            <legend class="card-order__type-user-title">Тип покупателя:</legend>
+            <div class="card-order__type-user-select">
+              <input type="radio" class="card-order__type-user-input visually-hidden individual-entity" value="Физическое лицо" checked name="type-user" id="individual-entity"></input>
+              <label class="card-order__type-user-label" for="individual-entity">Физическое лицо</label>
+            </div>
+            <div class="card-order__type-user-select">
+              <input type="radio" class="card-order__type-user-input visually-hidden legal-entity" value="Юридическое лицо" name="type-user" id="legal-entity"></input>
+              <label class="card-order__type-user-label" for="legal-entity">Юридическое лицо</label>
+            </div>
+          </fieldset>
+        </div>
+        <div class="card-order__summ">
+          <h3 class="card-order__summ-title">Итого</h3>
+          <div class="card-order__summ-cover">
+            <p class="card-order__summ-postscript">Товаров на:</p>
+            <h4 class="card-order__summ-value">123$</h4>
+          </div>
+          <button class="button card-order__button">Перейти к оформлению</button>
+        </div>
+      </form>
     </div>
   </main>
   <footer class="footer">
