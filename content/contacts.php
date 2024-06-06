@@ -103,6 +103,15 @@
           </a>
         </li>
         <li class="sidebar-menu_list-item list-item_option">
+          <a onclick="<?php if (empty($_SESSION['user'])) {
+                              echo 'openModal(panelAuthorization); getClassShowHide()';
+                            } else {
+                              echo 'window.location.replace(`./cart.php`)';
+                            } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
+            Корзина
+          </a>
+        </li>
+        <li class="sidebar-menu_list-item list-item_option">
           <a href="./howbuy.php" class="sidebar-menu__content header__list-item-link list-item-link__accent">
             Как купить
           </a>

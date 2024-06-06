@@ -104,6 +104,15 @@ require_once __DIR__ . './helpers.php';
           </a>
         </li>
         <li class="sidebar-menu_list-item list-item_option">
+          <a onclick="<?php if (empty($_SESSION['user'])) {
+                              echo 'openModal(panelAuthorization); getClassShowHide()';
+                            } else {
+                              echo 'window.location.replace(`./content/cart.php`)';
+                            } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
+            Корзина
+          </a>
+        </li>
+        <li class="sidebar-menu_list-item list-item_option">
           <a href="./content/howbuy.php" class="sidebar-menu__content header__list-item-link list-item-link__accent">
             Как купить
           </a>
@@ -142,7 +151,7 @@ require_once __DIR__ . './helpers.php';
       </div>
       <ul class="header__menu-list">
         <li class="header__list-item type__hiding">
-          <a href="./content/cart.php" class="header__list-item-link">Каталог</a>
+          <a href="./content/catalog.php?Value=0" class="header__list-item-link">Каталог</a>
         </li>
         <li class="header__list-item type__hiding">
           <a href="./content/howbuy.php" class="header__list-item-link">Как купить</a>

@@ -46,6 +46,21 @@
     padding: 20px;
     width: 60%;
   }
+
+  .content__block__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    justify-content: center;
+  }
+
+  .content__block__list-item {
+    width: 96%;
+  }
+
+  .content__block__list-link {
+    max-width: none;
+  }
 }
 
 @media (width <= 440px) {

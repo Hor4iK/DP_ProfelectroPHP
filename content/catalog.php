@@ -104,6 +104,15 @@
           </a>
         </li>
         <li class="sidebar-menu_list-item list-item_option">
+          <a onclick="<?php if (empty($_SESSION['user'])) {
+                              echo 'openModal(panelAuthorization); getClassShowHide()';
+                            } else {
+                              echo 'window.location.replace(`./cart.php`)';
+                            } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
+            Корзина
+          </a>
+        </li>
+        <li class="sidebar-menu_list-item list-item_option">
           <a href="./howbuy.php" class="sidebar-menu__content header__list-item-link list-item-link__accent">
             Как купить
           </a>
@@ -195,20 +204,23 @@
             </li>
           <? endforeach;
         } else { ?>
+
           <div class="content__catalog content__section">
+
             <? foreach ($products as $product) : ?>
               <button class='content__catalog-button' type='button' onclick="window.location.replace('./catalog.php?Value=0')">Каталог</button>
               <h1 class="offers__title"><?= $product['category_name'] ?></h1>
             <? break;
             endforeach; ?>
-            <?
-            if (array_key_exists('Podcategory', $_GET)) {
+
+            <? if (array_key_exists('Podcategory', $_GET)) {
               $podcategories = getPodcategory($_GET['Podcategory']);
             } else {
               $podcategories = getPodcategories($value);
-            }
-            ?>
+            } ?>
+
             <ul class="content__catalog-content">
+
               <? foreach ($podcategories as $podcategory) : ?>
                 <li class="offers-card-item box">
                   <a href="./catalog.php?Value=<?= $product['category_id'] ?>&Podcategory=<?= $podcategory['podcategory_id'] ?>" class="content__catalog-content-link">
@@ -222,6 +234,7 @@
             } ?>
 
             <? if (array_key_exists('Podcategory', $_GET)) $products = getGoodsPodcategory($_GET['Value'], $_GET['Podcategory']) ?>
+
             </ul>
 
             <h2 class="offers__title content__catalog-popular-title">
@@ -238,25 +251,30 @@
 
 
             <ul class="content__catalog-popular">
+
               <? foreach ($products as $product) : ?>
                 <li class="content__catalog-popular__card card" data-id="<?= $product['good_id'] ?>">
-                  <a href="#" class="content__catalog-popular__card-link">
+                  <a href="#" class="content__catalog__card-link">
                     <img src="<? if ($product['good_image']) echo ($product['good_image']);
-                              else echo ("../img/default-product-image.png") ?>" loading="lazy" class="content__catalog-popular__card-image  card-image" />
-                    <div class="content__catalog-popular__card-conteiner">
-                      <h6 class="content__catalog-popular__card-title card-title">
+                              else echo ("../img/default-product-image.png") ?>" loading="lazy" class="content__catalog__card-image  card-image" />
+                    <div class="content__catalog__card__conteiner">
+                      <h6 class="content__catalog__card-title card-title">
                         <?= $product['good_name'] ?>
                       </h6>
-                      <span class="content__catalog-popular__card-provider card-provider"><?= $product['good_provider'] ?></span>
-                      <div class="content__catalog-popular__card-price-cover">
-                        <span class="content__catalog-popular__card-value card-value"><?= $product['good_price'] ?> ₽</span>
-                        <span class="content__catalog-popular__card-unit card-unit"><?= $product['good_unit'] ?></span>
+                      <span class="content__catalog__card-provider card-provider"><?= $product['good_provider'] ?></span>
+                      <div class="content__catalog__card__price-cover">
+                        <span class="content__catalog__card-value card-value"><?= $product['good_price'] ?> ₽</span>
+                        <span class="content__catalog__card-unit card-unit"><?= $product['good_unit'] ?></span>
                       </div>
-
                     </div>
+                    <button onclick="<?php if (empty($_SESSION['user'])) {
+                              echo "openModal(panelAuthorization);";
+                            } else {
+                              addGoodCartFromBtn();
+                              echo "window.location.replace('./cart.php')";
+                            } ?>" class="content__catalog__card-button">Купить</button>
                   </a>
                 </li>
-
               <? endforeach; ?>
 
             </ul>
@@ -419,7 +437,8 @@
 
     cardsList.forEach((card) => {
       cardPreviewHandler(card, cardConfig, allPriceList);
-    })
+    });
+    setHandlersButtonsSubmit();
   </script>
 </body>
 

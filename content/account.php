@@ -108,6 +108,15 @@ $user = currentUser();
           </a>
         </li>
         <li class="sidebar-menu_list-item list-item_option">
+          <a onclick="<?php if (empty($_SESSION['user'])) {
+                              echo 'openModal(panelAuthorization); getClassShowHide()';
+                            } else {
+                              echo 'window.location.replace(`./cart.php`)';
+                            } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
+            Корзина
+          </a>
+        </li>
+        <li class="sidebar-menu_list-item list-item_option">
           <a href="./howbuy.php" class="sidebar-menu__content header__list-item-link list-item-link__accent">
             Как купить
           </a>
@@ -180,12 +189,15 @@ $user = currentUser();
     <div class="content__block">
       <ul class="content__block__list">
         <li class="content__block__list-item">
-          <a class="content__block__list-link" href="#personal">Личные данные</a>
+          <a class="content__block__list-link list-link_cart" href="./cart.php">Корзина</a>
         </li>
         <li class="content__block__list-item t2">
-          <a class="content__block__list-link" href="#change_password">Сменить пароль</a>
+          <a class="content__block__list-link" href="#personal">Личные данные</a>
         </li>
         <li class="content__block__list-item t3">
+          <a class="content__block__list-link" href="#change_password">Сменить пароль</a>
+        </li>
+        <li class="content__block__list-item t4">
           <a class="content__block__list-link" href="#history">История заказов</a>
         </li>
       </ul>

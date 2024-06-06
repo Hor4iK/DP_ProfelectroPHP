@@ -161,3 +161,28 @@ function getCart($User): array
 
   return $products;
 }
+
+function getGoodByID($idCard): array
+{
+  $pdo = getPDO();
+  if($idCard == null) {
+    $idCard = $_COOKIE['idCard'];
+  }
+  $result = $pdo->prepare(query: "SELECT * FROM goods WHERE good_id = $idCard");
+  $result->execute();
+  $products = array();
+
+  while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
+    $products[] = $product_info;
+  };
+  return $products;
+}
+
+function addGoodCartFromBtn()
+{
+  $idUser = $_SESSION['user']['id'];
+  $idCard = $_COOKIE['idCard'];
+  $pdo = getPDO();
+  $result = $pdo->prepare(query: "INSERT INTO cart(user_id, good_id, good_count, is_paid) VALUES ($idUser, $idCard, 1, false)");
+  $result->execute();
+}
