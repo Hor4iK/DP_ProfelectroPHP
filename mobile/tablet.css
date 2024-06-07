@@ -43,6 +43,18 @@
     grid-template-columns: 1fr;
     gap: 5vw
   }
+
+  .card-order {
+    max-width: none;
+  }
+
+  .cart__item-input {
+    width: 75px;
+    margin-block-start: 6px;
+    height: 32px;
+    padding: 8px;
+    font-size: 14px;
+  }
 }
 
 @media screen and (width < 786px) {
@@ -104,8 +116,6 @@
 
   .cart__item-price::after {
     left: auto;
-    right: 35px;
-    top: 20px;
   }
 
   .cart__item-cover_middle-down {
@@ -131,7 +141,7 @@
   }
 
   .cart__item-image {
-    margin-block-start: 20px;
+    margin-block-start: 40px;
   }
 
   .cart__list-item {

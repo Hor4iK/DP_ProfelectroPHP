@@ -130,7 +130,7 @@ require_once __DIR__ . '/../helpers.php';
         </li>
         <li class="sidebar-menu_list-item">
           <button onclick="<?php if (empty($_SESSION['user'])) {
-                              echo "openModal(panelAuthorization);";
+                              echo "openModal(panelAuthorization); getClassShowHide()";
                             } else {
                               echo "window.location.replace('./account.php')";
                             } ?>" class="sidebar-menu__content sidebar-menu__account-btn">
@@ -317,8 +317,20 @@ require_once __DIR__ . '/../helpers.php';
       характер и не является публичной офертой
     </p>
   </div>
+  <div class="popup popup__subscribe popup_is-animated" id="popup">
+    <form name="license" action="/index.php" class="popup__content">
+      <button type="button" class="popup__close"></button>
+      <h4 class="popup__title">Подписка на рассылку</h4>
+      <fieldset class="popup__container">
+        <input type="email" placeholder="example@mail.ru" name="license" id="popup__input_type_mail" class="popup__input popup__input_type_mail" required>
+        <input type="checkbox" name="license" id="popup__licenses" class="popup__input popup__input_type_licenses visually-hidden" required>
+        <label for="popup__licenses">Я согласен на <a class="popup__licenses-link" href="/public/license.pdf">обработку персональных данных</a></label>
+      </fieldset>
+      <button class="button popup__button panel-auto__btn-light" type="submit">Подписаться</button>
+    </form>
+  </div>
 </body>
-<script src="../script/script.js"></script>
+<script src="../script/index.js"></script>
 
 </html>
 <?php clearValidation(); ?>

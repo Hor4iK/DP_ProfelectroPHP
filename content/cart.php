@@ -105,10 +105,10 @@
         </li>
         <li class="sidebar-menu_list-item list-item_option">
           <a onclick="<?php if (empty($_SESSION['user'])) {
-                              echo 'openModal(panelAuthorization); getClassShowHide()';
-                            } else {
-                              echo 'window.location.replace(`./cart.php`)';
-                            } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
+                        echo 'openModal(panelAuthorization); getClassShowHide()';
+                      } else {
+                        echo 'window.location.replace(`./cart.php`)';
+                      } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
             Корзина
           </a>
         </li>
@@ -188,58 +188,33 @@
     <div class="content__cart">
       <h1 class="cart__title">Корзина</h1>
       <ul class="cart__list">
-        <li class="cart__list-item">
-          <img src="/img/exgoods.png" alt="" class="cart__item-image">
-          <div class="cart__item-cover_middle">
-            <h5 class="cart__item-title">Заглушка канализационная 'Россия' (наружная) (110)</h5>
-            <div class="cart__item-cover_middle-down">
-              <input type="number" min="1" value="1" class="popup__input cart__item-input" required>
-              <!-- !!! сделать приписку цена за шт через бифор -->
-              <h6 class="cart__item-price">512$</h6>
-            </div>
-          </div>
-          <h5 class="cart__item-value">512$</h5>
-          <button type="button" class="cart__close"></button>
-        </li>
-        <li class="cart__list-item">
-          <img src="/img/exgoods.png" alt="" class="cart__item-image">
-          <div class="cart__item-cover_middle">
-            <h5 class="cart__item-title">Заглушка канализационная 'Россия' (наружная) (110) Заглушка канализационная 'Россия' (наружная) (110)</h5>
-            <div class="cart__item-cover_middle-down">
-              <input type="number" min="1" value="1" class="popup__input cart__item-input" required>
-              <!-- !!! сделать приписку цена за шт через бифор -->
-              <h6 class="cart__item-price">512$</h6>
-            </div>
-          </div>
-          <h5 class="cart__item-value">512$</h5>
-          <button type="button" class="cart__close"></button>
-        </li>
-        <li class="cart__list-item">
-          <img src="/img/exgoods.png" alt="" class="cart__item-image">
-          <div class="cart__item-cover_middle">
-            <h5 class="cart__item-title">Заглушка канализационная 'Россия' (наружная) (110)</h5>
-            <div class="cart__item-cover_middle-down">
-              <input type="number" min="1" value="1" class="popup__input cart__item-input" required>
-              <!-- !!! сделать приписку цена за шт через бифор -->
-              <h6 class="cart__item-price">512$</h6>
-            </div>
-          </div>
-          <h5 class="cart__item-value">512$</h5>
-          <button type="button" class="cart__close"></button>
-        </li>
-        <li class="cart__list-item">
-          <img src="/img/exgoods.png" alt="" class="cart__item-image">
-          <div class="cart__item-cover_middle">
-            <h5 class="cart__item-title">Заглушка канализационная 'Россия' (наружная) (110)</h5>
-            <div class="cart__item-cover_middle-down">
-              <input type="number" min="1" value="1" class="popup__input cart__item-input" required>
-              <!-- !!! сделать приписку цена за шт через бифор -->
-              <h6 class="cart__item-price">512$</h6>
-            </div>
-          </div>
-          <h5 class="cart__item-value">512$</h5>
-          <button type="button" class="cart__close"></button>
-        </li>
+        <?
+        $products = getCart();
+        $summ = 0;
+        if ($products != null) {
+          foreach ($products as $product) : $summ += (float) $product['good_summ']; ?>
+            <li class="cart__list-item card" data-id="<?= $product['good_id'] ?>">
+              <img src="<? if ($product['good_image']) echo ($product['good_image']);
+                        else echo ("../img/default-product-image.png") ?>" alt="" class="cart__item-image">
+              <div class="cart__item-cover_middle">
+                <h5 class="cart__item-title"><?= $product['good_name'] ?></h5>
+                <div class="cart__item-cover_middle-down">
+                  <input type="number" min="1" value="<?= $product['good_count'] ?>" class="popup__input cart__item-input" required>
+                  <h6 class="cart__item-price"><?= $product['good_price'] ?></h6>
+                </div>
+              </div>
+              <h5 class="cart__item-value"><?= $product['good_summ'] ?></h5>
+              <button type="button" class="cart__close"></button>
+            </li>
+        <? endforeach;
+        } else {
+          echo ('
+              <h2 class="content__cart_empty">Ваша корзина пуста</h2>
+              <a href="./catalog.php?Value=0" class="content__cart-link_empty">Перейти к каталогу ➜</a>
+            ');
+        }
+        ?>
+
       </ul>
       <form class="card-order">
         <h2 class="card-order__title">Ваш заказ</h2>
@@ -260,7 +235,7 @@
           <h3 class="card-order__summ-title">Итого</h3>
           <div class="card-order__summ-cover">
             <p class="card-order__summ-postscript">Товаров на:</p>
-            <h4 class="card-order__summ-value">123$</h4>
+            <h4 class="card-order__summ-value"><?= $summ ?></h4>
           </div>
           <button class="button card-order__button">Перейти к оформлению</button>
         </div>
@@ -372,7 +347,22 @@
       характер и не является публичной офертой
     </p>
   </div>
-  <script src="../script/script.js"></script>
+  <div class="popup popup__subscribe popup_is-animated" id="popup">
+    <form name="license" action="/index.php" class="popup__content">
+      <button type="button" class="popup__close"></button>
+      <h4 class="popup__title">Подписка на рассылку</h4>
+      <fieldset class="popup__container">
+        <input type="email" placeholder="example@mail.ru" name="license" id="popup__input_type_mail" class="popup__input popup__input_type_mail" required>
+        <input type="checkbox" name="license" id="popup__licenses" class="popup__input popup__input_type_licenses visually-hidden" required>
+        <label for="popup__licenses">Я согласен на <a class="popup__licenses-link" href="/public/license.pdf">обработку персональных данных</a></label>
+      </fieldset>
+      <button class="button popup__button panel-auto__btn-light" type="submit">Подписаться</button>
+    </form>
+  </div>
+  <script src="../script/index.js"></script>
+  <script>
+    setHandlersCloseButtons();
+  </script>
 </body>
 
 </html>

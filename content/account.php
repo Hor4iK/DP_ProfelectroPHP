@@ -109,10 +109,10 @@ $user = currentUser();
         </li>
         <li class="sidebar-menu_list-item list-item_option">
           <a onclick="<?php if (empty($_SESSION['user'])) {
-                              echo 'openModal(panelAuthorization); getClassShowHide()';
-                            } else {
-                              echo 'window.location.replace(`./cart.php`)';
-                            } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
+                        echo 'openModal(panelAuthorization); getClassShowHide()';
+                      } else {
+                        echo 'window.location.replace(`./cart.php`)';
+                      } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
             Корзина
           </a>
         </li>
@@ -133,7 +133,7 @@ $user = currentUser();
         </li>
         <li class="sidebar-menu_list-item">
           <button onclick="<?php if (empty($_SESSION['user'])) {
-                              echo "openModal(panelAuthorization);";
+                              echo "openModal(panelAuthorization); getClassShowHide()";
                             } else {
                               echo "window.location.replace('./account.php')";
                             } ?>" class="sidebar-menu__content sidebar-menu__account-btn">
@@ -259,7 +259,36 @@ $user = currentUser();
           </button>
         </form>
         <div class="conteiner-text__account type__frame" id="history">
-          <h2>История заказов отсутствует</h2>
+
+          <ul class="cart__list">
+            <?
+            $products = getPaidGoods();
+            $summ = 0;
+            if ($products != null) {
+              echo ('<h2>История заказов</h2>');
+              foreach ($products as $product) : $summ += (float) $product['good_summ']; ?>
+                <li class="history__list-item card" data-id="<?= $product['good_id'] ?>">
+                  <img src="<? if ($product['good_image']) echo ($product['good_image']);
+                            else echo ("../img/default-product-image.png") ?>" alt="" class="history__item-image">
+                  <div class="cart__item-cover_middle">
+                    <h5 class="history__item-title"><?= $product['good_name'] ?></h5>
+                    <div class="cart__item-cover_middle-down">
+                      <input type="number" min="1" value="<?= $product['good_count'] ?>" class="popup__input cart__item-input" required>
+                      <h6 class="cart__item-price"><?= $product['good_price'] ?></h6>
+                    </div>
+                  </div>
+                  <h5 class="cart__item-value"><?= $product['good_summ'] ?></h5>
+                </li>
+            <? endforeach;
+            } else {
+              echo ('
+              <h2>История заказов отсутствует</h2>
+            ');
+            }
+            ?>
+          </ul>
+
+
         </div>
       </div>
     </div>
@@ -369,8 +398,20 @@ $user = currentUser();
       характер и не является публичной офертой
     </p>
   </div>
+  <div class="popup popup__subscribe popup_is-animated" id="popup">
+    <form name="license" action="/index.php" class="popup__content">
+      <button type="button" class="popup__close"></button>
+      <h4 class="popup__title">Подписка на рассылку</h4>
+      <fieldset class="popup__container">
+        <input type="email" placeholder="example@mail.ru" name="license" id="popup__input_type_mail" class="popup__input popup__input_type_mail" required>
+        <input type="checkbox" name="license" id="popup__licenses" class="popup__input popup__input_type_licenses visually-hidden" required>
+        <label for="popup__licenses">Я согласен на <a class="popup__licenses-link" href="/public/license.pdf">обработку персональных данных</a></label>
+      </fieldset>
+      <button class="button popup__button panel-auto__btn-light" type="submit">Подписаться</button>
+    </form>
+  </div>
 </body>
-<script src="../script/script.js"></script>
+<script src="../script/index.js"></script>
 
 </html>
 <?php clearValidation() ?>

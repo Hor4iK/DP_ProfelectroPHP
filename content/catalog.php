@@ -105,10 +105,10 @@
         </li>
         <li class="sidebar-menu_list-item list-item_option">
           <a onclick="<?php if (empty($_SESSION['user'])) {
-                              echo 'openModal(panelAuthorization); getClassShowHide()';
-                            } else {
-                              echo 'window.location.replace(`./cart.php`)';
-                            } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
+                        echo 'openModal(panelAuthorization); getClassShowHide()';
+                      } else {
+                        echo 'window.location.replace(`./cart.php`)';
+                      } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
             Корзина
           </a>
         </li>
@@ -164,7 +164,7 @@
         </li>
         <li class="header__list-item">
           <button onclick="<?php if (empty($_SESSION['user'])) {
-                              echo "openModal(panelAuthorization);";
+                              echo "openModal(panelAuthorization); getClassShowHide()";
                             } else {
                               echo "window.location.replace('../content/account.php')";
                             } ?>" class="header__user-link">
@@ -268,11 +268,10 @@
                       </div>
                     </div>
                     <button onclick="<?php if (empty($_SESSION['user'])) {
-                              echo "openModal(panelAuthorization);";
-                            } else {
-                              addGoodCartFromBtn();
-                              echo "window.location.replace('./cart.php')";
-                            } ?>" class="content__catalog__card-button">Купить</button>
+                                        echo "openModal(panelAuthorization);";
+                                      } else {
+                                        echo "window.location.replace('./cart.php')";
+                                      } ?>" class="content__catalog__card-button">Купить</button>
                   </a>
                 </li>
               <? endforeach; ?>
@@ -395,26 +394,42 @@
         <p class="popup__description">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
           Tempore cumque eos voluptatibus non quos ducimus quia dignissimos at fuga dolore neque dolor modi.
         </p>
-        <form name="card-preview" action="./cart.php" method="POST" class="popup__form">
+        <form name="card-preview" method="POST" class="popup__form">
           <div class="popup__price">
             <h5 class="popup__value">1234.5 $/м</h5>
             <span class="popup__currency">₽</span>
             <span class="popup__unit">\шт</span>
           </div>
           <div class="popup__container_form">
-            <input type="number" name="count-goods" value="1" id="popup__input_type_count" class="popup__input popup__input_type_count">
-            <button class="button popup__button" type="submit">В корзину</button>
+            <input type="number" name="count-good" value="1" min="1" minlength="1" id="popup__input_type_count" class="popup__input popup__input_type_count">
+            <button class="button popup__button" onclick="<?php if (empty($_SESSION['user'] && $_SESSION['user'] != null)) {
+                                                            echo "closeModal(); openModal(panelAuthorization);";
+                                                          } else {
+                                                            echo "window.location.replace('./cart.php')";
+                                                          } ?>" type="button">В корзину</button>
           </div>
         </form>
       </div>
     </div>
   </div>
-  <script src="../script/script.js"></script>
-  <?
-  $arrayGoodsPHP = getGoods(0);
-  $goodsJSON = json_encode($arrayGoodsPHP);
-  ?>
+  <div class="popup popup__subscribe popup_is-animated" id="popup">
+    <form name="license" action="/index.php" class="popup__content">
+      <button type="button" class="popup__close"></button>
+      <h4 class="popup__title">Подписка на рассылку</h4>
+      <fieldset class="popup__container">
+        <input type="email" placeholder="example@mail.ru" name="license" id="popup__input_type_mail" class="popup__input popup__input_type_mail" required>
+        <input type="checkbox" name="license" id="popup__licenses" class="popup__input popup__input_type_licenses visually-hidden" required>
+        <label for="popup__licenses">Я согласен на <a class="popup__licenses-link" href="/public/license.pdf">обработку персональных данных</a></label>
+      </fieldset>
+      <button class="button popup__button panel-auto__btn-light" type="submit">Подписаться</button>
+    </form>
+  </div>
+  <script src="../script/index.js"></script>
   <script>
+    <?
+    $arrayGoodsPHP = getGoods(0);
+    $goodsJSON = json_encode($arrayGoodsPHP);
+    ?>
     const popupCardPreview = document.querySelector('.popup_card-preview');
     const cardsList = document.querySelectorAll('.card');
     const allPriceList = <?= $goodsJSON ?>;
@@ -427,6 +442,7 @@
     const cardUnit = popupCardPreview.querySelector('.popup__unit');
 
     const cardConfig = {
+      dataset: popupCardPreview.dataset,
       image: cardImage,
       title: cardTitle,
       provider: cardProvider,
@@ -434,11 +450,11 @@
       price: cardValue,
       unit: cardUnit,
     }
-
     cardsList.forEach((card) => {
       cardPreviewHandler(card, cardConfig, allPriceList);
     });
     setHandlersButtonsSubmit();
+    setHandlersButtonsPopupSubmit();
   </script>
 </body>
 

@@ -11,6 +11,8 @@ function redirect(string $path)
   die();
 }
 
+
+//VALIDATION
 function clearValidation()
 {
   $_SESSION['validation'] = [];
@@ -43,6 +45,8 @@ function getMessage(string $key): string
   return $message;
 }
 
+
+//currentUser
 function currentUser(): array|false
 {
   $pdo = getPDO();
@@ -68,7 +72,9 @@ function currentUserAccount(): array
   return $stmt->fetch(mode: \PDO::FETCH_ASSOC);
 }
 
-function getGoods($Category): array
+
+//GOODS FUNCTIONS
+function getGoods(int $Category): array
 {
   $pdo = getPDO();
 
@@ -86,7 +92,7 @@ function getGoods($Category): array
   return $products;
 }
 
-function getGoodsPodcategory($Category, $Podcategory): array
+function getGoodsPodcategory(int $Category, int $Podcategory): array
 {
   $pdo = getPDO();
 
@@ -116,7 +122,7 @@ function getCategory(): array
   return $category;
 }
 
-function getPodcategory($Podcategory): array
+function getPodcategory(int $Podcategory): array
 {
   $pdo = getPDO();
   $result = $pdo->prepare(query: "SELECT podcategory.* FROM podcategory WHERE podcategory_id= $Podcategory");
@@ -130,7 +136,7 @@ function getPodcategory($Podcategory): array
   return $podcategory;
 }
 
-function getPodcategories($Category): array
+function getPodcategories(int $Category): array
 {
   $pdo = getPDO();
   if ($Category != 0)
@@ -147,25 +153,10 @@ function getPodcategories($Category): array
   return $podcategory;
 }
 
-
-function getCart($User): array
+function getGoodByID(int $idCard): array
 {
   $pdo = getPDO();
-  //$user = $_SESSION['user']['id'];
-  $result = $pdo->prepare(query: "SELECT good_name, good_price, good_count, round((good_price * good_count), 2) as price from goods, cart WHERE goods.good_id = cart.good_id and user_id = $User and is_paid = 0");
-  $result->execute();
-  $products = array();
-  while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
-    $products[] = $product_info;
-  }
-
-  return $products;
-}
-
-function getGoodByID($idCard): array
-{
-  $pdo = getPDO();
-  if($idCard == null) {
+  if ($idCard == null) {
     $idCard = $_COOKIE['idCard'];
   }
   $result = $pdo->prepare(query: "SELECT * FROM goods WHERE good_id = $idCard");
@@ -178,11 +169,76 @@ function getGoodByID($idCard): array
   return $products;
 }
 
-function addGoodCartFromBtn()
+
+//CART FUNCTIONS
+function getCart(): array
+{
+  $pdo = getPDO();
+  $user = $_SESSION['user']['id'];
+  $result = $pdo->prepare(query: "SELECT cart.good_id, good_name, good_image, good_overview, good_provider, good_price, good_count, round((good_price * good_count), 2) as good_summ, good_unit from goods, cart WHERE goods.good_id = cart.good_id and user_id = $user and is_paid = 0");
+  $result->execute();
+  $products = array();
+  while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
+    $products[] = $product_info;
+  }
+  return $products;
+}
+
+function addGoodCartFromBtn():string
 {
   $idUser = $_SESSION['user']['id'];
   $idCard = $_COOKIE['idCard'];
+  try {
+    $pdo = getPDO();
+    $result = $pdo->prepare(query: "INSERT INTO cart(user_id, good_id, good_count, is_paid) VALUES ($idUser, $idCard, 1, false)");
+    $result->execute();
+    return 'The product has been added to cart';
+  }
+  catch(Exception $err) {
+    return $err;
+  }
+}
+
+function addGoodCartFromPopup($countGood):string
+{
+  $idUser = $_SESSION['user']['id'];
+  $idCard = $_COOKIE['idCard'];
+  try {
+    $pdo = getPDO();
+    $result = $pdo->prepare(query: "INSERT INTO cart(user_id, good_id, good_count, is_paid) VALUES ($idUser, $idCard, $countGood, false)");
+    $result->execute();
+    return 'The product has been added to cart';
+  }
+  catch(Exception $err) {
+    return $err;
+  }
+}
+
+function deleteGoodFromCart($countGood):string
+{
+  $idUser = $_SESSION['user']['id'];
+  $idCard = $_COOKIE['idCard'];
+  try {
+    $pdo = getPDO();
+    $result = $pdo->prepare(query: "DELETE FROM cart WHERE user_id = $idUser and good_id = $idCard and good_count = $countGood");
+    $result->execute();
+    return 'The product has been deleted';
+  }
+  catch(Exception $err) {
+    return $err;
+  }
+}
+
+function getPaidGoods(): array
+{
   $pdo = getPDO();
-  $result = $pdo->prepare(query: "INSERT INTO cart(user_id, good_id, good_count, is_paid) VALUES ($idUser, $idCard, 1, false)");
+  $user = $_SESSION['user']['id'];
+  $result = $pdo->prepare(query: "SELECT cart.good_id, good_name, good_image, good_overview, good_provider, good_price, good_count, round((good_price * good_count), 2) as good_summ, good_unit from goods, cart WHERE goods.good_id = cart.good_id and user_id = $user and is_paid = 1");
   $result->execute();
+  $products = array();
+  while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
+    $products[] = $product_info;
+  }
+
+  return $products;
 }

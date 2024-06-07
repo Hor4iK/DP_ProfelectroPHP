@@ -1,4 +1,9 @@
 {
+  "name": "profelectro",
+  "version": "1.0.2",
+  "main": "index.js",
+  "author": "Hor4iK",
+  "license": "ISC",
   "dependencies": {
     "prettier": "^3.0.3",
     "stylelint": "^15.11.0"

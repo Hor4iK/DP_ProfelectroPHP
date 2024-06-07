@@ -234,6 +234,7 @@
   text-decoration: none;
   padding: 8px 0;
   padding-inline-end: 20px;
+  cursor: pointer;
 }
 
 .sidebar-menu__content::after {
