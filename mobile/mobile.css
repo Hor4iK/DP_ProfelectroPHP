@@ -8,6 +8,10 @@
     font-size: inherit;
   }
 
+  .sidebar-menu__content::after {
+    left: 410px;
+  }
+
   .content__about-list {
     display: flex;
     flex-direction: column;
@@ -21,6 +25,10 @@
 
   .about__card-paragraph {
     margin-left: 50px;
+  }
+
+  .data__actions__btn {
+    padding: 15px 5px;
   }
 }
 
@@ -61,6 +69,10 @@
   .content__block__list-link {
     max-width: none;
   }
+
+  .data__actions {
+    flex-direction: column;
+  }
 }
 
 @media (width <= 440px) {
@@ -75,5 +87,9 @@
   .cart__item-value {
     padding-inline-end: 10px;
     font-size: 16px;
+  }
+
+  .sidebar-menu__content::after {
+    left: 330px;
   }
 }

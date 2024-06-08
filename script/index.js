@@ -1,5 +1,5 @@
 //@ DOM-elements
-const menu = document.querySelector(".top-menu");
+const menu = document.querySelector(".popup__menu");
 const menuTriggers = Array.from(document.querySelectorAll(".menu"));
 const popupSubscribe = document.querySelector('.popup__subscribe');
 const panelAuthorization = document.querySelector('.panel-auto__background');
@@ -105,11 +105,10 @@ function cardPreviewHandler(card, cardConfig, priceList) {
 }
 
 //Toggle classlist of Menu
-const getClassShowHide = (evt) => {
-  menu.classList.toggle('type__visible');
-}
 menuTriggers.forEach((item) => {
-  item.addEventListener("click", getClassShowHide);
+  item.addEventListener("click", () => {
+    openModal(menu)
+  });
 });
 
 //Set eventListeners adding to button of a product card
@@ -164,5 +163,20 @@ function setHandlersCloseButtons() {
 subscribeButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   openModal(popupSubscribe);
-  console.log('foo?');
 });
+
+const handlerCallDeleteGoodDB = (evt) => {
+  const cardsList = document.querySelector('.data__list');
+  const cardArray = Array.from(cardsList.querySelectorAll('.card'));
+  const checkedItemList = cardArray.filter(item => item.querySelector('.data__list-item-check').checked);
+  const idList = Array.from(checkedItemList, item => item.dataset.id);
+  const args = {
+    cardsId: idList,
+  }
+  callFunctionAllocator('deleteGood', args)
+  .then(checkedItemList.forEach(item => item.remove()));
+}
+function setHandlerDeleteButton() {
+  const deleteButton = document.querySelector('.data__actions__btn_delete');
+  deleteButton.addEventListener('click', handlerCallDeleteGoodDB);
+}

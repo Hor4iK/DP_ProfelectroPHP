@@ -43,7 +43,7 @@ $user = currentUser();
       </div>
       <div class="panel-auto__btns">
         <button class="panel-auto__btn panel-auto__btn-color" type="submit" id="btn_enter">войти</button>
-        <button class="panel-auto__btn panel-auto__btn-light" type="button" onclick="window.location.replace('/action/register.php')" id="btn_register">
+        <button class="panel-auto__btn panel-auto__btn-light" type="button" onclick="window.location.replace('/content/register.php')" id="btn_register">
           регистрация
         </button>
       </div>
@@ -188,9 +188,17 @@ $user = currentUser();
     </div>
     <div class="content__block">
       <ul class="content__block__list">
-        <li class="content__block__list-item">
-          <a class="content__block__list-link list-link_cart" href="./cart.php">Корзина</a>
-        </li>
+        <?
+        if ($_SESSION['user']['login'] == 'admin@mail.ru' && password_verify('a1s2d3', $_SESSION['user']['password'])) { ?>
+          <li class="content__block__list-item">
+            <a class="content__block__list-link list-link_color list-link_admin" href="./admin.php">Администрирование</a>
+          </li>
+        <? } else { ?>
+          <li class="content__block__list-item">
+            <a class="content__block__list-link list-link_color" href="./cart.php">Корзина</a>
+          </li>
+        <? }
+        ?>
         <li class="content__block__list-item t2">
           <a class="content__block__list-link" href="#personal">Личные данные</a>
         </li>
@@ -297,8 +305,8 @@ $user = currentUser();
     <div class="footer__content">
       <div class="footer__content__list">
         <ul class="footer__list footer__only-title">
-          <a href="#" class="footer__content-link footer__title">каталог</a>
-          <a href="#" class="footer__content-link footer__title visible__none">бренды</a>
+          <a href="/content/catalog.php?Value=0" class="footer__content-link footer__title">каталог</a>
+          <a href="/action/load_to_pdf.php" class="footer__content-link footer__title">прайс-лист</a>
         </ul>
         <ul class="footer__list">
           <li class="footer__list-item">

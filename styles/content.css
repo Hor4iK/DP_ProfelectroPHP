@@ -54,7 +54,7 @@
   color: #444;
 }
 
-.list-link_cart {
+.list-link_color {
   color: white;
   background: var(--accent-color);
   border: 2px solid var(--theme-color);
@@ -62,7 +62,7 @@
   font-weight: 500;
 }
 
-.list-link_cart:hover {
+.list-link_color:hover {
   transition: background 0.2s ease-in, border 0.3s linear;
   border: 2px solid var(--theme-color-light);
   background: var(--theme-color);
@@ -1041,6 +1041,14 @@
   margin-block-end: 0 !important;
 }
 
+.popup__menu {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgb(0 0 0 / 0.06);
+  backdrop-filter: blur(0.6px);
+}
+
 .popup__subscribe  {
   position: fixed;
   display: none;
@@ -1157,3 +1165,93 @@ input[type="checkbox"] + label {
   color: #fff;
   background-color: var(--theme-color);
 }
+
+.data__title-list {
+  display: grid;
+  grid-template-columns: 0.2fr 2fr 0.6fr 0.5fr 0.7fr 0.2fr;
+  justify-items: center;
+  padding-inline: 30px 25px;
+}
+
+.data__title-list__item {
+
+}
+
+.data__list {
+  max-height: 700px;
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-block-end: 20px;
+}
+
+.data__list-item {
+  display: grid;
+  grid-template-columns: 0.2fr 2fr 0.6fr 0.5fr 0.7fr 0.2fr;
+  justify-items: start;
+  align-items: center;
+  gap: 5px;
+  padding: 7px;
+  margin: 0 4px;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px 0px rgb(0 0 0 / 0.4);
+  font-size: calc(var(--font-size));
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.data__list-item-image {
+  width: 70px;
+  object-fit: contain;
+  aspect-ratio: 1 / 1;
+}
+
+.data__list-item-title {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.data__list-item-price {
+  position: relative;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.data__list-item-price::after {
+  content: '₽';
+  position: relative;
+  left: 2px;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.data__list-item-unit {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.data__list-item-article {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.data__list-item-check {
+  padding: 0;
+  width: 22px;
+  height: 22px;
+}
+
+.data__actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+

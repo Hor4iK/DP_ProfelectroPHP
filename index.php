@@ -30,16 +30,16 @@ require_once __DIR__ . './helpers.php';
       <div class="panel-auto__login">
         <label for="login">Логин</label>
         <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['login'])) echo ' type__visible' ?>" id="incorrect-symbol-log">*</span>
-        <input class="panel-auto__field" type="email" name="login" id="login" required/>
+        <input class="panel-auto__field" type="email" name="login" id="login" required />
       </div>
       <div class="panel-auto__password">
         <label for="password">Пароль</label>
         <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['password'])) echo ' type__visible' ?>" id="incorrect-symbol-log">*</span>
-        <input class="panel-auto__field" type="password" name="password" id="password" required/>
+        <input class="panel-auto__field" type="password" name="password" id="password" required />
       </div>
       <div class="panel-auto__btns">
         <button class="panel-auto__btn panel-auto__btn-color" type="submit" id="btn_enter">войти</button>
-        <button class="panel-auto__btn panel-auto__btn-light" type="button" onclick="window.location.replace('/action/register.php')" id="btn_register">
+        <button class="panel-auto__btn panel-auto__btn-light" type="button" onclick="window.location.replace('/content/register.php')" id="btn_register">
           регистрация
         </button>
       </div>
@@ -51,8 +51,9 @@ require_once __DIR__ . './helpers.php';
         <img src="img/menu.png" alt="Изображение меню для раскрытия полного меню" class="header__menu-section-icon" />
       </a>
     </div>
-    <div class="sidebar-menu__block-list top-menu">
-      <ul class="sidebar-menu__list">
+    <div class="popup popup__menu popup_is-animated">
+      <button type="button" class="popup__close visually_hidden"></button>
+      <ul class="sidebar-menu__list sidebar-menu__block-list top-menu">
         <li class="sidebar-menu_list-item">
           <a href="./content/catalog.php?Value=1" class="sidebar-menu__content header__list-item-link">
             Электротовары
@@ -105,10 +106,10 @@ require_once __DIR__ . './helpers.php';
         </li>
         <li class="sidebar-menu_list-item list-item_option">
           <a onclick="<?php if (empty($_SESSION['user'])) {
-                              echo 'openModal(panelAuthorization); getClassShowHide()';
-                            } else {
-                              echo 'window.location.replace(`./content/cart.php`)';
-                            } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
+                        echo 'openModal(panelAuthorization); getClassShowHide()';
+                      } else {
+                        echo 'window.location.replace(`./content/cart.php`)';
+                      } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
             Корзина
           </a>
         </li>
@@ -336,7 +337,7 @@ require_once __DIR__ . './helpers.php';
       <div class="footer__content__list">
         <ul class="footer__list footer__only-title">
           <a href="/content/catalog.php?Value=0" class="footer__content-link footer__title">каталог</a>
-          <a href="#" class="footer__content-link footer__title visible__none">бренды</a>
+          <a href="/action/load_to_pdf.php" class="footer__content-link footer__title">прайс-лист</a>
         </ul>
         <ul class="footer__list">
           <li class="footer__list-item">

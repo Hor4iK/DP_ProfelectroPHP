@@ -39,7 +39,7 @@
       </div>
       <div class="panel-auto__btns">
         <button class="panel-auto__btn panel-auto__btn-color" type="submit" id="btn_enter">войти</button>
-        <button class="panel-auto__btn panel-auto__btn-light" type="button" onclick="window.location.replace('/action/register.php')" id="btn_register">
+        <button class="panel-auto__btn panel-auto__btn-light" type="button" onclick="window.location.replace('/content/register.php')" id="btn_register">
           регистрация
         </button>
       </div>
@@ -157,7 +157,7 @@
           <a href="./howbuy.php" class="header__list-item-link">Как купить</a>
         </li>
         <li class="header__list-item type__hiding">
-          <a class="header__list-item-link">О компании</a>
+          <a href="./about.php" class="header__list-item-link">О компании</a>
         </li>
         <li class="header__list-item type__hiding">
           <a href="./contacts.php" class="header__list-item-link">Контакты</a>
@@ -283,8 +283,8 @@
     <div class="footer__content">
       <div class="footer__content__list">
         <ul class="footer__list footer__only-title">
-          <a href="#" class="footer__content-link footer__title">каталог</a>
-          <a href="#" class="footer__content-link footer__title visible__none">бренды</a>
+          <a href="/content/catalog.php?Value=0" class="footer__content-link footer__title">каталог</a>
+          <a href="/action/load_to_pdf.php" class="footer__content-link footer__title">прайс-лист</a>
         </ul>
         <ul class="footer__list">
           <li class="footer__list-item">

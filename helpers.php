@@ -11,14 +11,6 @@ function redirect(string $path)
   die();
 }
 
-
-//VALIDATION
-function clearValidation()
-{
-  $_SESSION['validation'] = [];
-  // $_SESSION['class'] = null;
-}
-
 function getPDO(): PDO
 {
   try {
@@ -28,16 +20,21 @@ function getPDO(): PDO
   }
 }
 
+
+//VALIDATION
+function clearValidation()
+{
+  $_SESSION['validation'] = [];
+  // $_SESSION['class'] = null;
+}
 function setMessage(string $key, string $message): void
 {
   $_SESSION['message'][$key] = $message;
 }
-
 function hasMessage(string $key): bool
 {
   return isset($_SESSION['message'][$key]);
 }
-
 function getMessage(string $key): string
 {
   $message = $_SESSION['message'][$key] ?? '';
@@ -60,7 +57,6 @@ function currentUser(): array|false
   $stmt->execute(['id' => $userId]);
   return $stmt->fetch(mode: \PDO::FETCH_ASSOC);
 }
-
 function currentUserAccount(): array
 {
   $pdo = getPDO();
@@ -79,7 +75,8 @@ function getGoods(int $Category): array
   $pdo = getPDO();
 
   if ($Category != 0)
-    $result = $pdo->prepare(query: "SELECT goods.*, category.category_id, category.category_name FROM goods, category WHERE category.category_id = goods.category_id and category.category_id = $Category");
+    $result = $pdo->prepare(query: "SELECT goods.*, category.category_id, category.category_name
+    FROM goods, category WHERE category.category_id = goods.category_id and category.category_id = $Category");
   else
     $result = $pdo->prepare(query: "SELECT * FROM goods");
   $result->execute();
@@ -97,7 +94,9 @@ function getGoodsPodcategory(int $Category, int $Podcategory): array
   $pdo = getPDO();
 
   if ($Category != 0 && $Podcategory != 0)
-    $result = $pdo->prepare(query: "SELECT goods.*, category.category_id, category.category_name, podcategory.podcategory_id, podcategory.podcategory_name FROM goods, category, podcategory WHERE (category.category_id = goods.category_id and category.category_id = $Category) and (podcategory.podcategory_id = goods.good_podcategory_id and podcategory.podcategory_id = $Podcategory)");
+    $result = $pdo->prepare(query: "SELECT goods.*, category.category_id, category.category_name, podcategory.podcategory_id, podcategory.podcategory_name
+    FROM goods, category, podcategory
+    WHERE (category.category_id = goods.category_id and category.category_id = $Category) and (podcategory.podcategory_id = goods.good_podcategory_id and podcategory.podcategory_id = $Podcategory)");
   $result->execute();
   $products = array();
 
@@ -169,6 +168,20 @@ function getGoodByID(int $idCard): array
   return $products;
 }
 
+function deleteGood($idCard): string
+{
+  try {
+    $pdo = getPDO();
+    foreach ($idCard as $id) {
+      $result = $pdo->prepare(query: "DELETE FROM goods WHERE good_id = $id");
+      $result->execute();
+    }
+    return 'Successful deletion of objects';
+  } catch (Exception $err) {
+    return $err;
+  }
+}
+
 
 //CART FUNCTIONS
 function getCart(): array
@@ -184,7 +197,7 @@ function getCart(): array
   return $products;
 }
 
-function addGoodCartFromBtn():string
+function addGoodCartFromBtn(): string
 {
   $idUser = $_SESSION['user']['id'];
   $idCard = $_COOKIE['idCard'];
@@ -193,13 +206,12 @@ function addGoodCartFromBtn():string
     $result = $pdo->prepare(query: "INSERT INTO cart(user_id, good_id, good_count, is_paid) VALUES ($idUser, $idCard, 1, false)");
     $result->execute();
     return 'The product has been added to cart';
-  }
-  catch(Exception $err) {
+  } catch (Exception $err) {
     return $err;
   }
 }
 
-function addGoodCartFromPopup($countGood):string
+function addGoodCartFromPopup($countGood): string
 {
   $idUser = $_SESSION['user']['id'];
   $idCard = $_COOKIE['idCard'];
@@ -208,13 +220,12 @@ function addGoodCartFromPopup($countGood):string
     $result = $pdo->prepare(query: "INSERT INTO cart(user_id, good_id, good_count, is_paid) VALUES ($idUser, $idCard, $countGood, false)");
     $result->execute();
     return 'The product has been added to cart';
-  }
-  catch(Exception $err) {
+  } catch (Exception $err) {
     return $err;
   }
 }
 
-function deleteGoodFromCart($countGood):string
+function deleteGoodFromCart($countGood): string
 {
   $idUser = $_SESSION['user']['id'];
   $idCard = $_COOKIE['idCard'];
@@ -223,8 +234,7 @@ function deleteGoodFromCart($countGood):string
     $result = $pdo->prepare(query: "DELETE FROM cart WHERE user_id = $idUser and good_id = $idCard and good_count = $countGood");
     $result->execute();
     return 'The product has been deleted';
-  }
-  catch(Exception $err) {
+  } catch (Exception $err) {
     return $err;
   }
 }

@@ -23,6 +23,10 @@ switch ($data['funcName']) {
       $aResult['response'] = addGoodCartFromPopup($data['arguments']['countGood']);
       echo json_encode($aResult);
       break;
+    case 'deleteGood':
+      $aResult['response'] = deleteGood($data['arguments']['cardsId']);
+      echo json_encode($aResult);
+      break;
   default:
     $aResult['error'] = 'Not found function ' . $data['funcName'] . '!';
     echo json_encode($aResult);

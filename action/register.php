@@ -47,8 +47,6 @@ if (!empty($_SESSION['validation'])) {
 
 
 //ADD USER
-
-
 $pdo = getPDO();
 
 $query = "INSERT INTO users (name, email, phone, password) VALUES (:name, :email, :phone, :password)";

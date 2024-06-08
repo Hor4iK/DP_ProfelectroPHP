@@ -7,7 +7,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>О компании ПрофЭлектро</title>
+  <title>Политики ПрофЭлектро</title>
   <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon" sizes="any" />
   <link rel="icon" href="../img/logo.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../fonts/fonts.css" />
@@ -38,7 +38,7 @@
       </div>
       <div class="panel-auto__btns">
         <button class="panel-auto__btn panel-auto__btn-color" type="submit" id="btn_enter">войти</button>
-        <button class="panel-auto__btn panel-auto__btn-light" type="button" onclick="window.location.replace('/action/register.php')" id="btn_register">
+        <button class="panel-auto__btn panel-auto__btn-light" type="button" onclick="window.location.replace('/content/register.php')" id="btn_register">
           регистрация
         </button>
       </div>
@@ -239,8 +239,8 @@
     <div class="footer__content">
       <div class="footer__content__list">
         <ul class="footer__list footer__only-title">
-          <a href="#" class="footer__content-link footer__title">каталог</a>
-          <a href="#" class="footer__content-link footer__title visible__none">бренды</a>
+          <a href="/content/catalog.php?Value=0" class="footer__content-link footer__title">каталог</a>
+          <a href="/action/load_to_pdf.php" class="footer__content-link footer__title">прайс-лист</a>
         </ul>
         <ul class="footer__list">
           <li class="footer__list-item">

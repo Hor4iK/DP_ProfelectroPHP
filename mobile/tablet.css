@@ -55,6 +55,14 @@
     padding: 8px;
     font-size: 14px;
   }
+
+  .data__title-list {
+    display: none;
+  }
+
+  .data__actions__btn {
+    padding: 15px 20px;
+  }
 }
 
 @media screen and (width < 786px) {
@@ -151,5 +159,21 @@
 
   .content__cart {
     padding: 2vw;
+  }
+
+  .data__list-item {
+    justify-items: center;
+  }
+
+  .data__list-item-unit {
+    justify-self: flex-start;
+  }
+
+  .data__list-item-title {
+    justify-self: flex-start;
+  }
+
+  .data__list-item-check {
+    justify-self: flex-end;
   }
 }

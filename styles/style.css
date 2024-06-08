@@ -176,7 +176,7 @@
 
 .sidebar-menu__block-list {
   width: 82vw;
-  max-width: 345px;
+  max-width: 375px;
   padding: 2vw;
   padding-inline-start: 4vw;
   position: absolute;
@@ -201,21 +201,14 @@
 
 .top-menu {
   display: none;
-  z-index: 2;
+  z-index: 4;
   left: 0;
-  top: clamp(2.8125rem, 2.6381rem + 0.8017vw, 3.5rem);
+  top: clamp(2.9125rem, 2.6381rem + 0.8017vw, 3.6rem);
   -webkit-box-shadow: 10px 7px 6px -12px rgb(0 0 0 / 0.4);
   -moz-box-shadow: 10px 7px 6px -12px rgb(0 0 0 / 0.4);
   box-shadow: 10px 7px 6px -12px rgb(0 0 0 / 0.4);
   border-radius: 0 5px 5px 0;
 }
-
-/* .sidebar-menu:hover .sidebar-menu__block-list {
-  left: 75px;
-  -webkit-box-shadow: 17px 0 14px -12px rgb(0 0 0 / 0.27);
-  -moz-box-shadow: 17px 0 14px -12px rgb(0 0 0 / 0.27);
-  box-shadow: 17px 0 14px -12px rgb(0 0 0 / 0.27);
-} */
 
 .sidebar-menu__list {
   display: flex;
@@ -240,7 +233,7 @@
 .sidebar-menu__content::after {
   content: "›";
   position: absolute;
-  left: 250px;
+  left: 280px;
   top: 6px;
 }
 
