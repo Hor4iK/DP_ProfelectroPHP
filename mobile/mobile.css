@@ -73,6 +73,10 @@
   .data__actions {
     flex-direction: column;
   }
+
+  .content-frame__conteiner {
+    flex-direction: column;
+  }
 }
 
 @media (width <= 440px) {

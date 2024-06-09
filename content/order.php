@@ -1,10 +1,6 @@
-<?php
-
-require_once __DIR__ . '/../helpers.php';
-$user = currentUser();
-// echo $user['id'];
-// echo $_SESSION['user']['id'];
+<?php require_once __DIR__ . '/../helpers.php';
 ?>
+
 
 <!doctype html>
 <html lang="ru">
@@ -12,7 +8,7 @@ $user = currentUser();
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Контакты компании ПрофЭлектро</title>
+  <title>Каталог</title>
   <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon" sizes="any" />
   <link rel="icon" href="../img/logo.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../fonts/fonts.css" />
@@ -20,7 +16,7 @@ $user = currentUser();
   <link rel="stylesheet" href="../styles/style.css" />
   <link rel="stylesheet" href="../styles/content.css" />
   <link rel="stylesheet" media="(width <= 1215px)" href="../mobile/tablet.css" />
-  <link rel="stylesheet" media="(width <= 600px)" href="../mobile/mobile.css" />
+  <link rel="stylesheet" media="(width <= 600px)" href="/mobile/mobile.css" />
 </head>
 
 <body class="page">
@@ -110,7 +106,7 @@ $user = currentUser();
         </li>
         <li class="sidebar-menu_list-item list-item_option">
           <a onclick="<?php if (empty($_SESSION['user'])) {
-                        echo ' closeModal(); openModal(panelAuthorization);';
+                        echo ' closeModal(); openModal(panelAuthorization); ';
                       } else {
                         echo 'window.location.replace(`./cart.php`)';
                       } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
@@ -134,7 +130,7 @@ $user = currentUser();
         </li>
         <li class="sidebar-menu_list-item">
           <button onclick="<?php if (empty($_SESSION['user'])) {
-                              echo " closeModal(); openModal(panelAuthorization);";
+                              echo "openModal(panelAuthorization);";
                             } else {
                               echo "window.location.replace('./account.php')";
                             } ?>" class="sidebar-menu__content sidebar-menu__account-btn">
@@ -187,120 +183,83 @@ $user = currentUser();
         </div>
       </nav>
     </div>
-    <div class="content__block">
-      <ul class="content__block__list">
-        <?
-        if ($_SESSION['user']['login'] == 'admin@mail.ru' && password_verify('a1s2d3', $_SESSION['user']['password'])) { ?>
-          <li class="content__block__list-item">
-            <a class="content__block__list-link list-link_color list-link_admin" href="./admin.php">Администрирование</a>
-          </li>
-        <? } else { ?>
-          <li class="content__block__list-item">
-            <a class="content__block__list-link list-link_color" href="./cart.php">Корзина</a>
-          </li>
-        <? }
-        ?>
-        <li class="content__block__list-item t2">
-          <a class="content__block__list-link" href="#personal">Личные данные</a>
-        </li>
-        <li class="content__block__list-item t3">
-          <a class="content__block__list-link" href="#change_password">Сменить пароль</a>
-        </li>
-        <li class="content__block__list-item t4">
-          <a class="content__block__list-link" href="#history">История заказов</a>
-        </li>
-      </ul>
-      <div class="conteiner-text">
-        <form method="post" action="../action/change_data.php" class="conteiner-text__account type__frame" id="personal">
-          <h1 class="panel-auto__title">Личный кабинет</h1>
+
+    <div class="content__order">
+
+      <div class="content-frame card-order">
+        <h2 class="card-order__title">Ваш заказ</h2>
+        <div class="card-order__type-user">
+          <fieldset class="card-order__type-user-fieldset">
+            <legend class="card-order__type-user-title">Тип покупателя:</legend>
+            <div class="card-order__type-user-select">
+              <input type="radio" class="card-order__type-user-input visually-hidden individual-entity" value="Физическое лицо" checked name="type-user" id="individual-entity"></input>
+              <label class="card-order__type-user-label" for="individual-entity">Физическое лицо</label>
+            </div>
+            <div class="card-order__type-user-select">
+              <input type="radio" class="card-order__type-user-input visually-hidden legal-entity" value="Юридическое лицо" name="type-user" id="legal-entity"></input>
+              <label class="card-order__type-user-label" for="legal-entity">Юридическое лицо</label>
+            </div>
+          </fieldset>
+        </div>
+        <div class="card-order__summ">
+          <h3 class="card-order__summ-title">Итого</h3>
+          <div class="card-order__summ-cover">
+            <p class="card-order__summ-postscript">Товаров на:</p>
+            <h4 class="card-order__summ-value">123$</h4>
+          </div>
+        </div>
+      </div>
+      <div class="content-frame__conteiner ">
+        <div class="content-frame content__delivery">
+          <div class="content__container-image-title">
+            <img src="/img/delivery.png" class="content__image">
+            <h2 class="card-order__title">Способ доставки</h2>
+          </div>
+          <fieldset class="card-order__type-user-fieldset">
+            <legend class="card-order__type-user-title"></legend>
+            <div class="card-order__type-user-select">
+              <input type="radio" class="card-order__type-user-input visually-hidden" value="" checked name="delivery" id="delivery"></input>
+              <label class="card-order__type-user-label" for="delivery">Самовывоз</label>
+              <p>Вы можете самостоятельно забрать заказ из магазина.</p>
+            </div>
+          </fieldset>
+        </div>
+        <div class="content-frame content__payment">
+          <div class="content__container-image-title">
+            <img src="/img/payment.png" class="content__image">
+            <h2 class="card-order__title">Способ оплаты</h2>
+          </div>
+          <fieldset class="card-order__type-user-fieldset">
+            <legend class="card-order__type-user-title"></legend>
+            <div class="card-order__type-user-select">
+              <input type="radio" class="card-order__type-user-input visually-hidden" value="" checked name="payment" id="payment"></input>
+              <label class="card-order__type-user-label" for="payment">Наличными или картой при получении</label>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <div class="content__map">
+        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Adc74f8fcc44981cfde7910df3cfff9a6c53e615ac43997f1d0a4162dfef45d71&amp;source=constructor" width="100%" height="600" frameborder="0"></iframe>
+      </div>
+      <form method="post" action="" class="content-frame content__form" name="data-user">
+          <h1 class="panel-auto__title">Покупатель</h1>
           <div class="panel-auto__name">
-            <label for="name">Имя Фамилия</label>
+            <label for="name">ФИО</label>
             <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['name'])) echo ' type__visible' ?>" id="incorrect-symbol-name">*</span>
-            <input class="panel-auto__field" value="<?php if ($_SESSION['user'] == null) {
-                                                      echo '';
-                                                    } else {
-                                                      echo $user['name'];
-                                                    }
-                                                    ?>" name="name" id="name" />
+            <input class="panel-auto__field" type="text" placeholder="" name="name" />
           </div>
           <div class="panel-auto__login">
-            <label for="login">Логин</label>
+            <label for="login">E-mail</label>
             <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['login'])) echo ' type__visible' ?>" id="incorrect-symbol-log">*</span>
-            <input class="panel-auto__field" type="email" value="<?php if ($_SESSION['user'] == null) {
-                                                                    echo '';
-                                                                  } else {
-                                                                    echo $user['email'];
-                                                                  }  ?>" name="login" id="login" />
+            <input class="panel-auto__field" type="email" placeholder="" name="login"  />
           </div>
           <div class="panel-auto__password">
             <label for="phone">Телефон</label>
             <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['phone'])) echo ' type__visible' ?>" id="incorrect-symbol-phone">*</span>
-            <input class="panel-auto__field" value="<?php if ($_SESSION['user'] === null) {
-                                                      echo '';
-                                                    } else {
-                                                      echo $user['phone'];
-                                                    }  ?>" name="phone" id="phone" />
+            <input class="panel-auto__field" placeholder="" type="tel" name="phone" />
           </div>
-          <button type="submit" class="panel-auto__btn panel-auto__btn-color">
-            Сохранить изменения
-          </button>
         </form>
-        <form method="post" action="../action/change_password.php" class="conteiner-text__account type__frame" id="change_password">
-          <h1 class="panel-auto__title">Сменить пароль</h1>
-          <div class="panel-auto__name">
-            <label for="name">Новый пароль</label>
-            <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['password'])) echo ' type__visible' ?>" id="incorrect-symbol-pas_new">*</span>
-            <input class="panel-auto__field" type="password" minlength="6" required name="password" id="password" />
-          </div>
-          <div class="panel-auto__login">
-            <label for="login">Новый пароль ещё раз</label>
-            <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['password_again'])) echo ' type__visible' ?>" id="incorrect-symbol-pas_new_again">*</span>
-            <input class="panel-auto__field" minlength="6" type="password" required name="password_again" id="password_again" />
-          </div>
-          <button type="submit" class="panel-auto__btn panel-auto__btn-color">
-            Сохранить изменения
-          </button>
-        </form>
-        <form method="post" action="../action/die_account.php" class="conteiner-text__account type__frame">
-          <h2>Выйти из аккаунта</h2>
-          <button type="submit" id="btn_exit" name="btn_exit" onclick="<?php ?>" class="panel-auto__btn panel-auto__btn-color panel-auto__btn__exit">
-            Выйти
-          </button>
-        </form>
-        <div class="conteiner-text__account type__frame" id="history">
-
-          <ul class="cart__list">
-            <?
-            $products = getPaidGoods();
-            $summ = 0;
-            if ($products != null) {
-              echo ('<h2>История заказов</h2>');
-              foreach ($products as $product) : $summ += (float) $product['good_summ']; ?>
-                <li class="history__list-item card" data-id="<?= $product['good_id'] ?>">
-                  <img src="<? if ($product['good_image']) echo ($product['good_image']);
-                            else echo ("../img/default-product-image.png") ?>" alt="" class="history__item-image">
-                  <div class="cart__item-cover_middle">
-                    <h5 class="history__item-title"><?= $product['good_name'] ?></h5>
-                    <div class="cart__item-cover_middle-down">
-                      <input type="number" min="1" value="<?= $product['good_count'] ?>" class="popup__input cart__item-input" required>
-                      <h6 class="cart__item-price"><?= $product['good_price'] ?></h6>
-                    </div>
-                  </div>
-                  <h5 class="cart__item-value"><?= $product['good_summ'] ?></h5>
-                </li>
-            <? endforeach;
-            } else {
-              echo ('
-              <h2>История заказов отсутствует</h2>
-            ');
-            }
-            ?>
-          </ul>
-
-
-        </div>
-      </div>
-    </div>
+      <button class="button card-order__button">Оформить заказ</button>
   </main>
   <footer class="footer">
     <div class="footer__content">
@@ -419,8 +378,11 @@ $user = currentUser();
       <button class="button popup__button panel-auto__btn-light" type="submit">Подписаться</button>
     </form>
   </div>
+  <script src="../script/index.js"></script>
+  <script>
+    setHandlersCloseButtons();
+  </script>
 </body>
-<script src="../script/index.js"></script>
 
 </html>
 <?php clearValidation() ?>

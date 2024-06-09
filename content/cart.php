@@ -51,8 +51,9 @@
         <img src="../img/menu.png" alt="Изображение меню для раскрытия полного меню" class="header__menu-section-icon" />
       </a>
     </div>
-    <div class="sidebar-menu__block-list top-menu">
-      <ul class="sidebar-menu__list">
+    <div class="popup popup__menu popup_is-animated">
+      <button type="button" class="popup__close visually_hidden"></button>
+      <ul class="sidebar-menu__list sidebar-menu__block-list top-menu">
         <li class="sidebar-menu_list-item">
           <a href="./catalog.php?Value=1" class="sidebar-menu__content header__list-item-link">
             Электротовары
@@ -105,7 +106,7 @@
         </li>
         <li class="sidebar-menu_list-item list-item_option">
           <a onclick="<?php if (empty($_SESSION['user'])) {
-                        echo 'openModal(panelAuthorization); getClassShowHide()';
+                        echo ' closeModal(); openModal(panelAuthorization); ';
                       } else {
                         echo 'window.location.replace(`./cart.php`)';
                       } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
@@ -216,7 +217,7 @@
         ?>
 
       </ul>
-      <form class="card-order">
+      <form method="post" action="./order.php" class="card-order">
         <h2 class="card-order__title">Ваш заказ</h2>
         <div class="card-order__type-user">
           <fieldset class="card-order__type-user-fieldset">
@@ -237,7 +238,7 @@
             <p class="card-order__summ-postscript">Товаров на:</p>
             <h4 class="card-order__summ-value"><?= $summ ?></h4>
           </div>
-          <button class="button card-order__button">Перейти к оформлению</button>
+          <button type="submit" class="button card-order__button">Перейти к оформлению</button>
         </div>
       </form>
     </div>

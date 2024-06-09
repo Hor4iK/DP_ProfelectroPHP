@@ -50,8 +50,9 @@
         <img src="../img/menu.png" alt="Изображение меню для раскрытия полного меню" class="header__menu-section-icon" />
       </a>
     </div>
-    <div class="sidebar-menu__block-list top-menu">
-      <ul class="sidebar-menu__list">
+    <div class="popup popup__menu popup_is-animated">
+      <button type="button" class="popup__close visually_hidden"></button>
+      <ul class="sidebar-menu__list sidebar-menu__block-list top-menu">
         <li class="sidebar-menu_list-item">
           <a href="./catalog.php?Value=1" class="sidebar-menu__content header__list-item-link">
             Электротовары
@@ -104,10 +105,10 @@
         </li>
         <li class="sidebar-menu_list-item list-item_option">
           <a onclick="<?php if (empty($_SESSION['user'])) {
-                              echo 'openModal(panelAuthorization); getClassShowHide()';
-                            } else {
-                              echo 'window.location.replace(`./cart.php`)';
-                            } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
+                        echo ' closeModal(); openModal(panelAuthorization); ';
+                      } else {
+                        echo 'window.location.replace(`./cart.php`)';
+                      } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
             Корзина
           </a>
         </li>
@@ -128,7 +129,7 @@
         </li>
         <li class="sidebar-menu_list-item">
           <button onclick="<?php if (empty($_SESSION['user'])) {
-                              echo "openModal(panelAuthorization);";
+                              echo " closeModal(); openModal(panelAuthorization);";
                             } else {
                               echo "window.location.replace('./account.php')";
                             } ?>" class="sidebar-menu__content sidebar-menu__account-btn">

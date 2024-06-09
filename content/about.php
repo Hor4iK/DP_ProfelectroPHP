@@ -19,7 +19,7 @@
 </head>
 
 <body class="page">
-<div id="panel-auto" class="popup panel-auto__background popup_is-animated ">
+  <div id="panel-auto" class="popup panel-auto__background popup_is-animated ">
     <form class="panel-auto" action="/action/login.php" method="post">
       <button class="panel-auto-exit popup__close" id="panel-auto_exit" type="button"></button>
       <h1 class="panel-auto__title">Личный кабинет</h1>
@@ -29,12 +29,12 @@
       <div class="panel-auto__login">
         <label for="login">Логин</label>
         <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['login'])) echo ' type__visible' ?>" id="incorrect-symbol-log">*</span>
-        <input class="panel-auto__field" type="email" name="login" id="login" required/>
+        <input class="panel-auto__field" type="email" name="login" id="login" required />
       </div>
       <div class="panel-auto__password">
         <label for="password">Пароль</label>
         <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['password'])) echo ' type__visible' ?>" id="incorrect-symbol-log">*</span>
-        <input class="panel-auto__field" type="password" name="password" id="password" required/>
+        <input class="panel-auto__field" type="password" name="password" id="password" required />
       </div>
       <div class="panel-auto__btns">
         <button class="panel-auto__btn panel-auto__btn-color" type="submit" id="btn_enter">войти</button>
@@ -50,8 +50,9 @@
         <img src="../img/menu.png" alt="Изображение меню для раскрытия полного меню" class="header__menu-section-icon" />
       </a>
     </div>
-    <div class="sidebar-menu__block-list top-menu">
-      <ul class="sidebar-menu__list">
+    <div class="popup popup__menu popup_is-animated">
+      <button type="button" class="popup__close visually_hidden"></button>
+      <ul class="sidebar-menu__list sidebar-menu__block-list top-menu">
         <li class="sidebar-menu_list-item">
           <a href="./catalog.php?Value=1" class="sidebar-menu__content header__list-item-link">
             Электротовары
@@ -104,10 +105,10 @@
         </li>
         <li class="sidebar-menu_list-item list-item_option">
           <a onclick="<?php if (empty($_SESSION['user'])) {
-                              echo 'openModal(panelAuthorization); getClassShowHide()';
-                            } else {
-                              echo 'window.location.replace(`./cart.php`)';
-                            } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
+                        echo ' closeModal(); openModal(panelAuthorization);';
+                      } else {
+                        echo 'window.location.replace(`./cart.php`)';
+                      } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
             Корзина
           </a>
         </li>
@@ -128,7 +129,7 @@
         </li>
         <li class="sidebar-menu_list-item">
           <button onclick="<?php if (empty($_SESSION['user'])) {
-                              echo "openModal(panelAuthorization); getClassShowHide()";
+                              echo " closeModal(); openModal(panelAuthorization);";
                             } else {
                               echo "window.location.replace('./account.php')";
                             } ?>" class="sidebar-menu__content sidebar-menu__account-btn">

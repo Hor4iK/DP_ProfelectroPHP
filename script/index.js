@@ -165,6 +165,47 @@ subscribeButton.addEventListener('click', (evt) => {
   openModal(popupSubscribe);
 });
 
+//Set eventListeners to open modal of add card
+const setHandlerAddCardButtonOpenModal = (modal) => {
+  const buttonAdd = document.querySelector('.data__actions__btn_add');
+  buttonAdd.addEventListener('click', () => {
+    openModal(modal);
+  })
+}
+
+// Finding invalid inputs
+const hasInvalidInput = (inputList) => {
+  return inputList.some(inputElement => {
+    return !inputElement.validity.valid;
+  })
+}
+
+//Set eventListeners send data of adding card
+const setHandlerAddCardButton = (modal) => {
+  const form = modal.querySelector('.popup__content');
+  const inputList = Array.from(form.querySelectorAll('.popup__input'));
+  const buttonAdd = modal.querySelector('.popup__button');
+  inputList.forEach(item => {
+    item.addEventListener('input', () => {
+      if (hasInvalidInput(inputList)) {
+        // buttonAdd.disabled = true;
+        buttonAdd.classList.add('popup__button_is-invalid');
+      }
+      else {
+        // buttonAdd.disabled = false;
+        buttonAdd.classList.remove('popup__button_is-invalid');
+      }
+    })
+  })
+  buttonAdd.addEventListener('click', (evt) => {
+    if (!hasInvalidInput(inputList)) {}
+    else {
+      evt.preventDefault();
+    }
+  })
+}
+
+//Set eventListeners deleting to close__button of a product card
 const handlerCallDeleteGoodDB = (evt) => {
   const cardsList = document.querySelector('.data__list');
   const cardArray = Array.from(cardsList.querySelectorAll('.card'));
@@ -174,9 +215,16 @@ const handlerCallDeleteGoodDB = (evt) => {
     cardsId: idList,
   }
   callFunctionAllocator('deleteGood', args)
-  .then(checkedItemList.forEach(item => item.remove()));
+    .then(checkedItemList.forEach(item => item.remove()));
 }
 function setHandlerDeleteButton() {
   const deleteButton = document.querySelector('.data__actions__btn_delete');
   deleteButton.addEventListener('click', handlerCallDeleteGoodDB);
 }
+
+// const setHandlerOpenOrder = () => {
+//   const buttonOrder = document.querySelector('.card-order__button');
+//   buttonOrder.addEventListener('click', (evt) => {
+
+//   })
+// }

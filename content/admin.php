@@ -55,8 +55,9 @@ $user = currentUser();
         <img src="../img/menu.png" alt="Изображение меню для раскрытия полного меню" class="header__menu-section-icon" />
       </a>
     </div>
-    <div class="sidebar-menu__block-list top-menu">
-      <ul class="sidebar-menu__list">
+    <div class="popup popup__menu popup_is-animated">
+      <button type="button" class="popup__close visually_hidden"></button>
+      <ul class="sidebar-menu__list sidebar-menu__block-list top-menu">
         <li class="sidebar-menu_list-item">
           <a href="./catalog.php?Value=1" class="sidebar-menu__content header__list-item-link">
             Электротовары
@@ -109,7 +110,7 @@ $user = currentUser();
         </li>
         <li class="sidebar-menu_list-item list-item_option">
           <a onclick="<?php if (empty($_SESSION['user'])) {
-                        echo 'openModal(panelAuthorization); getClassShowHide()';
+                        echo ' closeModal(); openModal(panelAuthorization); ';
                       } else {
                         echo 'window.location.replace(`./cart.php`)';
                       } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
@@ -133,7 +134,7 @@ $user = currentUser();
         </li>
         <li class="sidebar-menu_list-item">
           <button onclick="<?php if (empty($_SESSION['user'])) {
-                              echo "openModal(panelAuthorization); getClassShowHide()";
+                              echo " closeModal(); openModal(panelAuthorization);";
                             } else {
                               echo "window.location.replace('./account.php')";
                             } ?>" class="sidebar-menu__content sidebar-menu__account-btn">
@@ -202,6 +203,7 @@ $user = currentUser();
         </li>
       </ul>
       <div class="conteiner-text">
+
         <form method="post" action="" class="conteiner-text__account type__frame" id="site_content">
           <h1 class="panel-auto__title">Контент сайта</h1>
 
@@ -209,6 +211,7 @@ $user = currentUser();
             Сохранить изменения
           </button>
         </form>
+
         <form method="post" action="" class="conteiner-text__account type__frame" id="products">
           <h1 class="panel-auto__title">Каталог товаров</h1>
           <ul class="data__title-list">
@@ -239,7 +242,6 @@ $user = currentUser();
             } else {
               echo ('<h2 class="content__cart_empty">Каталог товаров пуст</h2>');
             } ?>
-
           </fieldset>
           <div class="data__actions">
             <button type="button" class="panel-auto__btn panel-auto__btn-color data__actions__btn data__actions__btn_delete">
@@ -249,15 +251,14 @@ $user = currentUser();
               Добавить товар
             </button>
           </div>
-
         </form>
+
         <form method="post" action="" class="conteiner-text__account conteiner-text__uploading type__frame" id="uploading">
           <h1 class="panel-auto__title">Выгрузка файлов с базы</h1>
-          <button type="submit" onclick="window.location.replace('/action/load_to_pdf.php')" class="panel-auto__btn panel-auto__btn-color panel-auto__btn-uploading">
+          <a type="submit" href="/action/load_to_pdf.php" class="panel-auto__btn panel-auto__btn-color panel-auto__btn-uploading">
             Выгрузить прайс-лист.pdf
-          </button>
+          </a>
         </form>
-
       </div>
     </div>
   </main>
@@ -378,10 +379,85 @@ $user = currentUser();
       <button class="button popup__button panel-auto__btn-light" type="submit">Подписаться</button>
     </form>
   </div>
+  <div class="popup popup__add-card popup_is-animated" id="popup">
+    <form name="adding" action="/action/add_card.php" method="post" class="popup__content">
+      <button type="button" class="popup__close"></button>
+      <h4 class="popup__title">Добавление товара</h4>
+      <fieldset class="popup__container">
+        <input type="text" placeholder="Наименование" minlength="4" name="name" id="popup__input_type_card-name" class="popup__input popup__input_type_card-name" required>
+        <input type="url" placeholder="Адрес изображения" minlength="4" name="image" id="popup__input_type_card-image" class="popup__input popup__input_type_card-image" required>
+        <input type="text" placeholder="Описание товара" minlength="4" name="overview" id="popup__input_type_card-overview" class="popup__input popup__input_type_card-overview" required>
+        <input type="text" placeholder="Производитель" minlength="4" name="provider" id="popup__input_type_card-provider" class="popup__input popup__input_type_card-provider" required>
+        <input type="number" placeholder="Цена" step="0.01" min="1" minlength="1" name="price" id="popup__input_type_card-price" class="popup__input popup__input_type_card-price" required>
+        <select name="unit" id="popup__input_type_card-unit" class="popup__input popup__input_type_card-unit" autocomplete required>
+          <option value="">Ед.изм.</option>
+          <option selected value="/шт">/шт</option>
+          <option value="/м">/м</option>
+        </select>
+        <select name="podcategory" id="popup__input_type_card-category" class="popup__input popup__input_type_card-category" autocomplete required>
+          <optgroup label="Электротовары">
+            <option value="1">Кабели и провода</option>
+            <option value="2">Электроустановочные изделия</option>
+            <option value="3">Материалы для электромонтажа</option>
+            <option value="4">Щитовое оборудование</option>
+          </optgroup>
+          <optgroup label="Водоотведение">
+            <option value="5">Канализация</option>
+            <option value="6">Арматура</option>
+            <option value="7">Хомут</option>
+          </optgroup>
+          <optgroup label="Освещение">
+            <option value="8">Светодиодные лампы</option>
+            <option value="9">Светодиодные ленты</option>
+            <option value="10">Светодиодные прожектора</option>
+            <option value="11">Настольные светильники</option>
+            <option value="12">Светильники потолочные</option>
+            <option value="13">Светильники линейные</option>
+            <option value="14">Фонарики</option>
+          </optgroup>
+          <optgroup label="Инструменты">
+            <option value="15">Электроинструмент</option>
+            <option value="16">Ручные инструменты</option>
+            <option value="17">Инструмент сантехника</option>
+            <option value="18">Инструмент электромонтажный</option>
+            <option value="19">Лазерные уровни</option>
+          </optgroup>
+          <optgroup label="Экипировка, средства защиты">
+            <option value="20">Перчатки респиратор</option>
+            <option value="21">Маски сварочные</option>
+          </optgroup>
+          <optgroup label="Электрический тёплый пол">
+            <option value="22">SPYHEAT</option>
+            <option value="23">Warmeenergie</option>
+            <option value="24">ЧТК</option>
+          </optgroup>
+          <optgroup label="Сантехника">
+            <option value="25">Смесители</option>
+          </optgroup>
+          <optgroup label="Краски">
+            <option value="26">Аэрозоль</option>
+            <option value="27">Грунт 3 в 1</option>
+            <option value="28">Эмали</option>
+          </optgroup>
+          <optgroup label="Газовое оборудование">
+            <option value="29">Газовый счётчик</option>
+            <option value="30">Отопительные котлы</option>
+            <option value="31">Шланги для газа</option>
+            <option value="32">Запасные части к котлам</option>
+          </optgroup>
+        </select>
+        <!-- <input type="text" placeholder="Артикул" minlength="1" name="article" id="popup__input_type_card-article" class="popup__input popup__input_type_card-article" required> -->
+      </fieldset>
+      <button class="button popup__button panel-auto__btn-light" type="submit">Добавить</button>
+    </form>
+  </div>
 </body>
 <script src="../script/index.js"></script>
 <script>
   setHandlerDeleteButton();
+  const popupAddCard = document.querySelector('.popup__add-card');
+  setHandlerAddCardButtonOpenModal(popupAddCard);
+  setHandlerAddCardButton(popupAddCard);
 </script>
 
 </html>

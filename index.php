@@ -106,7 +106,7 @@ require_once __DIR__ . './helpers.php';
         </li>
         <li class="sidebar-menu_list-item list-item_option">
           <a onclick="<?php if (empty($_SESSION['user'])) {
-                        echo 'openModal(panelAuthorization); getClassShowHide()';
+                        echo ' closeModal(); openModal(panelAuthorization);';
                       } else {
                         echo 'window.location.replace(`./content/cart.php`)';
                       } ?>" class="sidebar-menu__content header__list-item-link list-item-link__accent">
@@ -130,7 +130,7 @@ require_once __DIR__ . './helpers.php';
         </li>
         <li class="sidebar-menu_list-item">
           <button onclick="<?php if (empty($_SESSION['user'])) {
-                              echo "openModal(panelAuthorization);";
+                              echo " closeModal(); openModal(panelAuthorization);";
                             } else {
                               echo "window.location.replace('./content/account.php')";
                             } ?>" class="sidebar-menu__content sidebar-menu__account-btn">
@@ -165,7 +165,7 @@ require_once __DIR__ . './helpers.php';
         </li>
         <li class="header__list-item">
           <button onclick="<?php if (empty($_SESSION['user'])) {
-                              echo "openModal(panelAuthorization); getClassShowHide();";
+                              echo "openModal(panelAuthorization); ";
                             } else {
                               echo "window.location.replace('./content/account.php')";
                             } ?>" class="header__user-link">

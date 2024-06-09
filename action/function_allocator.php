@@ -18,17 +18,23 @@ switch ($data['funcName']) {
     $aResult['response'] = deleteGoodFromCart($data['arguments']['countGood']);
     echo json_encode($aResult);
     break;
-    case 'addGoodCartFromPopup':
-      $_COOKIE['idCard'] = $data['arguments']['idCard'];
-      $aResult['response'] = addGoodCartFromPopup($data['arguments']['countGood']);
-      echo json_encode($aResult);
-      break;
-    case 'deleteGood':
-      $aResult['response'] = deleteGood($data['arguments']['cardsId']);
-      echo json_encode($aResult);
-      break;
+  case 'addGoodCartFromPopup':
+    $_COOKIE['idCard'] = $data['arguments']['idCard'];
+    $aResult['response'] = addGoodCartFromPopup($data['arguments']['countGood']);
+    echo json_encode($aResult);
+    break;
+  case 'deleteGood':
+    $aResult['response'] = deleteGood($data['arguments']['cardsId']);
+    echo json_encode($aResult);
+    break;
+  case 'addGood':
+    $aResult['response'] = addGood();
+    echo json_encode($aResult);
+    break;
   default:
     $aResult['error'] = 'Not found function ' . $data['funcName'] . '!';
     echo json_encode($aResult);
     break;
 }
+
+
