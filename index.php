@@ -449,6 +449,7 @@ require_once __DIR__ . './helpers.php';
       <button class="button popup__button panel-auto__btn-light" type="submit">Подписаться</button>
     </form>
   </div>
+
   <script src="./script/index.js"></script>
 </body>
 

@@ -84,7 +84,7 @@ foreach ($products as $i => $product) {
 			<tr>
 				<td align="center">' . (++$i) . '</td>
 				<td align="left">' . $product['good_name'] . '</td>
-				<td align="left">' . (++$i) . '</td>
+				<td align="left">' . $product['good_id'] . '</td>
 				<td align="left">' . $product['good_unit'] . '</td>
 				<td align="left">' . format_price($product['good_price']) . ' Руб.</td>
 			</tr>';

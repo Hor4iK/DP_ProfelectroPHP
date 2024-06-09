@@ -241,25 +241,25 @@
       <div class="content__map">
         <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Adc74f8fcc44981cfde7910df3cfff9a6c53e615ac43997f1d0a4162dfef45d71&amp;source=constructor" width="100%" height="600" frameborder="0"></iframe>
       </div>
-      <form method="post" action="" class="content-frame content__form" name="data-user">
+      <form method="post" action="" class="content-frame content__form" id="dataUser" name="dataUser">
           <h1 class="panel-auto__title">Покупатель</h1>
           <div class="panel-auto__name">
             <label for="name">ФИО</label>
-            <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['name'])) echo ' type__visible' ?>" id="incorrect-symbol-name">*</span>
-            <input class="panel-auto__field" type="text" placeholder="" name="name" />
+            <span class="incorrect-symbol type__hide type__visible" id="incorrect-symbol-name">*</span>
+            <input class="panel-auto__field" type="text" placeholder="ФИО" name="name" required/>
           </div>
           <div class="panel-auto__login">
             <label for="login">E-mail</label>
-            <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['login'])) echo ' type__visible' ?>" id="incorrect-symbol-log">*</span>
-            <input class="panel-auto__field" type="email" placeholder="" name="login"  />
+            <span class="incorrect-symbol type__hide type__visible" id="incorrect-symbol-log">*</span>
+            <input class="panel-auto__field" type="email" placeholder="example@mail.ru" name="login" required/>
           </div>
           <div class="panel-auto__password">
             <label for="phone">Телефон</label>
-            <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['phone'])) echo ' type__visible' ?>" id="incorrect-symbol-phone">*</span>
-            <input class="panel-auto__field" placeholder="" type="tel" name="phone" />
+            <span class="incorrect-symbol type__hide type__visible" id="incorrect-symbol-phone">*</span>
+            <input class="panel-auto__field" placeholder="89005006070" min="1" minlength="11" type="tel" name="phone" required/>
           </div>
         </form>
-      <button class="button card-order__button">Оформить заказ</button>
+      <button class="button card-order__button popup__button_is-invalid">Оформить заказ</button>
   </main>
   <footer class="footer">
     <div class="footer__content">
@@ -381,6 +381,7 @@
   <script src="../script/index.js"></script>
   <script>
     setHandlersCloseButtons();
+    handlerSendOrder();
   </script>
 </body>
 

@@ -9,7 +9,7 @@ $aResult = array();
 
 switch ($data['funcName']) {
   case 'addGoodCartFromBtn':
-    $_COOKIE['idCard'] = $data['arguments'];
+    $_COOKIE['idCard'] = $data['arguments']['idCard'];
     $aResult['response'] = addGoodCartFromBtn();
     echo json_encode($aResult);
     break;

@@ -199,6 +199,9 @@ $user = currentUser();
           <a class="content__block__list-link" href="#products">Товары</a>
         </li>
         <li class="content__block__list-item t4">
+          <a class="content__block__list-link" href="#history">История заказов</a>
+        </li>
+        <li class="content__block__list-item t5">
           <a class="content__block__list-link" href="#uploading">Выгрузка файлов</a>
         </li>
       </ul>
@@ -226,7 +229,6 @@ $user = currentUser();
             <legend></legend>
             <?
             $products = getGoods(0);
-            $summ = 0;
             if ($products != null) {
               foreach ($products as $product) : ?>
                 <li class="data__list-item cart__list-item card" data-id="<?= $product['good_id'] ?>">
@@ -253,10 +255,55 @@ $user = currentUser();
           </div>
         </form>
 
+        <form method="post" action="" class="conteiner-text__account type__frame" id="history">
+          <h1 class="panel-auto__title">Все заказы</h1>
+          <ul class="data__title-list">
+            <li class="data__title-list__item"></li>
+            <li class="data__title-list__item">Наименование</li>
+            <li class="data__title-list__item">Цена</li>
+            <li class="data__title-list__item">Ед.изм.</li>
+            <li class="data__title-list__item">Артикул</li>
+            <li class="data__title-list__item">Количество</li>
+            <li class="data__title-list__item">Сумма</li>
+          </ul>
+          <fieldset class="data__list">
+            <legend></legend>
+            <?
+            $products = getAllPaidGoods();
+            if ($products != null) {
+              foreach ($products as $product) : ?>
+                <li class="data__list-item cart__list-item card" data-id="<?= $product['good_id'] ?>">
+                  <img src="<? if ($product['good_image']) echo ($product['good_image']);
+                            else echo ("../img/default-product-image.png") ?>" alt="<?= $product['good_name'] ?>" class="data__list-item-image">
+                  <h5 class="data__list-item-title"><?= $product['good_name'] ?></h5>
+                  <h6 class="data__list-item-price"><?= $product['good_price'] ?></h6>
+                  <h5 class="data__list-item-unit"><?= $product['good_unit'] ?></h5>
+                  <h5 class="data__list-item-article"><?= $product['good_id'] ?></h5>
+                  <h5 class="data__list-item-count"><?= $product['good_count'] ?></h5>
+                  <h5 class="data__list-item-summ"><?= $product['good_summ'] ?></h5>
+                </li>
+            <? endforeach;
+            } else {
+              echo ('<h2 class="content__cart_empty">Каталог товаров пуст</h2>');
+            } ?>
+          </fieldset>
+          <div class="data__actions">
+            <button type="button" class="panel-auto__btn panel-auto__btn-color data__actions__btn data__actions__btn_delete">
+              Удалить выбранное
+            </button>
+            <button type="button" class="panel-auto__btn panel-auto__btn-color data__actions__btn data__actions__btn_add">
+              Добавить товар
+            </button>
+          </div>
+        </form>
+
         <form method="post" action="" class="conteiner-text__account conteiner-text__uploading type__frame" id="uploading">
           <h1 class="panel-auto__title">Выгрузка файлов с базы</h1>
           <a type="submit" href="/action/load_to_pdf.php" class="panel-auto__btn panel-auto__btn-color panel-auto__btn-uploading">
             Выгрузить прайс-лист.pdf
+          </a>
+          <a type="submit" href="/action/load_to_xls.php" class="panel-auto__btn panel-auto__btn-color panel-auto__btn-uploading">
+            Выгрузить прайс-лист.xls
           </a>
         </form>
       </div>
@@ -448,8 +495,25 @@ $user = currentUser();
         </select>
         <!-- <input type="text" placeholder="Артикул" minlength="1" name="article" id="popup__input_type_card-article" class="popup__input popup__input_type_card-article" required> -->
       </fieldset>
-      <button class="button popup__button panel-auto__btn-light" type="submit">Добавить</button>
+      <button class="button popup__button panel-auto__btn-light popup__button_is-invalid" type="submit">Добавить</button>
     </form>
+  </div>
+  <div class="notification">
+    <div class="notification__message message--success">
+      <h1>Info</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+      <button aria-labelledby="button-dismiss">
+        <span id="button-dismiss" hidden>Dismiss</span>
+        <svg viewBox="0 0 100 100" width="10" height="10">
+          <g stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+            <g transform="translate(50 50) rotate(45)">
+              <path d="M 0 -30 v 60 z M -30 0 h 60">
+              </path>
+            </g>
+          </g>
+        </svg>
+      </button>
+    </div>
   </div>
 </body>
 <script src="../script/index.js"></script>

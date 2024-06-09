@@ -117,7 +117,7 @@ const handlerCallAddGood = (evt) => {
   const args = {
     idCard: sendCookie(card),
   }
-  callFunctionAllocator('addGoodCartFromBtn', args.idCard)
+  callFunctionAllocator('addGoodCartFromBtn', args)
 }
 function setHandlersButtonsSubmit() {
   const buttonsSubmit = document.querySelectorAll('.content__catalog__card-button');
@@ -198,12 +198,16 @@ const setHandlerAddCardButton = (modal) => {
     })
   })
   buttonAdd.addEventListener('click', (evt) => {
-    if (!hasInvalidInput(inputList)) {}
+    if (!hasInvalidInput(inputList)) {
+      new Promise(generateMessage(messageTitle.success, messageText.successAdd, 'success'));
+    }
     else {
       evt.preventDefault();
     }
   })
 }
+
+
 
 //Set eventListeners deleting to close__button of a product card
 const handlerCallDeleteGoodDB = (evt) => {
@@ -215,16 +219,75 @@ const handlerCallDeleteGoodDB = (evt) => {
     cardsId: idList,
   }
   callFunctionAllocator('deleteGood', args)
-    .then(checkedItemList.forEach(item => item.remove()));
+    .then(checkedItemList.forEach(item => item.remove()))
+    .then(generateMessage(messageTitle.success, messageText.successRemove, 'success'));
 }
 function setHandlerDeleteButton() {
   const deleteButton = document.querySelector('.data__actions__btn_delete');
-  deleteButton.addEventListener('click', handlerCallDeleteGoodDB);
+  deleteButton.addEventListener('click', handlerCallDeleteGoodDB)
 }
 
-// const setHandlerOpenOrder = () => {
-//   const buttonOrder = document.querySelector('.card-order__button');
-//   buttonOrder.addEventListener('click', (evt) => {
+//Set eventListeners to button of sending order
+const handlerSendOrder = () => {
+  const buttonOrder = document.querySelector('.card-order__button');
+  const form = document.forms.dataUser;
+  const inputList = Array.from(form.querySelectorAll('.panel-auto__field'));
+  inputList.forEach(item => {
+    item.addEventListener('input', () => {
+      if (hasInvalidInput(inputList)) {
+        // buttonOrder.disabled = true;
+        buttonOrder.classList.add('popup__button_is-invalid');
+      }
+      else {
+        // buttonOrder.disabled = false;
+        buttonOrder.classList.remove('popup__button_is-invalid');
+      }
+    })
+  })
+  buttonOrder.addEventListener('click', () => {
+  })
+}
 
-//   })
-// }
+
+//NOTIFICATIONS
+
+
+const messageTitle = {
+  success: 'Успешно',
+  error: 'Ошибка',
+}
+
+const messageText = {
+  successAdd: 'Товар успешно добавлен!',
+  successRemove: 'Товар удалён из базы.',
+  errorAdd: 'Ошибка добавления товара в базу.',
+  errorRemove: 'Ошибка удаления товара из базы.',
+}
+
+const notification = document.querySelector('.notification');
+
+function dismissMessage() {
+  notification.classList.remove('received');
+}
+
+function showMessage() {
+  notification.classList.add('received');
+  const button = document.querySelector('.notification__message button');
+  button.addEventListener('click', dismissMessage, { once: true });
+}
+
+function generateMessage(messageTitle, messageText, messageClass) {
+  const delay = Math.floor(Math.random() * 800);
+  const timeoutID = setTimeout(() => {
+    const message = document.querySelector('.notification__message');
+
+    message.querySelector('h1').textContent = messageTitle;
+    message.querySelector('p').textContent = messageText;
+    message.className = `notification__message message--${messageClass}`;
+
+    showMessage();
+    clearTimeout(timeoutID);
+  }, delay);
+}
+
+

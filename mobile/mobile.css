@@ -77,6 +77,8 @@
   .content-frame__conteiner {
     flex-direction: column;
   }
+
+
 }
 
 @media (width <= 440px) {
@@ -95,5 +97,13 @@
 
   .sidebar-menu__content::after {
     left: 330px;
+  }
+
+  .content__order {
+    padding-inline: 1px;
+  }
+
+  .content-frame {
+    border-radius: 12px;
   }
 }

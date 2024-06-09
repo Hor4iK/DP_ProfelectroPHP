@@ -79,6 +79,10 @@
   .content__block__list {
     flex-direction: row;
   }
+
+  .content__catalog__card-title {
+    font-size: calc(var(--font-size));
+  }
 }
 
 @media (width <= 765px) {
@@ -175,5 +179,62 @@
 
   .data__list-item-check {
     justify-self: flex-end;
+  }
+
+  form#history .data__list-item {
+    grid-template-areas:
+      "image title title"
+      "image price unit"
+      "article count sum";
+    grid-template-columns: auto;
+  }
+
+  form#history ::before {
+    position: absolute;
+    right: 100%;
+    top: 5%;
+    opacity: 0.4;
+    display: block;
+    width: 60px;
+    font-size: 14px;
+  }
+
+  form#history .data__list-item-count::before {
+    content: "Кол-во:";
+  }
+
+  form#history .data__list-item-summ::before {
+    content: "Итого:";
+  }
+
+  form#history .data__list-item-image {
+    grid-area: image;
+  }
+
+  form#history .data__list-item-title {
+    grid-area: title;
+  }
+
+  form#history .data__list-item-price {
+    grid-area: price;
+    justify-self: end;
+  }
+
+  form#history .data__list-item-unit {
+    grid-area: unit;
+  }
+
+  form#history .data__list-item-article {
+    grid-area: article;
+    justify-self: flex-start;
+    padding-inline-start: 12px;
+  }
+
+  form#history .data__list-item-count {
+    grid-area: count;
+  }
+
+  form#history .data__list-item-summ {
+    grid-area: sum;
   }
 }

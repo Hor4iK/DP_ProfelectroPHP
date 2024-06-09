@@ -40,6 +40,10 @@
   top: calc(5vw + 1rem * 3 + 42px * 3);
 }
 
+.t5 {
+  top: calc(5vw + 1rem * 4 + 42px * 4);
+}
+
 .content__block__list-link {
   max-width: 250px;
   padding: 10px;
@@ -78,7 +82,7 @@
 }
 
 .conteiner-text > :not(:last-child) {
-  margin-bottom: 10rem;
+  margin-bottom: 8rem;
 }
 
 .conteiner-text > :has(h2) h2:not(:first-child) {
@@ -214,6 +218,8 @@
 }
 
 .panel-auto__btn-uploading {
+  max-width: 450px;
+  margin-block-end: 15px;
   cursor: pointer;
   text-decoration: none;
   transition: background 0.1s ease-in;
@@ -709,9 +715,10 @@
 }
 
 .popup__button_is-invalid {
-  background-color: var(--theme-color-light);
-  border: 1px solid var(--theme-color);
-  color: var(--theme-color);
+  background-color: var(--theme-color-light) !important;
+  border: 1px solid var(--theme-color) !important;
+  color: var(--theme-color) !important;
+  cursor: default;
 }
 
 .popup__button_is-invalid:hover {
@@ -1208,7 +1215,7 @@ input[type="checkbox"] + label {
 }
 
 .data__title-list__item {
-
+  padding-inline: 5px;
 }
 
 .data__list {
@@ -1271,9 +1278,17 @@ input[type="checkbox"] + label {
 }
 
 .data__list-item-article {
-  font-size: inherit;
-  font-weight: inherit;
+  /* font-size: inherit; */
+  font-weight: 400;
   line-height: inherit;
+}
+
+.data__list-item-count {
+
+}
+
+.data__list-item-summ {
+
 }
 
 .data__list-item-check {
@@ -1353,4 +1368,46 @@ input[type="checkbox"] + label {
 .content__form {
   padding: 2.2vw;
   margin-block-end: 30px;
+}
+
+#dataUser .incorrect-symbol {
+  left: auto;
+  right: 14%;
+}
+
+.conteiner-text__uploading {
+  display: flex;
+  flex-direction: column;
+}
+
+form#history .data__title-list {
+  grid-template-columns: 0.3fr 2fr 0.6fr 0.5fr 0.7fr 0.2fr 0.2fr;
+}
+
+form#history .data__list-item {
+  grid-template-columns: 0.3fr 1.7fr 0.6fr 0.5fr 0.7fr 0.2fr 0.2fr;
+}
+
+form#history .data__list-item-count {
+  position: relative;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+form#history .data__list-item-summ {
+  position: relative;
+  font-size: calc(var(--font-size) + 3px);
+  font-weight: inherit;
+  line-height: inherit;
+  justify-self: end;
+}
+
+form#history .data__list-item-summ::after {
+  content: '₽';
+  position: relative;
+  left: 2px;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
 }

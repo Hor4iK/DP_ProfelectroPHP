@@ -252,3 +252,16 @@ function getPaidGoods(): array
 
   return $products;
 }
+
+function getAllPaidGoods(): array
+{
+  $pdo = getPDO();
+  $result = $pdo->prepare(query: "SELECT cart.good_id, good_name, good_image, good_overview, good_provider, good_price, good_count, round((good_price * good_count), 2) as good_summ, good_unit from goods, cart WHERE goods.good_id = cart.good_id and is_paid = 1");
+  $result->execute();
+  $products = array();
+  while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
+    $products[] = $product_info;
+  }
+
+  return $products;
+}

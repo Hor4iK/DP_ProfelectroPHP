@@ -230,7 +230,7 @@ $user = currentUser();
                                                                     echo '';
                                                                   } else {
                                                                     echo $user['email'];
-                                                                  }  ?>" name="login" id="login" />
+                                                                  }  ?>" name="login" id="loginChange" />
           </div>
           <div class="panel-auto__password">
             <label for="phone">Телефон</label>
@@ -250,7 +250,7 @@ $user = currentUser();
           <div class="panel-auto__name">
             <label for="name">Новый пароль</label>
             <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['password'])) echo ' type__visible' ?>" id="incorrect-symbol-pas_new">*</span>
-            <input class="panel-auto__field" type="password" minlength="6" required name="password" id="password" />
+            <input class="panel-auto__field" type="password" minlength="6" required name="password" />
           </div>
           <div class="panel-auto__login">
             <label for="login">Новый пароль ещё раз</label>
