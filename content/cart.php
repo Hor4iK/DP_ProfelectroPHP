@@ -238,7 +238,9 @@
             <p class="card-order__summ-postscript">Товаров на:</p>
             <h4 class="card-order__summ-value"><?= $summ ?></h4>
           </div>
-          <button type="submit" class="button card-order__button">Перейти к оформлению</button>
+          <? if ($products != null) : ?>
+            <button type="submit" class="button card-order__button">Перейти к оформлению</button>
+          <? endif; ?>
         </div>
       </form>
     </div>

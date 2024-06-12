@@ -228,7 +228,13 @@ function setHandlerDeleteButton() {
 }
 
 //Set eventListeners to button of sending order
+const setEventConfirmed = (evt) => {
+  console.log(evt.target);
+  if (evt.target.classList.contains('popup')) window.location.replace('/index.php');
+}
 const handlerSendOrder = () => {
+  const popupConfirmation = document.querySelector('.popup__confirmation');
+  // const buttonOk = popupConfirmation.querySelector('.popup__button');
   const buttonOrder = document.querySelector('.card-order__button');
   const form = document.forms.dataUser;
   const inputList = Array.from(form.querySelectorAll('.panel-auto__field'));
@@ -245,6 +251,8 @@ const handlerSendOrder = () => {
     })
   })
   buttonOrder.addEventListener('click', () => {
+    callFunctionAllocator('setPaidGood')
+      .then([openModal(popupConfirmation), ]);
   })
 }
 

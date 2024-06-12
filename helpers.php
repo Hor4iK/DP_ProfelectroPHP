@@ -186,15 +186,19 @@ function deleteGood($idCard): string
 //CART FUNCTIONS
 function getCart(): array
 {
-  $pdo = getPDO();
   $user = $_SESSION['user']['id'];
-  $result = $pdo->prepare(query: "SELECT cart.good_id, good_name, good_image, good_overview, good_provider, good_price, good_count, round((good_price * good_count), 2) as good_summ, good_unit from goods, cart WHERE goods.good_id = cart.good_id and user_id = $user and is_paid = 0");
-  $result->execute();
-  $products = array();
-  while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
-    $products[] = $product_info;
+  try {
+    $pdo = getPDO();
+    $result = $pdo->prepare(query: "SELECT cart.cart_id, cart.user_id, cart.good_id, good_name, good_image, good_overview, good_provider, good_price, good_count, round((good_price * good_count), 2) as good_summ, good_unit from goods, cart WHERE goods.good_id = cart.good_id and user_id = $user and is_paid = 0");
+    $result->execute();
+    $products = array();
+    while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
+      $products[] = $product_info;
+    }
+    return $products;
+  } catch (Exception $err) {
+    return $products[] =$err;
   }
-  return $products;
 }
 
 function addGoodCartFromBtn(): string
@@ -235,33 +239,51 @@ function deleteGoodFromCart($countGood): string
     $result->execute();
     return 'The product has been deleted';
   } catch (Exception $err) {
-    return $err;
   }
 }
 
 function getPaidGoods(): array
 {
-  $pdo = getPDO();
   $user = $_SESSION['user']['id'];
-  $result = $pdo->prepare(query: "SELECT cart.good_id, good_name, good_image, good_overview, good_provider, good_price, good_count, round((good_price * good_count), 2) as good_summ, good_unit from goods, cart WHERE goods.good_id = cart.good_id and user_id = $user and is_paid = 1");
-  $result->execute();
-  $products = array();
-  while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
-    $products[] = $product_info;
+  try {
+    $pdo = getPDO();
+    $result = $pdo->prepare(query: "SELECT cart.good_id, good_name, good_image, good_overview, good_provider, good_price, good_count, round((good_price * good_count), 2) as good_summ, good_unit from goods, cart WHERE goods.good_id = cart.good_id and user_id = $user and is_paid = 1");
+    $result->execute();
+    $products = array();
+    while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
+      $products[] = $product_info;
+    }
+    return $products;
+  } catch (Exception $err) {
+    return $products[] =$err;
   }
-
-  return $products;
 }
 
 function getAllPaidGoods(): array
 {
-  $pdo = getPDO();
-  $result = $pdo->prepare(query: "SELECT cart.good_id, good_name, good_image, good_overview, good_provider, good_price, good_count, round((good_price * good_count), 2) as good_summ, good_unit from goods, cart WHERE goods.good_id = cart.good_id and is_paid = 1");
-  $result->execute();
-  $products = array();
-  while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
-    $products[] = $product_info;
+  try {
+    $pdo = getPDO();
+    $result = $pdo->prepare(query: "SELECT cart.good_id, cart.user_id, users.phone, users.name, good_name, good_image, good_overview, good_provider, good_price, good_count, round((good_price * good_count), 2) as good_summ, good_unit from goods, cart, users WHERE goods.good_id = cart.good_id and is_paid = 1 and users.id = cart.user_id");
+    $result->execute();
+    $products = array();
+    while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
+      $products[] = $product_info;
+    }
+    return $products;
+  } catch (Exception $err) {
+    return $products[] =$err;
   }
+}
 
-  return $products;
+function setPaidGood($cartId, $goodId, $userId): string
+{
+  // $user = $_SESSION['user']['id'];
+  try {
+    $pdo = getPDO();
+    $result = $pdo->prepare(query: "UPDATE cart SET is_paid=1 WHERE cart_id=$cartId and user_id=$userId and good_id=$goodId");
+    $result->execute();
+    return 'The changes has been applied';
+  } catch (Exception $err) {
+    return $err;
+  }
 }

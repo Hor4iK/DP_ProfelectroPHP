@@ -220,8 +220,8 @@ $user = currentUser();
           <ul class="data__title-list">
             <li class="data__title-list__item"></li>
             <li class="data__title-list__item">Наименование</li>
-            <li class="data__title-list__item">Цена</li>
-            <li class="data__title-list__item">Ед.изм.</li>
+            <li class="data__title-list__item data__title_price">Цена</li>
+            <!-- <li class="data__title-list__item">Ед.изм.</li> -->
             <li class="data__title-list__item">Артикул</li>
             <li class="data__title-list__item">Выбранные</li>
           </ul>
@@ -260,11 +260,12 @@ $user = currentUser();
           <ul class="data__title-list">
             <li class="data__title-list__item"></li>
             <li class="data__title-list__item">Наименование</li>
-            <li class="data__title-list__item">Цена</li>
-            <li class="data__title-list__item">Ед.изм.</li>
-            <li class="data__title-list__item">Артикул</li>
-            <li class="data__title-list__item">Количество</li>
+            <!-- <li class="data__title-list__item">Цена</li> -->
+            <!-- <li class="data__title-list__item">Ед.изм.</li> -->
+            <li class="data__title-list__item data__title_price">Цена/Артикул</li>
+            <li class="data__title-list__item">Кол-во</li>
             <li class="data__title-list__item">Сумма</li>
+            <li class="data__title-list__item">Покупатель</li>
           </ul>
           <fieldset class="data__list">
             <legend></legend>
@@ -281,20 +282,14 @@ $user = currentUser();
                   <h5 class="data__list-item-article"><?= $product['good_id'] ?></h5>
                   <h5 class="data__list-item-count"><?= $product['good_count'] ?></h5>
                   <h5 class="data__list-item-summ"><?= $product['good_summ'] ?></h5>
+                  <h5 class="data__list-item-user"><?= $product['name'] ?></h5>
+                  <h5 class="data__list-item-user"><?= $product['phone'] ?></h5>
                 </li>
             <? endforeach;
             } else {
-              echo ('<h2 class="content__cart_empty">Каталог товаров пуст</h2>');
+              echo ('<h2 class="content__cart_empty">История заказов пуста</h2>');
             } ?>
           </fieldset>
-          <div class="data__actions">
-            <button type="button" class="panel-auto__btn panel-auto__btn-color data__actions__btn data__actions__btn_delete">
-              Удалить выбранное
-            </button>
-            <button type="button" class="panel-auto__btn panel-auto__btn-color data__actions__btn data__actions__btn_add">
-              Добавить товар
-            </button>
-          </div>
         </form>
 
         <form method="post" action="" class="conteiner-text__account conteiner-text__uploading type__frame" id="uploading">

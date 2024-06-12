@@ -1,4 +1,5 @@
 <?php require_once __DIR__ . '/../helpers.php';
+$user = currentUser();
 ?>
 
 
@@ -186,6 +187,12 @@
 
     <div class="content__order">
 
+      <?
+        $products = getCart();
+        $summ = 0;
+        if ($products != null) foreach ($products as $product) : $summ += (float) $product['good_summ']; endforeach;
+      ?>
+
       <div class="content-frame card-order">
         <h2 class="card-order__title">Ваш заказ</h2>
         <div class="card-order__type-user">
@@ -205,7 +212,7 @@
           <h3 class="card-order__summ-title">Итого</h3>
           <div class="card-order__summ-cover">
             <p class="card-order__summ-postscript">Товаров на:</p>
-            <h4 class="card-order__summ-value">123$</h4>
+            <h4 class="card-order__summ-value"><?= $summ ?></h4>
           </div>
         </div>
       </div>
@@ -242,24 +249,24 @@
         <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Adc74f8fcc44981cfde7910df3cfff9a6c53e615ac43997f1d0a4162dfef45d71&amp;source=constructor" width="100%" height="600" frameborder="0"></iframe>
       </div>
       <form method="post" action="" class="content-frame content__form" id="dataUser" name="dataUser">
-          <h1 class="panel-auto__title">Покупатель</h1>
-          <div class="panel-auto__name">
-            <label for="name">ФИО</label>
-            <span class="incorrect-symbol type__hide type__visible" id="incorrect-symbol-name">*</span>
-            <input class="panel-auto__field" type="text" placeholder="ФИО" name="name" required/>
-          </div>
-          <div class="panel-auto__login">
-            <label for="login">E-mail</label>
-            <span class="incorrect-symbol type__hide type__visible" id="incorrect-symbol-log">*</span>
-            <input class="panel-auto__field" type="email" placeholder="example@mail.ru" name="login" required/>
-          </div>
-          <div class="panel-auto__password">
-            <label for="phone">Телефон</label>
-            <span class="incorrect-symbol type__hide type__visible" id="incorrect-symbol-phone">*</span>
-            <input class="panel-auto__field" placeholder="89005006070" min="1" minlength="11" type="tel" name="phone" required/>
-          </div>
-        </form>
-      <button class="button card-order__button popup__button_is-invalid">Оформить заказ</button>
+        <h1 class="panel-auto__title">Покупатель</h1>
+        <div class="panel-auto__name">
+          <label for="name">ФИО</label>
+          <span class="incorrect-symbol type__hide type__visible" id="incorrect-symbol-name">*</span>
+          <input class="panel-auto__field" value="<?php if ($_SESSION['user'] == null) echo ''; else echo $user['name']; ?>" type="text" placeholder="ФИО" name="name" disabled required />
+        </div>
+        <div class="panel-auto__login">
+          <label for="login">E-mail</label>
+          <span class="incorrect-symbol type__hide type__visible" id="incorrect-symbol-log">*</span>
+          <input class="panel-auto__field" value="<?php if ($_SESSION['user'] == null) echo ''; else  echo $user['email']; ?>" type="email" placeholder="example@mail.ru" name="login" disabled required />
+        </div>
+        <div class="panel-auto__password">
+          <label for="phone">Телефон</label>
+          <span class="incorrect-symbol type__hide type__visible" id="incorrect-symbol-phone">*</span>
+          <input class="panel-auto__field" placeholder="89005006070" value="<?php if ($_SESSION['user'] === null) echo '';else echo $user['phone']; ?>" min="1" minlength="11" type="tel" name="phone" disabled required />
+        </div>
+      </form>
+      <button class="button card-order__button">Оформить заказ</button>
   </main>
   <footer class="footer">
     <div class="footer__content">
@@ -376,6 +383,13 @@
         <label for="popup__licenses">Я согласен на <a class="popup__licenses-link" href="/public/license.pdf">обработку персональных данных</a></label>
       </fieldset>
       <button class="button popup__button panel-auto__btn-light" type="submit">Подписаться</button>
+    </form>
+  </div>
+  <div class="popup popup__confirmation popup_is-animated" id="popup">
+    <form name="order" action="/index.php" class="popup__content">
+      <button type="button" class="popup__close" style="display: none;"></button>
+      <h4 class="popup__title">Заказ оформлен</h4>
+      <button class="button popup__button" type="submit">Закрыть</button>
     </form>
   </div>
   <script src="../script/index.js"></script>

@@ -31,10 +31,18 @@ switch ($data['funcName']) {
     $aResult['response'] = addGood();
     echo json_encode($aResult);
     break;
+  case 'setPaidGood':
+    $products = array();
+    $products[] = getCart();
+    $aResult['response'] = $products[0];
+    foreach ($products[0] as $product) {
+      $aResult['response'] = setPaidGood($product['cart_id'], $product['good_id'], $product['user_id']);
+    }
+    unset($product);
+    echo json_encode($aResult);
+    break;
   default:
     $aResult['error'] = 'Not found function ' . $data['funcName'] . '!';
     echo json_encode($aResult);
     break;
 }
-
-
