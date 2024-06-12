@@ -30,12 +30,12 @@ require_once __DIR__ . './helpers.php';
       <div class="panel-auto__login">
         <label for="login">Логин</label>
         <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['login'])) echo ' type__visible' ?>" id="incorrect-symbol-log">*</span>
-        <input class="panel-auto__field" type="email" name="login" id="login" required />
+        <input class="panel-auto__field" type="email" name="login" id="login" autocomplete required />
       </div>
       <div class="panel-auto__password">
         <label for="password">Пароль</label>
         <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['password'])) echo ' type__visible' ?>" id="incorrect-symbol-log">*</span>
-        <input class="panel-auto__field" type="password" name="password" id="password" required />
+        <input class="panel-auto__field" type="password" name="password" id="password" autocomplete required />
       </div>
       <div class="panel-auto__btns">
         <button class="panel-auto__btn panel-auto__btn-color" type="submit" id="btn_enter">войти</button>

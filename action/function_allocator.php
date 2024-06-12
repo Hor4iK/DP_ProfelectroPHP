@@ -41,6 +41,14 @@ switch ($data['funcName']) {
     unset($product);
     echo json_encode($aResult);
     break;
+  case 'changeGoodCart':
+      $aResult['response'] = changeGoodCart($data['arguments']['cardId'], $data['arguments']['count']);
+    echo json_encode($aResult);
+    break;
+  case 'getCart':
+    $aResult['response'] = getCart();
+    echo json_encode($aResult);
+    break;
   default:
     $aResult['error'] = 'Not found function ' . $data['funcName'] . '!';
     echo json_encode($aResult);

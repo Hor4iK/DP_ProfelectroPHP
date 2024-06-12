@@ -196,7 +196,7 @@
           foreach ($products as $product) : $summ += (float) $product['good_summ']; ?>
             <li class="cart__list-item card" data-id="<?= $product['good_id'] ?>">
               <img src="<? if ($product['good_image']) echo ($product['good_image']);
-                        else echo ("../img/default-product-image.png") ?>" alt="" class="cart__item-image">
+                        else echo ("../img/default-product-image.png") ?>" alt="<?= $product['good_name'] ?>" class="cart__item-image">
               <div class="cart__item-cover_middle">
                 <h5 class="cart__item-title"><?= $product['good_name'] ?></h5>
                 <div class="cart__item-cover_middle-down">
@@ -365,6 +365,7 @@
   <script src="../script/index.js"></script>
   <script>
     setHandlersCloseButtons();
+    setHandlersListenersInput();
   </script>
 </body>
 

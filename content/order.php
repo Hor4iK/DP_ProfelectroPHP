@@ -193,6 +193,7 @@ $user = currentUser();
         if ($products != null) foreach ($products as $product) : $summ += (float) $product['good_summ']; endforeach;
       ?>
 
+      <button class='content__catalog-button' type='button' onclick="window.location.replace('./cart.php')">Вернуться</button>
       <div class="content-frame card-order">
         <h2 class="card-order__title">Ваш заказ</h2>
         <div class="card-order__type-user">
@@ -253,17 +254,20 @@ $user = currentUser();
         <div class="panel-auto__name">
           <label for="name">ФИО</label>
           <span class="incorrect-symbol type__hide type__visible" id="incorrect-symbol-name">*</span>
-          <input class="panel-auto__field" value="<?php if ($_SESSION['user'] == null) echo ''; else echo $user['name']; ?>" type="text" placeholder="ФИО" name="name" disabled required />
+          <input class="panel-auto__field" value="<?php if ($_SESSION['user'] == null) echo '';
+                                                  else echo $user['name']; ?>" type="text" placeholder="ФИО" name="name" disabled required />
         </div>
         <div class="panel-auto__login">
           <label for="login">E-mail</label>
           <span class="incorrect-symbol type__hide type__visible" id="incorrect-symbol-log">*</span>
-          <input class="panel-auto__field" value="<?php if ($_SESSION['user'] == null) echo ''; else  echo $user['email']; ?>" type="email" placeholder="example@mail.ru" name="login" disabled required />
+          <input class="panel-auto__field" value="<?php if ($_SESSION['user'] == null) echo '';
+                                                  else  echo $user['email']; ?>" type="email" placeholder="example@mail.ru" name="login" disabled required />
         </div>
         <div class="panel-auto__password">
           <label for="phone">Телефон</label>
           <span class="incorrect-symbol type__hide type__visible" id="incorrect-symbol-phone">*</span>
-          <input class="panel-auto__field" placeholder="89005006070" value="<?php if ($_SESSION['user'] === null) echo '';else echo $user['phone']; ?>" min="1" minlength="11" type="tel" name="phone" disabled required />
+          <input class="panel-auto__field" placeholder="89005006070" value="<?php if ($_SESSION['user'] === null) echo '';
+                                                                            else echo $user['phone']; ?>" min="1" minlength="11" type="tel" name="phone" disabled required />
         </div>
       </form>
       <button class="button card-order__button">Оформить заказ</button>

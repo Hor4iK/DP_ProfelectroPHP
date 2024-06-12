@@ -1469,6 +1469,7 @@ form#history .data__list-item-user {
   font-weight: 500;
   line-height: inherit;
   justify-self: center;
+  text-align: center;
 }
 
 form#history .data__list-item-user:first-child {

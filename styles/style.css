@@ -5,6 +5,7 @@
   --theme-color: #13265f;
   --theme-color-light: #fff;
   --accent-color: #2548b9;
+  --color-icon-user: #4B5F83;
 }
 
 .page {
@@ -100,14 +101,15 @@
   width: clamp(2.8125rem, 3.0172rem + -0.431vw, 2.5rem);
   height: clamp(2.8125rem, 3.0172rem + -0.431vw, 2.5rem);
   padding: 10px;
-  background-image: url(../img/user-profile.svg);
+  background-image: url(/img/account.svg);
   background-position: center center;
-  background-size: 70%;
+  background-size: 90%;
   background-repeat: no-repeat;
 }
 
 .header__user-link:hover {
-  transform: scale(1.06);
+  transition: transform 0.2s linear;
+  transform: scale(1.04);
 }
 
 .header__logo-link {
@@ -746,7 +748,7 @@
 /* BLOCK OF NOTIFICATION */
 
 
-@import url("https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500&display=swap");
+/* @import url("https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500&display=swap"); */
 
 * {
   box-sizing: border-box;

@@ -66,8 +66,8 @@ const callFunctionAllocator = (functionName, args = null) => {
       arguments: args ?? null
     })
   }).then(res => checkResponse(res))
-    .then(data => { console.log(data) })
-    .catch((err) => { console.log(`Warning expected: error sending data...`); })
+  // .then(data => { console.log(data) })
+  // .catch((err) => { console.log(`Warning expected: error sending data...`); })
 }
 
 const sendCookie = (card) => {
@@ -252,10 +252,37 @@ const handlerSendOrder = () => {
   })
   buttonOrder.addEventListener('click', () => {
     callFunctionAllocator('setPaidGood')
-      .then([openModal(popupConfirmation), ]);
+      .then([openModal(popupConfirmation),]);
   })
 }
 
+//Set eventListeners to input of changing cart
+const setHandlersListenersInput = () => {
+  const sumElemenet = document.querySelector('.card-order__summ-value');
+  const cardsList = Array.from(document.querySelectorAll('.card'));
+  cardsList.forEach(item => {
+    const cardId = item.dataset.id;
+    const input = item.querySelector('.cart__item-input');
+
+    input.addEventListener('change', () => {
+      const inputValue = input.value;
+      let sum = 0;
+      const args = {
+        cardId: cardId,
+        count: inputValue
+      }
+      Promise.all([callFunctionAllocator('changeGoodCart', args)])
+        .then(() => {
+          callFunctionAllocator('getCart')
+            .then(data => {
+              const dataArray = Array.from(data.response);
+              dataArray.forEach(item => { sum += Number(item.good_summ) });
+              sumElemenet.textContent = sum;
+            })
+        })
+    })
+  })
+}
 
 //NOTIFICATIONS
 

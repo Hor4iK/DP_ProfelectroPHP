@@ -431,12 +431,12 @@ $user = currentUser();
         <input type="text" placeholder="Описание товара" minlength="4" name="overview" id="popup__input_type_card-overview" class="popup__input popup__input_type_card-overview" required>
         <input type="text" placeholder="Производитель" minlength="4" name="provider" id="popup__input_type_card-provider" class="popup__input popup__input_type_card-provider" required>
         <input type="number" placeholder="Цена" step="0.01" min="1" minlength="1" name="price" id="popup__input_type_card-price" class="popup__input popup__input_type_card-price" required>
-        <select name="unit" id="popup__input_type_card-unit" class="popup__input popup__input_type_card-unit" autocomplete required>
+        <select name="unit" id="popup__input_type_card-unit" class="popup__input popup__input_type_card-unit" required>
           <option value="">Ед.изм.</option>
           <option selected value="/шт">/шт</option>
           <option value="/м">/м</option>
         </select>
-        <select name="podcategory" id="popup__input_type_card-category" class="popup__input popup__input_type_card-category" autocomplete required>
+        <select name="podcategory" id="popup__input_type_card-category" class="popup__input popup__input_type_card-category" required>
           <optgroup label="Электротовары">
             <option value="1">Кабели и провода</option>
             <option value="2">Электроустановочные изделия</option>

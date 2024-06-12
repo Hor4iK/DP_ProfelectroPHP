@@ -197,7 +197,7 @@ function getCart(): array
     }
     return $products;
   } catch (Exception $err) {
-    return $products[] =$err;
+    return $products[] = $err;
   }
 }
 
@@ -205,10 +205,25 @@ function addGoodCartFromBtn(): string
 {
   $idUser = $_SESSION['user']['id'];
   $idCard = $_COOKIE['idCard'];
+  $products = array();
   try {
     $pdo = getPDO();
-    $result = $pdo->prepare(query: "INSERT INTO cart(user_id, good_id, good_count, is_paid) VALUES ($idUser, $idCard, 1, false)");
+
+    $result = $pdo->prepare(query: "SELECT * FROM cart WHERE user_id = $idUser and good_id = $idCard");
     $result->execute();
+    while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
+      $products[] = $product_info;
+    }
+
+    if ($products != null) {
+      $count = $products[0]['good_count'] + 1;
+      $result = $pdo->prepare(query: "UPDATE cart SET good_count = $count WHERE user_id = $idUser and good_id = $idCard");
+      $result->execute();
+    } else {
+      $result = $pdo->prepare(query: "INSERT INTO cart(user_id, good_id, good_count, is_paid) VALUES ($idUser, $idCard, 1, 0)");
+      $result->execute();
+    }
+
     return 'The product has been added to cart';
   } catch (Exception $err) {
     return $err;
@@ -219,10 +234,25 @@ function addGoodCartFromPopup($countGood): string
 {
   $idUser = $_SESSION['user']['id'];
   $idCard = $_COOKIE['idCard'];
+  $products = array();
   try {
     $pdo = getPDO();
-    $result = $pdo->prepare(query: "INSERT INTO cart(user_id, good_id, good_count, is_paid) VALUES ($idUser, $idCard, $countGood, false)");
+
+    $result = $pdo->prepare(query: "SELECT * FROM cart WHERE user_id = $idUser and good_id = $idCard");
     $result->execute();
+    while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
+      $products[] = $product_info;
+    }
+
+    if ($products != null) {
+      $count = $products[0]['good_count'] + $countGood;
+      $result = $pdo->prepare(query: "UPDATE cart SET good_count = $count WHERE user_id = $idUser and good_id = $idCard");
+      $result->execute();
+    } else {
+      $result = $pdo->prepare(query: "INSERT INTO cart(user_id, good_id, good_count, is_paid) VALUES ($idUser, $idCard, $countGood, 0)");
+      $result->execute();
+    }
+
     return 'The product has been added to cart';
   } catch (Exception $err) {
     return $err;
@@ -255,7 +285,7 @@ function getPaidGoods(): array
     }
     return $products;
   } catch (Exception $err) {
-    return $products[] =$err;
+    return $products[] = $err;
   }
 }
 
@@ -271,7 +301,7 @@ function getAllPaidGoods(): array
     }
     return $products;
   } catch (Exception $err) {
-    return $products[] =$err;
+    return $products[] = $err;
   }
 }
 
@@ -281,6 +311,19 @@ function setPaidGood($cartId, $goodId, $userId): string
   try {
     $pdo = getPDO();
     $result = $pdo->prepare(query: "UPDATE cart SET is_paid=1 WHERE cart_id=$cartId and user_id=$userId and good_id=$goodId");
+    $result->execute();
+    return 'The changes has been applied';
+  } catch (Exception $err) {
+    return $err;
+  }
+}
+
+function changeGoodCart($goodId, $count): string
+{
+  $user = $_SESSION['user']['id'];
+  try {
+    $pdo = getPDO();
+    $result = $pdo->prepare(query: "UPDATE cart SET good_count = $count WHERE user_id = $user and good_id=$goodId");
     $result->execute();
     return 'The changes has been applied';
   } catch (Exception $err) {
