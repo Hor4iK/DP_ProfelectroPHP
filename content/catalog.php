@@ -271,7 +271,7 @@
                     <button onclick="<?php if (empty($_SESSION['user'])) {
                                         echo "openModal(panelAuthorization);";
                                       } else {
-                                        echo "window.location.replace('./cart.php')";
+                                        echo "setTimeout(() => { window.location.replace('./cart.php') }, 500)";
                                       } ?>" class="content__catalog__card-button">Купить</button>
                   </a>
                 </li>
@@ -406,7 +406,7 @@
             <button class="button popup__button" onclick="<?php if (empty($_SESSION['user'] && $_SESSION['user'] != null)) {
                                                             echo "closeModal(); openModal(panelAuthorization);";
                                                           } else {
-                                                            echo "window.location.replace('./cart.php')";
+                                                            echo "setTimeout(() => { window.location.replace('./cart.php') }, 500)";
                                                           } ?>" type="button">В корзину</button>
           </div>
         </form>
@@ -432,7 +432,6 @@
     $goodsJSON = json_encode($arrayGoodsPHP);
     ?>
     const popupCardPreview = document.querySelector('.popup_card-preview');
-    const cardsList = document.querySelectorAll('.card');
     const allPriceList = <?= $goodsJSON ?>;
 
     const cardImage = popupCardPreview.querySelector('.popup__image');
@@ -451,9 +450,13 @@
       price: cardValue,
       unit: cardUnit,
     }
-    cardsList.forEach((card) => {
-      cardPreviewHandler(card, cardConfig, allPriceList);
-    });
+    async function setEventHandlersCards() {
+      const cardsList = Array.from(document.querySelectorAll('.card'));
+      cardsList.forEach((card) => {
+        cardPreviewHandler(card, cardConfig, allPriceList);
+      });
+    }
+    setEventHandlersCards();
     setHandlersButtonsSubmit();
     setHandlersButtonsPopupSubmit();
   </script>

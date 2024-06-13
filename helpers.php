@@ -209,7 +209,7 @@ function addGoodCartFromBtn(): string
   try {
     $pdo = getPDO();
 
-    $result = $pdo->prepare(query: "SELECT * FROM cart WHERE user_id = $idUser and good_id = $idCard");
+    $result = $pdo->prepare(query: "SELECT * FROM cart WHERE user_id = $idUser and good_id = $idCard and is_paid = 0");
     $result->execute();
     while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
       $products[] = $product_info;
@@ -238,7 +238,7 @@ function addGoodCartFromPopup($countGood): string
   try {
     $pdo = getPDO();
 
-    $result = $pdo->prepare(query: "SELECT * FROM cart WHERE user_id = $idUser and good_id = $idCard");
+    $result = $pdo->prepare(query: "SELECT * FROM cart WHERE user_id = $idUser and good_id = $idCard and is_paid = 0");
     $result->execute();
     while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
       $products[] = $product_info;

@@ -126,6 +126,10 @@
     padding-block-end: 0;
   }
 
+  .popup_card-preview .popup__form {
+    margin-top: 0;
+  }
+
   .cart__item-price::after {
     left: auto;
   }

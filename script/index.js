@@ -55,6 +55,7 @@ const checkResponse = res => {
   return Promise.reject(`Ошибка: ${res.status}`);
 }
 
+//The function of sending to the distributor
 const callFunctionAllocator = (functionName, args = null) => {
   return fetch('/action/function_allocator.php', {
     method: 'POST',
@@ -66,10 +67,9 @@ const callFunctionAllocator = (functionName, args = null) => {
       arguments: args ?? null
     })
   }).then(res => checkResponse(res))
-  // .then(data => { console.log(data) })
-  // .catch((err) => { console.log(`Warning expected: error sending data...`); })
 }
 
+//The function of sending cookies
 const sendCookie = (card) => {
   const idCard = card.dataset.id;
   document.cookie = `idCard=${idCard}`;
@@ -89,7 +89,8 @@ function cardPreviewHandler(card, cardConfig, priceList) {
       priceList.forEach(item => {
         if (item.good_id == idCard) {
           cardConfig.title.textContent = item.good_name;
-          cardConfig.image.src = item.good_image;
+          if (item.good_image != null) cardConfig.image.src = item.good_image;
+          else cardConfig.image.src = '../img/default-product-image.png';
           cardConfig.image.alt = item.good_name;
           cardConfig.provider.textContent = item.good_provider;
           cardConfig.description.textContent = item.good_overview;
@@ -112,7 +113,7 @@ menuTriggers.forEach((item) => {
 });
 
 //Set eventListeners adding to button of a product card
-const handlerCallAddGood = (evt) => {
+const handlerCallAddGoodCartFromBtn = (evt) => {
   const card = evt.target.closest('.card');
   const args = {
     idCard: sendCookie(card),
@@ -122,7 +123,7 @@ const handlerCallAddGood = (evt) => {
 function setHandlersButtonsSubmit() {
   const buttonsSubmit = document.querySelectorAll('.content__catalog__card-button');
   buttonsSubmit.forEach(btn => {
-    btn.addEventListener('click', handlerCallAddGood)
+    btn.addEventListener('click', handlerCallAddGoodCartFromBtn)
   })
 }
 
@@ -143,14 +144,29 @@ function setHandlersButtonsPopupSubmit() {
 
 //Set eventListeners deleting to close__button of a product card
 const handlerCallDeleteGood = (evt) => {
+  const cardOrder = document.querySelector('.card-order');
+  const sumElemenet = cardOrder.querySelector('.card-order__summ-value');
+  const buttonOrder = cardOrder.querySelector('.card-order__button')
   const card = evt.target.closest('.card');
   const inputValue = card.querySelector('.cart__item-input').value;
   const args = {
     idCard: sendCookie(card),
     countGood: inputValue,
   }
-  callFunctionAllocator('deleteGoodFromCart', args)
-    .then(card.remove());
+  let sum = 0;
+  Promise.all([callFunctionAllocator('deleteGoodFromCart', args)])
+    .then(() => {
+      callFunctionAllocator('getCart')
+        .then(data => {
+          const dataArray = Array.from(data.response);
+          dataArray.forEach(item => {
+            sum += Number(item.good_summ);
+          });
+          sumElemenet.textContent = sum;
+          if(sum == 0) buttonOrder.remove();
+        })
+    })
+    .then(card.remove())
 }
 function setHandlersCloseButtons() {
   const closeButtons = document.querySelectorAll('.cart__close');
@@ -207,8 +223,6 @@ const setHandlerAddCardButton = (modal) => {
   })
 }
 
-
-
 //Set eventListeners deleting to close__button of a product card
 const handlerCallDeleteGoodDB = (evt) => {
   const cardsList = document.querySelector('.data__list');
@@ -229,7 +243,6 @@ function setHandlerDeleteButton() {
 
 //Set eventListeners to button of sending order
 const setEventConfirmed = (evt) => {
-  console.log(evt.target);
   if (evt.target.classList.contains('popup')) window.location.replace('/index.php');
 }
 const handlerSendOrder = () => {
@@ -261,10 +274,11 @@ const setHandlersListenersInput = () => {
   const sumElemenet = document.querySelector('.card-order__summ-value');
   const cardsList = Array.from(document.querySelectorAll('.card'));
   cardsList.forEach(item => {
+    const cardSum = item.querySelector('.cart__item-value');
     const cardId = item.dataset.id;
     const input = item.querySelector('.cart__item-input');
 
-    input.addEventListener('change', () => {
+    input.addEventListener('input', () => {
       const inputValue = input.value;
       let sum = 0;
       const args = {
@@ -276,13 +290,17 @@ const setHandlersListenersInput = () => {
           callFunctionAllocator('getCart')
             .then(data => {
               const dataArray = Array.from(data.response);
-              dataArray.forEach(item => { sum += Number(item.good_summ) });
+              dataArray.forEach(item => {
+                if (item.good_id == cardId) cardSum.textContent = item.good_summ;
+                sum += Number(item.good_summ);
+              });
               sumElemenet.textContent = sum;
             })
         })
     })
   })
 }
+
 
 //NOTIFICATIONS
 
@@ -312,7 +330,7 @@ function showMessage() {
 }
 
 function generateMessage(messageTitle, messageText, messageClass) {
-  const delay = Math.floor(Math.random() * 800);
+  const delay = Math.floor(Math.random() * 600);
   const timeoutID = setTimeout(() => {
     const message = document.querySelector('.notification__message');
 

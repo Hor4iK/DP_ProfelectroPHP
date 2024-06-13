@@ -1,7 +1,8 @@
 @media (width <= 600px) {
   .sidebar-menu__block-list {
-    width: 100%;
+    width: 95%;
     max-width: 500px;
+    gap: 20px;
   }
 
   .sidebar-menu__list {
@@ -29,6 +30,10 @@
 
   .data__actions__btn {
     padding: 15px 5px;
+  }
+
+  .content__catalog-popular {
+    grid-template-columns: repeat(auto-fit, 90%);
   }
 }
 

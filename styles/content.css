@@ -433,6 +433,7 @@
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.4);
   text-align: center;
   border-radius: 12px;
+  border: 1px solid rgb(0, 0, 0, 0.04);
 }
 
 .content__catalog-popular__card:hover {
@@ -536,6 +537,11 @@
 
 .popup_card-preview {
   background-color: rgba(0, 0, 0, .4);
+}
+
+.popup_card-preview .popup__description {
+  max-height: 100px;
+  overflow-y: scroll;
 }
 
 .popup_is-animated {
@@ -863,10 +869,10 @@
 }
 
 .cart__close {
-  width: 25px;
-  height: 25px;
+  width: 21px;
+  height: 21px;
   background: transparent url(../img/close-gray.svg) center no-repeat;
-  background-size: 25px 25px;
+  background-size: 21px 21px;
   border: none;
   position: absolute;
   top: 12px;
@@ -1042,7 +1048,7 @@
   background: var(--theme-color);
   border-radius: 10px;
   border: 3px solid var(--theme-color);
-  margin-block-end: 40px;
+  /* margin-block-end: 40px; */
 }
 
 .card-order__button:hover {

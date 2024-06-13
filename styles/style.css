@@ -350,6 +350,7 @@
   align-items: end;
   padding: 30px 35px;
   text-decoration: none;
+  border: 1px solid rgb(0, 0, 0, 0.03);
 }
 
 .preview__card-link:hover {
@@ -519,6 +520,7 @@
   justify-content: center;
   gap: 0.6em;
   text-decoration: none;
+  border: 1px solid rgb(0, 0, 0, 0.03);
 }
 
 .offers-card-item:hover .offers-card-link {
