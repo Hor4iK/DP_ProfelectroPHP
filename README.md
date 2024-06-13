@@ -1,6 +1,8 @@
 # Kursovoi
 ## Link to repository
 Макет сайта для компании ПрофЭлектро.
+## Link to site
+[ProfElectro](80.254.99.199)
 ### About The project
 Web-приложение было создано в рамках курсового проектирования для компании ИП Назырова Е. А..
 ### About the company
