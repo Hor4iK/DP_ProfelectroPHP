@@ -81,22 +81,22 @@ const sendCookie = (card) => {
 
 
 //Open popup for watching a product card
-function cardPreviewHandler(card, cardConfig, priceList) {
+function cardPreviewHandler(card, popupConfig, priceList) {
   card.addEventListener('click', (evt) => {
     evt.preventDefault();
     if (!evt.target.classList.contains('content__catalog__card-button')) {
       const idCard = card.dataset.id;
       priceList.forEach(item => {
         if (item.good_id == idCard) {
-          cardConfig.title.textContent = item.good_name;
-          if (item.good_image != null) cardConfig.image.src = item.good_image;
-          else cardConfig.image.src = '../img/default-product-image.png';
-          cardConfig.image.alt = item.good_name;
-          cardConfig.provider.textContent = item.good_provider;
-          cardConfig.description.textContent = item.good_overview;
-          cardConfig.price.textContent = item.good_price;
-          cardConfig.unit.textContent = item.good_unit;
-          cardConfig.dataset.id = idCard;
+          popupConfig.title.textContent = item.good_name;
+          if (item.good_image != null) popupConfig.image.src = item.good_image;
+          else popupConfig.image.src = '../img/default-product-image.png';
+          popupConfig.image.alt = item.good_name;
+          popupConfig.provider.textContent = item.good_provider;
+          popupConfig.description.textContent = item.good_overview;
+          popupConfig.price.textContent = item.good_price;
+          popupConfig.unit.textContent = item.good_unit;
+          popupConfig.dataset.id = idCard;
           return;
         }
       });
@@ -163,7 +163,7 @@ const handlerCallDeleteGood = (evt) => {
             sum += Number(item.good_summ);
           });
           sumElemenet.textContent = sum;
-          if(sum == 0) buttonOrder.remove();
+          if (sum == 0) buttonOrder.remove();
         })
     })
     .then(card.remove())
@@ -301,6 +301,71 @@ const setHandlersListenersInput = () => {
   })
 }
 
+const renderLoading = (loader, isLoading) => {
+  isLoading ? loader.classList.add('loader_active') : loader.classList.remove('loader_active');
+}
+
+const replaceToCart = () => {
+  setTimeout(() => { window.location.replace('./cart.php') }, 500);
+}
+
+const createCard = (template, cardData, popupConfig, allPriceList) => {
+  const cardElement = template.querySelector('.card').cloneNode(true);
+  const image = cardElement.querySelector('.card-image');
+  const name = cardElement.querySelector('.card-title');
+  const provider = cardElement.querySelector('.card-provider');
+  const price = cardElement.querySelector('.card-value');
+  const unit = cardElement.querySelector('.card-unit');
+
+  cardElement.dataset.id = cardData.good_id;
+  cardData.good_image ? image.src = cardData.good_image : image.src = '../img/default-product-image.png';
+  image.alt = cardData.good_name;
+  name.textContent = cardData.good_name;
+  provider.textContent = cardData.good_provider;
+  price.textContent = cardData.good_price + ' ₽';
+  unit.textContent = cardData.good_unit;
+  cardPreviewHandler(cardElement, popupConfig, allPriceList);
+
+  return cardElement;
+}
+
+function setHandlerInputSearch(searchConfig, loader, template) {
+  searchConfig.input.addEventListener('input', () => {
+    const args = {
+      search: searchConfig.input.value,
+    }
+    searchConfig.containerSearch.querySelectorAll('.card').forEach(item => { item.remove(); });
+    if (searchConfig.input.value != "" && searchConfig.input.value != null && searchConfig.input.value != ' ') {
+      if (!searchConfig.input.validity.patternMismatch) {
+        renderLoading(loader, true);
+        callFunctionAllocator('getGoodsBySearch', args)
+          .then(data => {
+            const res = Array.from(data.response);
+            if (res[0]) {
+              if (res.length > 1) searchConfig.titlePage.textContent = `Найдено: ${res.length} товаров`;
+              else if (res.length = 1) searchConfig.titlePage.textContent = `Найден: ${res.length} товар`;
+              searchConfig.container.classList.add('content__catalog-container_type_hide');
+              res.forEach(item => { searchConfig.containerSearch.append(createCard(template, item, searchConfig.popupConfig, searchConfig.allPriceList)) });
+            }
+            else {
+              searchConfig.titlePage.textContent = `Результаты не найдены`;
+              searchConfig.container.classList.add('content__catalog-container_type_hide');
+            }
+          })
+          .finally(renderLoading(loader, false))
+      }
+      else {
+        searchConfig.titlePage.textContent = `Результаты не найдены`;
+        searchConfig.container.classList.add('content__catalog-container_type_hide');
+      }
+    }
+    else {
+      searchConfig.titlePage.textContent = 'Категории';
+      searchConfig.container.classList.remove('content__catalog-container_type_hide');
+    }
+  })
+}
+
 
 //NOTIFICATIONS
 
@@ -342,5 +407,4 @@ function generateMessage(messageTitle, messageText, messageClass) {
     clearTimeout(timeoutID);
   }, delay);
 }
-
 

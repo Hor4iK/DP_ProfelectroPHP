@@ -42,11 +42,15 @@ switch ($data['funcName']) {
     echo json_encode($aResult);
     break;
   case 'changeGoodCart':
-      $aResult['response'] = changeGoodCart($data['arguments']['cardId'], $data['arguments']['count']);
+    $aResult['response'] = changeGoodCart($data['arguments']['cardId'], $data['arguments']['count']);
     echo json_encode($aResult);
     break;
   case 'getCart':
     $aResult['response'] = getCart();
+    echo json_encode($aResult);
+    break;
+  case 'getGoodsBySearch':
+    $aResult['response'] = getGoodsBySearch($data['arguments']['search']);
     echo json_encode($aResult);
     break;
   default:

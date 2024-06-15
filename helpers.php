@@ -187,11 +187,11 @@ function deleteGood($idCard): string
 function getCart(): array
 {
   $user = $_SESSION['user']['id'];
+  $products = array();
   try {
     $pdo = getPDO();
     $result = $pdo->prepare(query: "SELECT cart.cart_id, cart.user_id, cart.good_id, good_name, good_image, good_overview, good_provider, good_price, good_count, round((good_price * good_count), 2) as good_summ, good_unit from goods, cart WHERE goods.good_id = cart.good_id and user_id = $user and is_paid = 0");
     $result->execute();
-    $products = array();
     while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
       $products[] = $product_info;
     }
@@ -275,11 +275,11 @@ function deleteGoodFromCart($countGood): string
 function getPaidGoods(): array
 {
   $user = $_SESSION['user']['id'];
+  $products = array();
   try {
     $pdo = getPDO();
     $result = $pdo->prepare(query: "SELECT cart.good_id, good_name, good_image, good_overview, good_provider, good_price, good_count, round((good_price * good_count), 2) as good_summ, good_unit from goods, cart WHERE goods.good_id = cart.good_id and user_id = $user and is_paid = 1");
     $result->execute();
-    $products = array();
     while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
       $products[] = $product_info;
     }
@@ -291,11 +291,11 @@ function getPaidGoods(): array
 
 function getAllPaidGoods(): array
 {
+  $products = array();
   try {
     $pdo = getPDO();
     $result = $pdo->prepare(query: "SELECT cart.good_id, cart.user_id, users.phone, users.name, good_name, good_image, good_overview, good_provider, good_price, good_count, round((good_price * good_count), 2) as good_summ, good_unit from goods, cart, users WHERE goods.good_id = cart.good_id and is_paid = 1 and users.id = cart.user_id");
     $result->execute();
-    $products = array();
     while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
       $products[] = $product_info;
     }
@@ -328,5 +328,21 @@ function changeGoodCart($goodId, $count): string
     return 'The changes has been applied';
   } catch (Exception $err) {
     return $err;
+  }
+}
+
+function getGoodsBySearch(string $search): array
+{
+  $products = array();
+  try {
+    $pdo = getPDO();
+    $result = $pdo->prepare(query: "SELECT * FROM goods WHERE good_name LIKE '%$search%'");
+    $result->execute();
+    while ($product_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
+      $products[] = $product_info;
+    };
+    return $products;
+  } catch (Exception $err) {
+    return $products[] = $err;
   }
 }

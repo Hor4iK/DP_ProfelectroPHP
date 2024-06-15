@@ -187,98 +187,106 @@
     <? $value = $_GET['Value'];
     $products = getGoods($value);
     if ($value == 0) {
-      $categories = getCategory();
-    ?>
+      $categories = getCategory(); ?>
 
       <div class="content__catalog content__section">
+        <div class="searchBox">
+          <input class="searchInput" pattern="[a-zA-Zа-яА-ЯёЁ\- ]+" type="text" name="search" placeholder="Поиск по сайту">
+          <button class="searchButton" href="#">
+            <i class="material-icons">
+            </i>
+          </button>
+        </div>
         <h1 class="offers__title">Категории</h1>
-        <ul class="content__catalog-content">
+        <div class="loader"></div>
+        <ul class="content__catalog-popular" id="container-search"></ul>
+        <div class="content__catalog-container">
+          <ul class="content__catalog-content">
 
-          <? foreach ($categories as $category) : ?>
-            <li class="offers-card-item box">
-              <a href="./catalog.php?Value=<?= $category['category_id'] ?>" class="content__catalog-content-link">
-                <img src="<?= $category['category_image'] ?>" class="content__catalog-content__image">
-                <h6 class="content__catalog-content__title">
-                  <?= $category['category_name'] ?>
-                </h6>
-              </a>
-            </li>
-          <? endforeach;
-        } else { ?>
-
-          <div class="content__catalog content__section">
-
-            <? foreach ($products as $product) : ?>
-              <button class='content__catalog-button' type='button' onclick="window.location.replace('./catalog.php?Value=0')">Каталог</button>
-              <h1 class="offers__title"><?= $product['category_name'] ?></h1>
-            <? break;
-            endforeach; ?>
-
-            <? if (array_key_exists('Podcategory', $_GET)) {
-              $podcategories = getPodcategory($_GET['Podcategory']);
-            } else {
-              $podcategories = getPodcategories($value);
-            } ?>
-
-            <ul class="content__catalog-content">
-
-              <? foreach ($podcategories as $podcategory) : ?>
-                <li class="offers-card-item box">
-                  <a href="./catalog.php?Value=<?= $product['category_id'] ?>&Podcategory=<?= $podcategory['podcategory_id'] ?>" class="content__catalog-content-link">
-                    <img src="<?= $podcategory['podcategory_image'] ?>" class="content__catalog-content__image">
-                    <h6 class="content__catalog-content__title">
-                      <?= $podcategory['podcategory_name'] ?>
-                    </h6>
-                  </a>
-                </li>
+            <? foreach ($categories as $category) : ?>
+              <li class="offers-card-item box">
+                <a href="./catalog.php?Value=<?= $category['category_id'] ?>" class="content__catalog-content-link">
+                  <img src="<?= $category['category_image'] ?>" class="content__catalog-content__image">
+                  <h6 class="content__catalog-content__title">
+                    <?= $category['category_name'] ?>
+                  </h6>
+                </a>
+              </li>
             <? endforeach;
-            } ?>
+          } else { ?>
 
-            <? if (array_key_exists('Podcategory', $_GET)) $products = getGoodsPodcategory($_GET['Value'], $_GET['Podcategory']) ?>
-
-            </ul>
-
-            <h2 class="offers__title content__catalog-popular-title">
-              <? if (array_key_exists('Podcategory', $_GET)) {
-                $podcategory = getPodcategory($_GET['Podcategory']); ?>
-
-              <? echo ($podcategory[0]['podcategory_name']);
-              } elseif (array_key_exists('Value', $_GET) && $_GET['Value'] != 0) {
-                echo ('Популярные товары раздела');
-              } else {
-                echo ('Популярные товары');
-              } ?>
-            </h2>
-
-
-            <ul class="content__catalog-popular">
+            <div class="content__catalog content__section">
 
               <? foreach ($products as $product) : ?>
-                <li class="content__catalog-popular__card card" data-id="<?= $product['good_id'] ?>">
-                  <a href="#" class="content__catalog__card-link">
-                    <img src="<? if ($product['good_image']) echo ($product['good_image']);
-                              else echo ("../img/default-product-image.png") ?>" loading="lazy" class="content__catalog__card-image  card-image" />
-                    <div class="content__catalog__card__conteiner">
-                      <h6 class="content__catalog__card-title card-title">
-                        <?= $product['good_name'] ?>
-                      </h6>
-                      <span class="content__catalog__card-provider card-provider"><?= $product['good_provider'] ?></span>
-                      <div class="content__catalog__card__price-cover">
-                        <span class="content__catalog__card-value card-value"><?= $product['good_price'] ?> ₽</span>
-                        <span class="content__catalog__card-unit card-unit"><?= $product['good_unit'] ?></span>
-                      </div>
-                    </div>
-                    <button onclick="<?php if (empty($_SESSION['user'])) {
-                                        echo "openModal(panelAuthorization);";
-                                      } else {
-                                        echo "setTimeout(() => { window.location.replace('./cart.php') }, 500)";
-                                      } ?>" class="content__catalog__card-button">Купить</button>
-                  </a>
-                </li>
-              <? endforeach; ?>
+                <button class='content__catalog-button' type='button' onclick="window.location.replace('./catalog.php?Value=0')">Каталог</button>
+                <h1 class="offers__title"><?= $product['category_name'] ?></h1>
+              <? break;
+              endforeach; ?>
 
-            </ul>
-          </div>
+              <? if (array_key_exists('Podcategory', $_GET)) {
+                $podcategories = getPodcategory($_GET['Podcategory']);
+              } else {
+                $podcategories = getPodcategories($value);
+              } ?>
+
+              <ul class="content__catalog-content">
+
+                <? foreach ($podcategories as $podcategory) : ?>
+                  <li class="offers-card-item box">
+                    <a href="./catalog.php?Value=<?= $product['category_id'] ?>&Podcategory=<?= $podcategory['podcategory_id'] ?>" class="content__catalog-content-link">
+                      <img src="<?= $podcategory['podcategory_image'] ?>" class="content__catalog-content__image">
+                      <h6 class="content__catalog-content__title">
+                        <?= $podcategory['podcategory_name'] ?>
+                      </h6>
+                    </a>
+                  </li>
+              <? endforeach;
+              } ?>
+
+              <? if (array_key_exists('Podcategory', $_GET)) $products = getGoodsPodcategory($_GET['Value'], $_GET['Podcategory']) ?>
+
+              </ul>
+
+              <h2 class="offers__title content__catalog-popular-title">
+                <? if (array_key_exists('Podcategory', $_GET)) {
+                  $podcategory = getPodcategory($_GET['Podcategory']); ?>
+                <? echo ($podcategory[0]['podcategory_name']);
+                } elseif (array_key_exists('Value', $_GET) && $_GET['Value'] != 0) {
+                  echo ('Популярные товары раздела');
+                } else {
+                  echo ('Популярные товары');
+                } ?>
+              </h2>
+
+              <ul class="content__catalog-popular">
+
+                <? foreach ($products as $product) : ?>
+                  <li class="content__catalog-popular__card card" data-id="<?= $product['good_id'] ?>">
+                    <a href="#" class="content__catalog__card-link">
+                      <img src="<? if ($product['good_image']) echo ($product['good_image']);
+                                else echo ("../img/default-product-image.png") ?>" loading="lazy" class="content__catalog__card-image  card-image" />
+                      <div class="content__catalog__card__conteiner">
+                        <h6 class="content__catalog__card-title card-title">
+                          <?= $product['good_name'] ?>
+                        </h6>
+                        <span class="content__catalog__card-provider card-provider"><?= $product['good_provider'] ?></span>
+                        <div class="content__catalog__card__price-cover">
+                          <span class="content__catalog__card-value card-value"><?= $product['good_price'] ?> ₽</span>
+                          <span class="content__catalog__card-unit card-unit"><?= $product['good_unit'] ?></span>
+                        </div>
+                      </div>
+                      <button onclick="<?php if (empty($_SESSION['user'])) {
+                                          echo "openModal(panelAuthorization);";
+                                        } else {
+                                          echo "replaceToCart()";
+                                        } ?>" class="content__catalog__card-button">Купить</button>
+                    </a>
+                  </li>
+                <? endforeach; ?>
+
+              </ul>
+            </div>
+        </div>
   </main>
   <footer class="footer">
     <div class="footer__content">
@@ -406,7 +414,7 @@
             <button class="button popup__button" onclick="<?php if (empty($_SESSION['user'] && $_SESSION['user'] != null)) {
                                                             echo "closeModal(); openModal(panelAuthorization);";
                                                           } else {
-                                                            echo "setTimeout(() => { window.location.replace('./cart.php') }, 500)";
+                                                            echo "replaceToCart()";
                                                           } ?>" type="button">В корзину</button>
           </div>
         </form>
@@ -414,17 +422,39 @@
     </div>
   </div>
   <div class="popup popup__subscribe popup_is-animated" id="popup">
-    <form name="license" action="/index.php" class="popup__content">
+    <form name="license" method="post" action="/action/subscribe.php" class="popup__content">
       <button type="button" class="popup__close"></button>
       <h4 class="popup__title">Подписка на рассылку</h4>
       <fieldset class="popup__container">
         <input type="email" placeholder="example@mail.ru" name="license" id="popup__input_type_mail" class="popup__input popup__input_type_mail" required>
-        <input type="checkbox" name="license" id="popup__licenses" class="popup__input popup__input_type_licenses visually-hidden" required>
+        <input type="checkbox" id="popup__licenses" class="popup__input popup__input_type_licenses visually-hidden" required>
         <label for="popup__licenses">Я согласен на <a class="popup__licenses-link" href="/public/license.pdf">обработку персональных данных</a></label>
       </fieldset>
       <button class="button popup__button panel-auto__btn-light" type="submit">Подписаться</button>
     </form>
   </div>
+  <template id="search-request">
+    <ul class="content__catalog-popular">
+      <li class="content__catalog-popular__card card">
+        <a class="content__catalog__card-link">
+          <img loading="lazy" class="content__catalog__card-image  card-image" />
+          <div class="content__catalog__card__conteiner">
+            <h6 class="content__catalog__card-title card-title"></h6>
+            <span class="content__catalog__card-provider card-provider"></span>
+            <div class="content__catalog__card__price-cover">
+              <span class="content__catalog__card-value card-value"></span>
+              <span class="content__catalog__card-unit card-unit"></span>
+            </div>
+          </div>
+          <button onclick="<?php if (empty($_SESSION['user'])) {
+                              echo "openModal(panelAuthorization);";
+                            } else {
+                              echo "replaceToCart()";
+                            } ?>" class="content__catalog__card-button">Купить</button>
+        </a>
+      </li>
+    </ul>
+  </template>
   <script src="../script/index.js"></script>
   <script>
     <?
@@ -434,6 +464,13 @@
     const popupCardPreview = document.querySelector('.popup_card-preview');
     const allPriceList = <?= $goodsJSON ?>;
 
+    const titlePage = document.querySelector('.offers__title');
+    const container = document.querySelector('.content__catalog-container');
+    const containerSearch = document.querySelector('#container-search');
+    const template = document.querySelector('#search-request').content;
+    const searchInput = document.querySelector('.searchInput');
+    const loader = document.querySelector('.loader');
+
     const cardImage = popupCardPreview.querySelector('.popup__image');
     const cardTitle = popupCardPreview.querySelector('.popup__title');
     const cardProvider = popupCardPreview.querySelector('.popup__provider');
@@ -441,7 +478,7 @@
     const cardValue = popupCardPreview.querySelector('.popup__value');
     const cardUnit = popupCardPreview.querySelector('.popup__unit');
 
-    const cardConfig = {
+    const popupConfig = {
       dataset: popupCardPreview.dataset,
       image: cardImage,
       title: cardTitle,
@@ -450,15 +487,25 @@
       price: cardValue,
       unit: cardUnit,
     }
+    const searchConfig = {
+      titlePage: titlePage,
+      container: container,
+      containerSearch: containerSearch,
+      input: searchInput,
+      popupConfig: popupConfig,
+      allPriceList: allPriceList,
+    }
+
     async function setEventHandlersCards() {
       const cardsList = Array.from(document.querySelectorAll('.card'));
       cardsList.forEach((card) => {
-        cardPreviewHandler(card, cardConfig, allPriceList);
+        cardPreviewHandler(card, popupConfig, allPriceList);
       });
     }
     setEventHandlersCards();
     setHandlersButtonsSubmit();
     setHandlersButtonsPopupSubmit();
+    setHandlerInputSearch(searchConfig, loader, template);
   </script>
 </body>
 

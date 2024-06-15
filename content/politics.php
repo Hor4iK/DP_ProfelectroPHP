@@ -342,12 +342,12 @@
     </p>
   </div>
   <div class="popup popup__subscribe popup_is-animated" id="popup">
-    <form name="license" action="/index.php" class="popup__content">
+    <form name="license" method="post" action="/action/subscribe.php" class="popup__content">
       <button type="button" class="popup__close"></button>
       <h4 class="popup__title">Подписка на рассылку</h4>
       <fieldset class="popup__container">
         <input type="email" placeholder="example@mail.ru" name="license" id="popup__input_type_mail" class="popup__input popup__input_type_mail" required>
-        <input type="checkbox" name="license" id="popup__licenses" class="popup__input popup__input_type_licenses visually-hidden" required>
+        <input type="checkbox" id="popup__licenses" class="popup__input popup__input_type_licenses visually-hidden" required>
         <label for="popup__licenses">Я согласен на <a class="popup__licenses-link" href="/public/license.pdf">обработку персональных данных</a></label>
       </fieldset>
       <button class="button popup__button panel-auto__btn-light" type="submit">Подписаться</button>
