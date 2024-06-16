@@ -5,6 +5,14 @@ const popupSubscribe = document.querySelector('.popup__subscribe');
 const panelAuthorization = document.querySelector('.panel-auto__background');
 const subscribeButton = document.querySelector('.footer-button-subscribe');
 
+const renderLoading = (loader, isLoading) => {
+  isLoading ? loader.classList.add('loader_active') : loader.classList.remove('loader_active');
+}
+
+const replaceToCart = () => {
+  setTimeout(() => { window.location.replace('./cart.php') }, 600);
+}
+
 
 //BLOCK MODAL
 
@@ -247,7 +255,7 @@ const setEventConfirmed = (evt) => {
 }
 const handlerSendOrder = () => {
   const popupConfirmation = document.querySelector('.popup__confirmation');
-  // const buttonOk = popupConfirmation.querySelector('.popup__button');
+  const buttonOk = popupConfirmation.querySelector('.popup__button');
   const buttonOrder = document.querySelector('.card-order__button');
   const form = document.forms.dataUser;
   const inputList = Array.from(form.querySelectorAll('.panel-auto__field'));
@@ -263,9 +271,9 @@ const handlerSendOrder = () => {
       }
     })
   })
-  buttonOrder.addEventListener('click', () => {
-    callFunctionAllocator('setPaidGood')
-      .then([openModal(popupConfirmation),]);
+  buttonOrder.addEventListener('click',() => {openModal(popupConfirmation)});
+  buttonOk.addEventListener('click', () => {
+    callFunctionAllocator('setPaidGood');
   })
 }
 
@@ -301,14 +309,6 @@ const setHandlersListenersInput = () => {
   })
 }
 
-const renderLoading = (loader, isLoading) => {
-  isLoading ? loader.classList.add('loader_active') : loader.classList.remove('loader_active');
-}
-
-const replaceToCart = () => {
-  setTimeout(() => { window.location.replace('./cart.php') }, 500);
-}
-
 const createCard = (template, cardData, popupConfig, allPriceList) => {
   const cardElement = template.querySelector('.card').cloneNode(true);
   const image = cardElement.querySelector('.card-image');
@@ -316,6 +316,7 @@ const createCard = (template, cardData, popupConfig, allPriceList) => {
   const provider = cardElement.querySelector('.card-provider');
   const price = cardElement.querySelector('.card-value');
   const unit = cardElement.querySelector('.card-unit');
+  const button = cardElement.querySelector('.content__catalog__card-button');
 
   cardElement.dataset.id = cardData.good_id;
   cardData.good_image ? image.src = cardData.good_image : image.src = '../img/default-product-image.png';
@@ -325,6 +326,7 @@ const createCard = (template, cardData, popupConfig, allPriceList) => {
   price.textContent = cardData.good_price + ' ₽';
   unit.textContent = cardData.good_unit;
   cardPreviewHandler(cardElement, popupConfig, allPriceList);
+  button.addEventListener('click', handlerCallAddGoodCartFromBtn);
 
   return cardElement;
 }

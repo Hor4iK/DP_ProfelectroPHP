@@ -198,7 +198,9 @@
           </button>
         </div>
         <h1 class="offers__title">Категории</h1>
-        <div class="loader"></div>
+        <div class="loader-container">
+          <div class="loader"></div>
+        </div>
         <ul class="content__catalog-popular" id="container-search"></ul>
         <div class="content__catalog-container">
           <ul class="content__catalog-content">
@@ -469,7 +471,7 @@
     const containerSearch = document.querySelector('#container-search');
     const template = document.querySelector('#search-request').content;
     const searchInput = document.querySelector('.searchInput');
-    const loader = document.querySelector('.loader');
+    const loader = document.querySelector('.loader-container');
 
     const cardImage = popupCardPreview.querySelector('.popup__image');
     const cardTitle = popupCardPreview.querySelector('.popup__title');

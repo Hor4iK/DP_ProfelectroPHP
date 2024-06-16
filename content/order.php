@@ -392,8 +392,8 @@ $user = currentUser();
   <div class="popup popup__confirmation popup_is-animated" id="popup">
     <form name="order" action="/index.php" class="popup__content">
       <button type="button" class="popup__close" style="display: none;"></button>
-      <h4 class="popup__title">Заказ оформлен</h4>
-      <button class="button popup__button" type="submit">Закрыть</button>
+      <h4 class="popup__title">Оформить заказ?</h4>
+      <button class="button popup__button" type="submit">Подтвердить</button>
     </form>
   </div>
   <script src="../script/index.js"></script>
