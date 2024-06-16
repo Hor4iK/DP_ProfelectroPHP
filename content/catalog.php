@@ -413,7 +413,7 @@
           </div>
           <div class="popup__container_form">
             <input type="number" name="count-good" value="1" min="1" minlength="1" id="popup__input_type_count" class="popup__input popup__input_type_count">
-            <button class="button popup__button" onclick="<?php if (empty($_SESSION['user'] && $_SESSION['user'] != null)) {
+            <button class="button popup__button" onclick="<?php if (empty($_SESSION['user'])) {
                                                             echo "closeModal(); openModal(panelAuthorization);";
                                                           } else {
                                                             echo "replaceToCart()";

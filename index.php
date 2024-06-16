@@ -246,7 +246,7 @@ require_once __DIR__ . './helpers.php';
               <img src="/img/dosatavka.svg" class="about__icon" />
               <h5 class="about__card-title">Быстрая доставка</h5>
               <p class="about__card-paragraph">
-                Бережно доставляем товарыпо России за 24 часа
+                Бережно доставляем товары по России за 24 часа
               </p>
             </li>
             <li class="about__card-item">
@@ -274,39 +274,49 @@ require_once __DIR__ . './helpers.php';
         </div>
         <div class="content__offers content__section">
           <h1 class="offers__title">Лучшие предложения</h1>
-          <div class="offers__switches">
+          <!-- <div class="offers__switches">
             <button class="offers__card-switch button-type__light"></button>
             <button class="offers__card-switch button-type__color"></button>
-          </div>
+          </div> -->
           <ul class="offers__cards-list">
-            <li class="offers-card-item">
+            <li class="offers-card-item card" data-id="56">
               <a href="#" class="offers__card-link">
-                <img src="/img/exgoods.png" class="offers__card-image" />
+                <img src="https://rndelectro.ru/upload/resize_cache/iblock/d4a/450_450_140cd750bba9870f18aada2478b24840a/5sct4vflcp1pd8qlhnxukyjobi862kc8.jpg" alt="Светильник настольный LE TL-108 RED (Красный, E27, прищепка, пакет) (24)" class="offers__card-image" />
                 <h6 class="offers__card-title">
-                  Коврик с подогревом 400*600 К-50 серый
+                  Светильник настольный LE TL-108 RED (Красный, E27, прищепка, пакет) (24)
                 </h6>
-                <span class="offers__card-provider">ЧТК</span>
-                <span class="offers__card-value">3 779.50 ₽/шт</span>
+                <span class="offers__card-provider"></span>
+                <span class="offers__card-value">450.5 ₽/шт</span>
               </a>
             </li>
-            <li class="offers-card-item">
+            <li class="offers-card-item card" data-id="153">
               <a href="#" class="offers__card-link">
-                <img src="/img/exgoods.png" class="offers__card-image" />
+                <img src="https://rndelectro.ru/upload/resize_cache/iblock/cf0/450_450_140cd750bba9870f18aada2478b24840a/vb67hrpcmn22gg2h3ka0twl1bw41m6n4.jpg" class="offers__card-image" />
                 <h6 class="offers__card-title">
-                  Коврик с подогревом 400*600 К-50 серый
+                  Двухконтурный напольный газовый котел отопления КОВ-16СКВС Сигнал, серия 'S-TERM' (до 160 кв.м)
                 </h6>
-                <span class="offers__card-provider">ЧТК</span>
-                <span class="offers__card-value">3 779.50 ₽/шт</span>
+                <span class="offers__card-provider">Сигнал</span>
+                <span class="offers__card-value">30645 ₽/шт</span>
               </a>
             </li>
-            <li class="offers-card-item">
+            <li class="offers-card-item card" data-id="127">
               <a href="#" class="offers__card-link">
-                <img src="/img/exgoods.png" class="offers__card-image" />
+                <img src="https://rndelectro.ru/upload/resize_cache/iblock/67b/450_450_140cd750bba9870f18aada2478b24840a/3xhpy84zqwfxvd60b40vs3l9ow831f00.jpg" class="offers__card-image" />
                 <h6 class="offers__card-title">
-                  Коврик с подогревом 400*600 К-50 серый
+                  Смеситель для умывальника Milardo Simp SIMSB00M01
                 </h6>
-                <span class="offers__card-provider">ЧТК</span>
-                <span class="offers__card-value">3 779.50 ₽/шт</span>
+                <span class="offers__card-provider">Milardo</span>
+                <span class="offers__card-value">2 114 ₽/шт</span>
+              </a>
+            </li>
+            <li class="offers-card-item card" data-id="52">
+              <a href="#" class="offers__card-link">
+                <img src="https://rndelectro.ru/upload/resize_cache/iblock/ca1/450_450_140cd750bba9870f18aada2478b24840a/ykhbin4f527t6e1z0uljh3jw6bfyfu6q.jpg" class="offers__card-image" />
+                <h6 class="offers__card-title">
+                  Прожектор светодиодный STAR 2 220-240В 100вт IP65 6500К, Sparkled
+                </h6>
+                <span class="offers__card-provider">Sparkled</span>
+                <span class="offers__card-value">607.50 ₽/шт</span>
               </a>
             </li>
           </ul>
@@ -437,6 +447,34 @@ require_once __DIR__ . './helpers.php';
       характер и не является публичной офертой
     </p>
   </div>
+  <div class="popup popup_card-preview popup_is-animated" id="popup">
+    <div class="popup__content">
+      <button type="button" class="popup__close"></button>
+      <h4 class="popup__title">Name Good</h4>
+      <h4 class="popup__provider">Name Provider</h4>
+      <img src="/img/exgoods.png" alt="" class="popup__image">
+      <div class="popup__container">
+        <p class="popup__description">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+          Tempore cumque eos voluptatibus non quos ducimus quia dignissimos at fuga dolore neque dolor modi.
+        </p>
+        <form name="card-preview" method="POST" class="popup__form">
+          <div class="popup__price">
+            <h5 class="popup__value">1234.5 $/м</h5>
+            <span class="popup__currency">₽</span>
+            <span class="popup__unit">\шт</span>
+          </div>
+          <div class="popup__container_form">
+            <input type="number" name="count-good" value="1" min="1" minlength="1" id="popup__input_type_count" class="popup__input popup__input_type_count">
+            <button class="button popup__button" onclick="<?php if (empty($_SESSION['user'])) {
+                                                            echo "closeModal(); openModal(panelAuthorization);";
+                                                          } else {
+                                                            echo "replaceToCart()";
+                                                          } ?>" type="button">В корзину</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
   <div class="popup popup__subscribe popup_is-animated" id="popup">
     <form name="license" method="post" action="/action/subscribe.php" class="popup__content">
       <button type="button" class="popup__close"></button>
@@ -451,6 +489,34 @@ require_once __DIR__ . './helpers.php';
   </div>
 
   <script src="./script/index.js"></script>
+  <script>
+    <?
+    $arrayGoodsPHP = getGoods(0);
+    $goodsJSON = json_encode($arrayGoodsPHP);
+    ?>
+    const popupCardPreview = document.querySelector('.popup_card-preview');
+    const allPriceList = <?= $goodsJSON ?>;
+    const cardsList = Array.from(document.querySelectorAll('.card'));
+    const cardImage = popupCardPreview.querySelector('.popup__image');
+    const cardTitle = popupCardPreview.querySelector('.popup__title');
+    const cardProvider = popupCardPreview.querySelector('.popup__provider');
+    const cardDescription = popupCardPreview.querySelector('.popup__description');
+    const cardValue = popupCardPreview.querySelector('.popup__value');
+    const cardUnit = popupCardPreview.querySelector('.popup__unit');
+    const popupConfig = {
+      dataset: popupCardPreview.dataset,
+      image: cardImage,
+      title: cardTitle,
+      provider: cardProvider,
+      description: cardDescription,
+      price: cardValue,
+      unit: cardUnit,
+    }
+    cardsList.forEach((card) => {
+      cardPreviewHandler(card, popupConfig, allPriceList);
+    });
+    setHandlersButtonsPopupSubmit();
+  </script>
 </body>
 
 </html>

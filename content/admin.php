@@ -192,28 +192,28 @@ $user = currentUser();
         <li class="content__block__list-item t">
           <a class="content__block__list-link list-link_color list-link_back" href="./account.php">Вернуться в профиль</a>
         </li>
-        <li class="content__block__list-item t2 ">
+        <!-- <li class="content__block__list-item  ">
           <a class="content__block__list-link" href="#site_content">Контент сайта</a>
-        </li>
-        <li class="content__block__list-item t3">
+        </li> -->
+        <li class="content__block__list-item t2">
           <a class="content__block__list-link" href="#products">Товары</a>
         </li>
-        <li class="content__block__list-item t4">
+        <li class="content__block__list-item t3">
           <a class="content__block__list-link" href="#history">История заказов</a>
         </li>
-        <li class="content__block__list-item t5">
+        <li class="content__block__list-item t4">
           <a class="content__block__list-link" href="#uploading">Выгрузка файлов</a>
         </li>
       </ul>
       <div class="conteiner-text">
 
-        <form method="post" action="" class="conteiner-text__account type__frame" id="site_content">
+        <!-- <form method="post" action="" class="conteiner-text__account type__frame" id="site_content">
           <h1 class="panel-auto__title">Контент сайта</h1>
 
           <button type="submit" class="panel-auto__btn panel-auto__btn-color">
             Сохранить изменения
           </button>
-        </form>
+        </form> -->
 
         <form method="post" action="" class="conteiner-text__account type__frame" id="products">
           <h1 class="panel-auto__title">Каталог товаров</h1>

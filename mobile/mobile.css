@@ -87,7 +87,9 @@
     flex-direction: column;
   }
 
-
+  .popup__title {
+    font-size: clamp(1.375rem, 1.6283rem + 0.5868vw, 1.5rem);
+  }
 }
 
 @media (width <= 440px) {

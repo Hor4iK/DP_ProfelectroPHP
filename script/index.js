@@ -10,7 +10,7 @@ const renderLoading = (loader, isLoading) => {
 }
 
 const replaceToCart = () => {
-  setTimeout(() => { window.location.replace('./cart.php') }, 600);
+  setTimeout(() => { window.location.replace('/content/cart.php') }, 600);
 }
 
 
@@ -346,6 +346,7 @@ function setHandlerInputSearch(searchConfig, loader, template) {
             if (res[0]) {
               if (res.length > 1) searchConfig.titlePage.textContent = `Найдено: ${res.length} товаров`;
               else if (res.length = 1) searchConfig.titlePage.textContent = `Найден: ${res.length} товар`;
+              else if (res.length > 1 && res.length < 5) searchConfig.titlePage.textContent = `Найдено: ${res.length} товара`;
               searchConfig.container.classList.add('content__catalog-container_type_hide');
               res.forEach(item => { searchConfig.containerSearch.append(createCard(template, item, searchConfig.popupConfig, searchConfig.allPriceList)) });
             }

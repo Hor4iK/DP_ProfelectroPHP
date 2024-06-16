@@ -282,7 +282,7 @@ $user = currentUser();
                   <div class="cart__item-cover_middle">
                     <h5 class="history__item-title"><?= $product['good_name'] ?></h5>
                     <div class="cart__item-cover_middle-down">
-                      <input type="number" min="1" value="<?= $product['good_count'] ?>" class="popup__input cart__item-input" required>
+                      <input type="number" min="1" value="<?= $product['good_count'] ?>" disabled class="popup__input cart__item-input" required>
                       <h6 class="cart__item-price"><?= $product['good_price'] ?></h6>
                     </div>
                   </div>

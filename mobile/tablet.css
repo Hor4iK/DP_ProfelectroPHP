@@ -70,6 +70,11 @@
     display: none;
   }
 
+  .popup__title {
+    font-size: clamp(1.475rem, 1.6283rem + 0.5868vw, 1.6rem);
+    line-height: 22px;
+  }
+
   .content__block {
     display: flex;
     flex-direction: column;
@@ -124,6 +129,10 @@
 
   .popup__image {
     padding-block-end: 0;
+  }
+
+  .popup_card-preview .popup__description {
+    max-height: 90px;
   }
 
   .popup_card-preview .popup__form {
