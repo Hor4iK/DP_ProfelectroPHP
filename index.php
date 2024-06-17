@@ -30,12 +30,12 @@ require_once __DIR__ . './helpers.php';
       <div class="panel-auto__login">
         <label for="login">Логин</label>
         <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['login'])) echo ' type__visible' ?>" id="incorrect-symbol-log">*</span>
-        <input class="panel-auto__field" type="email" name="login" id="login" autocomplete required />
+        <input class="panel-auto__field" type="email" name="login" pattern="[@a-zA-Z\-\._0-9]+" id="login" autocomplete required />
       </div>
       <div class="panel-auto__password">
         <label for="password">Пароль</label>
         <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['password'])) echo ' type__visible' ?>" id="incorrect-symbol-log">*</span>
-        <input class="panel-auto__field" type="password" name="password" id="password" autocomplete required />
+        <input class="panel-auto__field" type="password" pattern="[\da-zA-Zа-яА-ЯёЁ\-]+" minlength="6" name="password" id="password" autocomplete required />
       </div>
       <div class="panel-auto__btns">
         <button class="panel-auto__btn panel-auto__btn-color" type="submit" id="btn_enter">войти</button>
@@ -188,7 +188,7 @@ require_once __DIR__ . './helpers.php';
             <ul class="banner-view__list">
               <li class="banner-view__list-item banner-view__type__byrenie">
                 <h2 class="banner-view__list-item-title">
-                  Алмазное бурение и комплектующие
+                  Кабельно-проводниковая продукция
                 </h2>
                 <button class="banner-view__list-item-button">
                   Подробнее

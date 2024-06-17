@@ -260,7 +260,7 @@
   height: 100%;
   min-height: 18em;
   width: 100%;
-  padding: 10px 0;
+  padding: 2px 0;
   background-color: var(--theme-color-light);
 }
 
@@ -271,12 +271,13 @@
   align-items: center;
   text-decoration: none;
   background-position: center right;
-  background-size: 90%;
+  background-size: 100%;
   background-repeat: no-repeat;
 }
 
 .banner-view-link__type__byrenie {
-  background-image: url(/img/banner2.jpg);
+  background-image: url(/img/hmn1a00ads4vdele29wppnryug2qkkt1.jpg);
+  filter: brightness(1.05);
 }
 
 .banner-view__list-item {
@@ -319,9 +320,7 @@
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  -webkit-box-shadow: 0 -150px 67px -75px rgb(0 0 0 / 0.6) inset;
-  -moz-box-shadow: 0 -150px 67px -75px rgb(0 0 0 / 0.6) inset;
-  box-shadow: 0 -150px 67px -75px rgb(0 0 0 / 0.6) inset;
+  box-shadow: 0 -160px 67px -75px rgb(0 0 0 / 0.4) inset, 0 -70px 67px -75px rgb(0 0 0 / 1) inset;
 }
 
 .card-type__watersupply {

@@ -188,7 +188,7 @@ require_once __DIR__ . '/../helpers.php';
           <div class="form-reg">
             <label for="login">E-mail</label>
             <span class="incorrect-symbol type__hide <?php if (!empty($_SESSION['validation']['login'])) echo ' type__visible' ?>" id="incorrect-symbol-log"><?php echo $_SESSION['validation']['login'] ?></span>
-            <input class="panel-auto__field" placeholder="ivanov@example.ru" pattern="[@a-zA-Z\-\._]+" type="email" required name="login" id="login" />
+            <input class="panel-auto__field" placeholder="ivanov@example.ru" pattern="[@a-zA-Z\-\._0-9]+" type="email" required name="login" id="login" />
           </div>
           <div class="form-reg">
             <label for="phone">Телефон</label>
