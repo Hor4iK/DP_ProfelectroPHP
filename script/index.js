@@ -10,7 +10,7 @@ const renderLoading = (loader, isLoading) => {
 }
 
 const replaceToCart = () => {
-  setTimeout(() => { window.location.replace('/content/cart.php') }, 600);
+  setTimeout(() => { window.location.replace('/content/cart.php') }, 300);
 }
 
 

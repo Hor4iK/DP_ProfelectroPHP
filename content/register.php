@@ -183,27 +183,27 @@ require_once __DIR__ . '/../helpers.php';
           <div class="form-reg">
             <label for="name">Имя Фамилия</label>
             <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['name'])) echo ' type__visible' ?>" id="incorrect-symbol-name"><?php echo $_SESSION['validation']['name'] ?></span>
-            <input class="panel-auto__field" required type="text" minlength="3" placeholder="Иванов Иван" name="name" id="name" />
+            <input class="panel-auto__field" required type="text" pattern="[a-zA-Zа-яА-ЯёЁ\- ]+" minlength="3" placeholder="Иванов Иван" name="name" id="name" />
           </div>
           <div class="form-reg">
             <label for="login">E-mail</label>
             <span class="incorrect-symbol type__hide <?php if (!empty($_SESSION['validation']['login'])) echo ' type__visible' ?>" id="incorrect-symbol-log"><?php echo $_SESSION['validation']['login'] ?></span>
-            <input class="panel-auto__field" placeholder="ivanov@example.ru" type="email" required name="login" id="login" />
+            <input class="panel-auto__field" placeholder="ivanov@example.ru" pattern="[@a-zA-Z\-\._]+" type="email" required name="login" id="login" />
           </div>
           <div class="form-reg">
             <label for="phone">Телефон</label>
             <span class="incorrect-symbol type__hide <?php if (!empty($_SESSION['validation']['phone'])) echo ' type__visible' ?>" id="incorrect-symbol-phone"><?php echo $_SESSION['validation']['phone'] ?></span>
-            <input class="panel-auto__field" required maxlength="11" placeholder="79008007060" type="tel" name="phone" id="phone" />
+            <input class="panel-auto__field" required minlength="11" maxlength="11" placeholder="79008007060" type="tel" name="phone" id="phone" />
           </div>
           <div class="form-reg">
             <label for="password">Пароль</label>
             <span class="incorrect-symbol type__hide <?php if (!empty($_SESSION['validation']['password'])) echo ' type__visible' ?>" id="incorrect-symbol-password"><?php echo $_SESSION['validation']['password'] ?></span>
-            <input class="panel-auto__field" required minlength="6" placeholder="*********" type="password" name="password" id="password" />
+            <input class="panel-auto__field" pattern="[\da-zA-Zа-яА-ЯёЁ\-]+" required minlength="6" placeholder="*********" type="password" name="password" id="password" />
           </div>
           <div class="form-reg">
             <label for="password_again">Подтвердите пароль</label>
             <span class="incorrect-symbol type__hide <?php if (!empty($_SESSION['validation']['password_again'])) echo ' type__visible' ?>" id="incorrect-symbol-password_again"><?php echo $_SESSION['validation']['password_again'] ?></span>
-            <input class="panel-auto__field" required minlength="6" placeholder="*********" type="password" name="password_again" id="password_again" />
+            <input class="panel-auto__field" pattern="[\da-zA-Zа-яА-ЯёЁ\-]+" required minlength="6" placeholder="*********" type="password" name="password_again" id="password_again" />
           </div>
           <button type="submit" class="panel-auto__btn panel-auto__btn-color">
             Продолжить

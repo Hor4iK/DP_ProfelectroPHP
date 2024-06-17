@@ -221,7 +221,7 @@ $user = currentUser();
                                                     } else {
                                                       echo $user['name'];
                                                     }
-                                                    ?>" name="name" id="name" />
+                                                    ?>" pattern="[a-zA-Zа-яА-ЯёЁ\- ]+" minlength="3" name="name" id="name" />
           </div>
           <div class="panel-auto__login">
             <label for="login">Логин</label>
@@ -230,7 +230,7 @@ $user = currentUser();
                                                                     echo '';
                                                                   } else {
                                                                     echo $user['email'];
-                                                                  }  ?>" name="login" id="loginChange" />
+                                                                  }  ?>" pattern="[@a-zA-Z\-\._]+" name="login" id="loginChange" />
           </div>
           <div class="panel-auto__password">
             <label for="phone">Телефон</label>
@@ -239,7 +239,7 @@ $user = currentUser();
                                                       echo '';
                                                     } else {
                                                       echo $user['phone'];
-                                                    }  ?>" name="phone" id="phone" />
+                                                    }  ?>" pattern="\d+" type="tel" minlength="11" maxlength="11" name="phone" id="phone" />
           </div>
           <button type="submit" class="panel-auto__btn panel-auto__btn-color">
             Сохранить изменения
@@ -250,12 +250,12 @@ $user = currentUser();
           <div class="panel-auto__name">
             <label for="name">Новый пароль</label>
             <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['password'])) echo ' type__visible' ?>" id="incorrect-symbol-pas_new">*</span>
-            <input class="panel-auto__field" type="password" minlength="6" required name="password" />
+            <input class="panel-auto__field" pattern="[\da-zA-Zа-яА-ЯёЁ\-]+" required type="password" minlength="6" required name="password" />
           </div>
           <div class="panel-auto__login">
             <label for="login">Новый пароль ещё раз</label>
             <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['password_again'])) echo ' type__visible' ?>" id="incorrect-symbol-pas_new_again">*</span>
-            <input class="panel-auto__field" minlength="6" type="password" required name="password_again" id="password_again" />
+            <input class="panel-auto__field" pattern="[\da-zA-Zа-яА-ЯёЁ\-]+" minlength="6" type="password" required name="password_again" id="password_again" />
           </div>
           <button type="submit" class="panel-auto__btn panel-auto__btn-color">
             Сохранить изменения
