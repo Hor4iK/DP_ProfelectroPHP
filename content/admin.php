@@ -426,8 +426,8 @@ $user = currentUser();
       <button type="button" class="popup__close"></button>
       <h4 class="popup__title">Добавление товара</h4>
       <fieldset class="popup__container">
-        <input type="text" placeholder="Наименование" minlength="4" name="name" id="popup__input_type_card-name" class="popup__input popup__input_type_card-name" required>
-        <input type="url" placeholder="Адрес изображения" minlength="4" name="image" id="popup__input_type_card-image" class="popup__input popup__input_type_card-image" required>
+        <input type="text" placeholder="Наименование" minlength="4" maxlength="150" name="name" id="popup__input_type_card-name" class="popup__input popup__input_type_card-name" required>
+        <input type="url" placeholder="Ссылка на изображение (https://gray-test.ru/example.png)" minlength="4" name="image" id="popup__input_type_card-image" class="popup__input popup__input_type_card-image">
         <input type="text" placeholder="Описание товара" minlength="4" name="overview" id="popup__input_type_card-overview" class="popup__input popup__input_type_card-overview" required>
         <input type="text" placeholder="Производитель" minlength="4" name="provider" id="popup__input_type_card-provider" class="popup__input popup__input_type_card-provider" required>
         <input type="number" placeholder="Цена" step="0.01" min="1" minlength="1" name="price" id="popup__input_type_card-price" class="popup__input popup__input_type_card-price" required>

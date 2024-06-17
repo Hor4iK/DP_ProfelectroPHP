@@ -226,7 +226,7 @@ const setHandlerAddCardButton = (modal) => {
       new Promise(generateMessage(messageTitle.success, messageText.successAdd, 'success'));
     }
     else {
-      evt.preventDefault();
+      // evt.preventDefault();
     }
   })
 }

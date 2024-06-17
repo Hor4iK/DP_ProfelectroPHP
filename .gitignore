@@ -1,3 +1,6 @@
 node_modules/
 stylelint.config.js
 .prettierrc
+.editorconfig
+package.json
+package-lock.json
