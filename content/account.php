@@ -336,9 +336,7 @@ $user = currentUser();
           <li class="footer__list-item">
             <a href="../content/politics.php" class="footer__content-link">Политика</a>
           </li>
-          <li class="footer__list-item">
-            <a href="#" class="footer__content-link">Реквизиты</a>
-          </li>
+
         </ul>
         <ul class="footer__list">
           <li class="footer__list-item">

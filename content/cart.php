@@ -219,7 +219,7 @@
       </ul>
       <form method="post" action="./order.php" class="card-order">
         <h2 class="card-order__title">Ваш заказ</h2>
-        <div class="card-order__type-user">
+        <!-- <div class="card-order__type-user">
           <fieldset class="card-order__type-user-fieldset">
             <legend class="card-order__type-user-title">Тип покупателя:</legend>
             <div class="card-order__type-user-select">
@@ -231,7 +231,7 @@
               <label class="card-order__type-user-label" for="legal-entity">Юридическое лицо</label>
             </div>
           </fieldset>
-        </div>
+        </div> -->
         <div class="card-order__summ">
           <h3 class="card-order__summ-title">Итого</h3>
           <div class="card-order__summ-cover">
@@ -279,9 +279,7 @@
           <li class="footer__list-item">
             <a href="../content/politics.php" class="footer__content-link">Политика</a>
           </li>
-          <li class="footer__list-item">
-            <a href="#" class="footer__content-link">Реквизиты</a>
-          </li>
+
         </ul>
         <ul class="footer__list">
           <li class="footer__list-item">

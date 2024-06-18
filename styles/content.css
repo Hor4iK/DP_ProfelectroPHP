@@ -905,6 +905,7 @@
 }
 
 .card-order {
+  height: 55%;
   max-width: 500px;
   max-height: 390px;
   width: 100%;
@@ -916,6 +917,10 @@
   background-color: var(--theme-color-light);
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.4);
   border-radius: 25px;
+}
+
+.content__order .card-order {
+  height: auto;
 }
 
 .card-order__title {

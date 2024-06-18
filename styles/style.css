@@ -707,12 +707,22 @@
   letter-spacing: 1.35px;
 }
 
+.footer__contact-link[href^="tel:"]:hover {
+  transition: opacity 0.1s linear;
+  opacity: 0.5;
+}
+
 .footer__contact-list-item.footer__contact-link[href^="mailto:"] {
   margin-bottom: 15px;
 }
 
 .footer__contact-link[href^="mailto:"] {
   margin: 17px 0;
+}
+
+.footer__contact-link[href^="mailto:"]:hover {
+  transition: opacity 0.1s linear;
+  opacity: 0.5;
 }
 
 .contact__block-address {
@@ -727,6 +737,11 @@
 .contact__link-svg {
   display: block;
   margin-top: 10px;
+}
+
+.contact__link-svg:hover {
+  transition: opacity 0.1s linear;
+  opacity: 0.5;
 }
 
 .footer__offer {

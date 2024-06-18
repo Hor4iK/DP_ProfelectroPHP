@@ -184,7 +184,7 @@ require_once __DIR__ . './helpers.php';
       </nav>
       <div class="preview-banner-cards">
         <div class="banner-view">
-          <a href="./content/catalog.php?Value=4" class="banner-view-link banner-view-link__type__byrenie">
+          <a href="./content/catalog.php?Value=1&Podcategory=1" class="banner-view-link banner-view-link__type__byrenie">
             <ul class="banner-view__list">
               <li class="banner-view__list-item banner-view__type__byrenie">
                 <h2 class="banner-view__list-item-title">
@@ -375,9 +375,6 @@ require_once __DIR__ . './helpers.php';
           </li>
           <li class="footer__list-item">
             <a href="../content/politics.php" class="footer__content-link">Политика</a>
-          </li>
-          <li class="footer__list-item">
-            <a href="#" class="footer__content-link">Реквизиты</a>
           </li>
         </ul>
         <ul class="footer__list">
