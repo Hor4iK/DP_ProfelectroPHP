@@ -642,7 +642,7 @@ $user = currentUser();
       <h6 class="data__list-item-price card-value"></h6>
       <h5 class="data__list-item-unit card-unit"></h5>
       <h5 class="data__list-item-article card-article"></h5>
-      <input class="data__list-item-check" type="checkbox" name="id">
+      <input class="data__list-item-check input-card" type="checkbox" name="id">
     </li>
   </template>
   <template id="banner-card">

@@ -490,7 +490,7 @@ function updateBanners($idBannersList, $obj): string
     $pdo = getPDO();
     foreach ($idBannersList as $id) {
       $result = $pdo->prepare(query: "UPDATE banners SET banner_turn= $obj[$id] WHERE banner_id= $id");
-    $result->execute();
+      $result->execute();
     }
     return 'The banners has been updated';
   } catch (Exception $err) {
@@ -504,7 +504,7 @@ function updateMiniBanners($idMiniBannersList, $obj): string
     $pdo = getPDO();
     foreach ($idMiniBannersList as $id) {
       $result = $pdo->prepare(query: "UPDATE mini_banners SET mini_banner_name= '{$obj[$id]['name']}', mini_banner_src= '{$obj[$id]['src']}', mini_banner_image= '{$obj[$id]['image']}' WHERE mini_banner_id= $id");
-    $result->execute();
+      $result->execute();
     }
     return 'The minibanners has been updated';
   } catch (Exception $err) {
@@ -518,7 +518,7 @@ function updateOffers($idOffersList, $obj): string
     $pdo = getPDO();
     foreach ($idOffersList as $id) {
       $result = $pdo->prepare(query: "UPDATE offers SET offer_good_turn= $obj[$id] WHERE offer_id= $id");
-    $result->execute();
+      $result->execute();
     }
     return 'The offers has been updated';
   } catch (Exception $err) {

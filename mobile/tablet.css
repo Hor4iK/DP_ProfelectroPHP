@@ -41,7 +41,7 @@
 
   .content__cart {
     grid-template-columns: 1fr;
-    gap: 5vw
+    gap: 5vw;
   }
 
   .card-order {
@@ -110,7 +110,10 @@
 
 @media (width <= 700px) {
   .content__catalog-content {
-    grid-template-columns: repeat(auto-fit, clamp(305px, calc(95% - 20px), 615px));
+    grid-template-columns: repeat(
+      auto-fit,
+      clamp(305px, calc(95% - 20px), 615px)
+    );
   }
 
   .popup__content {

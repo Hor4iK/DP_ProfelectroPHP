@@ -8,10 +8,10 @@
   .sidebar-menu__list {
     font-size: inherit;
   }
-
-  .sidebar-menu__content::after {
+  /*
+  .sidebar-menu__content::befo {
     left: 410px;
-  }
+  } */
 
   .content__about-list {
     display: flex;
@@ -106,9 +106,9 @@
     font-size: 16px;
   }
 
-  .sidebar-menu__content::after {
+  /* .sidebar-menu__content::before {
     left: 330px;
-  }
+  } */
 
   .content__order {
     padding-inline: 1px;

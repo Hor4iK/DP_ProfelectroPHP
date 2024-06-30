@@ -5,7 +5,7 @@
   --theme-color: #13265f;
   --theme-color-light: #fff;
   --accent-color: #2548b9;
-  --color-icon-user: #4B5F83;
+  --color-icon-user: #4b5f83;
 }
 
 .page {
@@ -221,6 +221,16 @@
   font-weight: 300;
 }
 
+.sidebar-menu_list-item {
+  position: relative;
+}
+
+.sidebar-menu_list-item:not(:last-child)::before {
+  content: "›";
+  position: absolute;
+  left: 95%;
+}
+
 .sidebar-menu__list .list-item_option:first-of-type {
   padding-top: 20px;
 }
@@ -232,12 +242,12 @@
   cursor: pointer;
 }
 
-.sidebar-menu__content::after {
+/* .sidebar-menu__content::before {
   content: "›";
   position: absolute;
   left: 280px;
   top: 6px;
-}
+} */
 
 .sidebar-menu__account-btn {
   padding: 8px 40px;
@@ -321,7 +331,9 @@
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  box-shadow: 0 -160px 67px -75px rgb(0 0 0 / 0.4) inset, 0 -70px 67px -75px rgb(0 0 0 / 1) inset;
+  box-shadow:
+    0 -160px 67px -75px rgb(0 0 0 / 0.4) inset,
+    0 -70px 67px -75px rgb(0 0 0 / 1) inset;
 }
 
 /* .card-type__watersupply {
@@ -673,7 +685,9 @@
 }
 
 .footer-button-subscribe:hover {
-  transition: scale  0.15s linear, background 0.1s linear ;
+  transition:
+    scale 0.15s linear,
+    background 0.1s linear;
   scale: 1.05;
   background-color: var(--accent-color);
 }
@@ -771,9 +785,7 @@
   gap: 50px;
 }
 
-
 /* BLOCK OF NOTIFICATION */
-
 
 /* @import url("https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500&display=swap"); */
 
@@ -848,7 +860,9 @@ body {
   margin: 1rem 0;
   background: hsl(0, 0%, 100%);
   border-radius: 10px;
-  box-shadow: 0 0 5px hsla(0, 0%, 0%, 0.1), 0 2px 3px hsla(0, 0%, 0%, 0.1);
+  box-shadow:
+    0 0 5px hsla(0, 0%, 0%, 0.1),
+    0 2px 3px hsla(0, 0%, 0%, 0.1);
   border-left: 0.5rem solid hsl(0, 0%, 100%);
   transform: translateX(100%);
   opacity: 0;
