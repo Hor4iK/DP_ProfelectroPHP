@@ -45,9 +45,12 @@
 }
 
 .content__block__list-link {
+  height: 100%;
   max-width: 250px;
   padding: 10px;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--theme-color-light);
   border: 2px solid var(--accent-color);
   border-radius: 15px;
@@ -107,6 +110,8 @@
 .conteiner-text__account {
   padding: 3vw;
   text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .conteiner-text__about {
@@ -1568,6 +1573,68 @@ form#history .data__list-item-user:first-child {
   background-size: contain;
 }
 
+.panel-subtitle {
+  font-size: calc(var(--font-size) + 0.5em);
+  margin-block-end: 20px;
+  margin-block-start: 40px;
+}
+
+.list-banners {
+
+}
+
+.list-banners .data__list-item-image {
+  width: 100%;
+  max-height: 85px;
+  aspect-ratio: auto;
+}
+
+.list-banners__item {
+  grid-template-columns: 1fr 2fr 2fr 0.3fr;
+  background-color: var(--theme-color-light);
+  height: 100px;
+}
+
+.list-minibanners .data__list-item-image {
+  width: 100%;
+  max-width: 130px;
+  max-height: 100px;
+  aspect-ratio: auto;
+}
+
+.list-minibanners .data__list-item-title {
+  width: 90%;
+  height: 30px;
+  font-size: calc(var(--font-size));
+  font-weight: 500;
+  padding-inline: 6px;
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.list-minibanners .data__list-item-article {
+  width: 100%;
+  height: 30px;
+  font-size: calc(var(--font-size));
+  font-weight: 500;
+  padding-inline: 6px;
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.list-minibanners__item {
+  background-color: var(--theme-color-light);
+  height: 110px;
+  grid-template:
+    "image name src"
+    "image imaget src";
+  grid-template-columns: 70px 1fr 1fr;
+}
+
+.offers {
+  margin-block-end: 50px;
+}
+
 .loader-container {
   display: none;
   position: fixed;
@@ -1604,4 +1671,43 @@ form#history .data__list-item-user:first-child {
   100% {
     rotate: 360deg;
   }
+}
+
+.popup__add-banner .popup__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.popup__add-banner .popup__container {
+  gap: 15px;
+  border: none;
+  border-radius: 5px;
+}
+
+.popup__add-offer  .popup__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 15px;
+}
+
+.popup__add-offer  .data__list {
+  max-height: 400px;
+}
+
+.list-minibanners__item .data__list-item-image {
+  grid-area: image;
+}
+
+.data__list-item_banner-name {
+  grid-area: name;
+}
+
+.data__list-item_banner-src {
+  grid-area: src;
+}
+
+.data__list-item_banner-image {
+  grid-area: imaget;
 }

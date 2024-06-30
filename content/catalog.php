@@ -494,6 +494,8 @@
       input: searchInput,
       popupConfig: popupConfig,
       allPriceList: allPriceList,
+      method: 'getGoodsBySearch',
+      admin: false,
     }
 
     async function setEventHandlersCards() {
@@ -505,7 +507,7 @@
     setEventHandlersCards();
     setHandlersButtonsSubmit();
     setHandlersButtonsPopupSubmit();
-    setHandlerInputSearch(searchConfig, loader, template);
+    setHandlerInputSearch(searchConfig, loader);
   </script>
 </body>
 

@@ -22,6 +22,8 @@ function getPDO(): PDO
 
 
 //VALIDATION
+
+
 function clearValidation()
 {
   $_SESSION['validation'] = [];
@@ -44,6 +46,8 @@ function getMessage(string $key): string
 
 
 //currentUser
+
+
 function currentUser(): array|false
 {
   $pdo = getPDO();
@@ -70,6 +74,8 @@ function currentUserAccount(): array
 
 
 //GOODS FUNCTIONS
+
+
 function getGoods(int $Category): array
 {
   $pdo = getPDO();
@@ -184,6 +190,8 @@ function deleteGood($idCard): string
 
 
 //CART FUNCTIONS
+
+
 function getCart(): array
 {
   $user = $_SESSION['user']['id'];
@@ -344,5 +352,190 @@ function getGoodsBySearch(string $search): array
     return $products;
   } catch (Exception $err) {
     return $products[] = $err;
+  }
+}
+
+function getBannerTurn(): array
+{
+  try {
+    $pdo = getPDO();
+    $result = $pdo->prepare(query: "SELECT * FROM banners WHERE banner_turn=1");
+    $result->execute();
+    $banners = array();
+
+    while ($banners_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
+      $banners[] = $banners_info;
+    };
+
+    return $banners;
+  } catch (Exception $err) {
+    return $banners[] = $err;
+  }
+}
+
+function getBanners(): array
+{
+  try {
+    $pdo = getPDO();
+    $result = $pdo->prepare(query: "SELECT * FROM banners ");
+    $result->execute();
+    $banners = array();
+
+    while ($banners_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
+      $banners[] = $banners_info;
+    };
+
+    return $banners;
+  } catch (Exception $err) {
+    return $banners[] = $err;
+  }
+}
+
+function getMiniBanners(): array
+{
+  try {
+    $pdo = getPDO();
+    $result = $pdo->prepare(query: "SELECT * FROM mini_banners");
+    $result->execute();
+    $minibanners = array();
+
+    while ($minibanners_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
+      $minibanners[] = $minibanners_info;
+    };
+
+    return $minibanners;
+  } catch (Exception $err) {
+    return $minibanners[] = $err;
+  }
+}
+
+function getOffers(): array
+{
+  try {
+    $pdo = getPDO();
+    $result = $pdo->prepare(query: "SELECT * FROM offers, goods WHERE offer_good_id = good_id");
+    $result->execute();
+    $offers = array();
+
+    while ($offers_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
+      $offers[] = $offers_info;
+    };
+    return $offers;
+  } catch (Exception $err) {
+    return $offers[] = $err;
+  }
+}
+
+function getTurnedOffers(): array
+{
+  try {
+    $pdo = getPDO();
+    $result = $pdo->prepare(query: "SELECT * FROM offers, goods WHERE offer_good_turn=1 and offer_good_id = good_id");
+    $result->execute();
+    $offers = array();
+
+    while ($offers_info = $result->fetch(mode: \PDO::FETCH_ASSOC)) {
+      $offers[] = $offers_info;
+    };
+    return $offers;
+  } catch (Exception $err) {
+    return $offers[] = $err;
+  }
+}
+
+function addOffers($idCards): array
+{
+  try {
+    $pdo = getPDO();
+    foreach ($idCards as $id) {
+      $result = $pdo->prepare(query: "INSERT INTO offers(offer_good_id) VALUES ($id)");
+      $result->execute();
+    }
+
+    return getOffers();
+  } catch (Exception $err) {
+    return $offers[] = $err;
+  }
+}
+
+function deleteBanners($idBanner): string
+{
+  try {
+    $pdo = getPDO();
+    foreach ($idBanner as $id) {
+      $result = $pdo->prepare(query: "DELETE FROM banners WHERE banner_id = $id");
+      $result->execute();
+    }
+    return 'The banner has been deleted';
+  } catch (Exception $err) {
+    return $err;
+  }
+}
+
+function addBanner(string $imageBanner, string $linkBanner, string $contentBanner): string
+{
+  try {
+    $pdo = getPDO();
+    $result = $pdo->prepare(query: "INSERT INTO banners (banner_image, banner_link, banner_content) VALUES ('$imageBanner', '$linkBanner', '$contentBanner')");
+    $result->execute();
+    return 'The new banner has been added';
+  } catch (Exception $err) {
+    return $err;
+  }
+}
+
+function updateBanners($idBannersList, $obj): string
+{
+  try {
+    $pdo = getPDO();
+    foreach ($idBannersList as $id) {
+      $result = $pdo->prepare(query: "UPDATE banners SET banner_turn= $obj[$id] WHERE banner_id= $id");
+    $result->execute();
+    }
+    return 'The banners has been updated';
+  } catch (Exception $err) {
+    return $err;
+  }
+}
+
+function updateMiniBanners($idMiniBannersList, $obj): string
+{
+  try {
+    $pdo = getPDO();
+    foreach ($idMiniBannersList as $id) {
+      $result = $pdo->prepare(query: "UPDATE mini_banners SET mini_banner_name= '{$obj[$id]['name']}', mini_banner_src= '{$obj[$id]['src']}', mini_banner_image= '{$obj[$id]['image']}' WHERE mini_banner_id= $id");
+    $result->execute();
+    }
+    return 'The minibanners has been updated';
+  } catch (Exception $err) {
+    return $err;
+  }
+}
+
+function updateOffers($idOffersList, $obj): string
+{
+  try {
+    $pdo = getPDO();
+    foreach ($idOffersList as $id) {
+      $result = $pdo->prepare(query: "UPDATE offers SET offer_good_turn= $obj[$id] WHERE offer_id= $id");
+    $result->execute();
+    }
+    return 'The offers has been updated';
+  } catch (Exception $err) {
+    return $err;
+  }
+}
+
+function deleteOffers($idOffers): string
+{
+  try {
+    $pdo = getPDO();
+    foreach ($idOffers as $id) {
+      $result = $pdo->prepare(query: "DELETE FROM offers WHERE offer_id = $id");
+      $result->execute();
+    }
+    return 'The offers has been deleted';
+  } catch (Exception $err) {
+    return $err;
   }
 }

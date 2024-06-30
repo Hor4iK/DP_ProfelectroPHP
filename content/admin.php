@@ -192,31 +192,120 @@ $user = currentUser();
         <li class="content__block__list-item t">
           <a class="content__block__list-link list-link_color list-link_back" href="./account.php">Вернуться в профиль</a>
         </li>
-        <!-- <li class="content__block__list-item  ">
+        <li class="content__block__list-item t2 ">
           <a class="content__block__list-link" href="#site_content">Контент сайта</a>
-        </li> -->
-        <li class="content__block__list-item t2">
+        </li>
+        <li class="content__block__list-item t3 ">
           <a class="content__block__list-link" href="#products">Товары</a>
         </li>
-        <li class="content__block__list-item t3">
+        <li class="content__block__list-item t4 ">
           <a class="content__block__list-link" href="#history">История заказов</a>
         </li>
-        <li class="content__block__list-item t4">
+        <li class="content__block__list-item t5 ">
           <a class="content__block__list-link" href="#uploading">Выгрузка файлов</a>
         </li>
       </ul>
       <div class="conteiner-text">
 
-        <!-- <form method="post" action="" class="conteiner-text__account type__frame" id="site_content">
+        <form method="post" action="" class="conteiner-text__account type__frame" id="site_content">
           <h1 class="panel-auto__title">Контент сайта</h1>
-
-          <button type="submit" class="panel-auto__btn panel-auto__btn-color">
+          <div class="banners box">
+            <h1 class="panel-auto__title panel-subtitle">Главный баннер</h1>
+            <fieldset id="banners" class="data__list list-banners">
+              <legend></legend>
+              <?
+              $banners = getBanners();
+              if ($banners != null) {
+                foreach ($banners as $banner) : ?>
+                  <li class="data__list-item list-banners__item card" data-id="<?= $banner['banner_id'] ?>">
+                    <img src="<? if ($banner['banner_image']) echo ($banner['banner_image']);
+                              else echo ("../img/default-product-image.png") ?>" alt="" class="data__list-item-image">
+                    <h5 class="data__list-item-title"><?= $banner['banner_content'] ?></h5>
+                    <h5 class="data__list-item-article"><?= $banner['banner_link'] ?></h5>
+                    <input class="data__list-item-check input-card" <? if ($banner['banner_turn']) echo ('checked') ?> type="radio" name="banner">
+                  </li>
+              <? endforeach;
+              } else {
+                echo ('<h2 class="content__cart_empty">Список баннеров пуст</h2>');
+              } ?>
+            </fieldset>
+            <div class="data__actions">
+              <button type="button" class="panel-auto__btn panel-auto__btn-color data__actions__btn data__actions__btn_delete_banners">
+                Удалить выбранное
+              </button>
+              <button type="button" class="panel-auto__btn panel-auto__btn-color data__actions__btn data__actions__btn_add_banner">
+                Добавить баннер
+              </button>
+            </div>
+          </div>
+          <div class="minibanners box">
+            <h1 class="panel-auto__title panel-subtitle">Карточки разделов</h1>
+            <fieldset id="minibanners" class="data__list list-minibanners">
+              <legend></legend>
+              <?
+              $banners = getMiniBanners();
+              if ($banners != null) {
+                foreach ($banners as $banner) : ?>
+                  <li class="data__list-item list-minibanners__item card" data-id="<?= $banner['mini_banner_id'] ?>">
+                    <img src="<? if ($banner['mini_banner_image']) echo ($banner['mini_banner_image']);
+                              else echo ("../img/default-product-image.png") ?>" alt="" class="data__list-item-image">
+                    <input type="text" placeholder="Название раздела" value="<?= $banner['mini_banner_name'] ?>" class="data__list-item-title data__list-item_banner-name input-card"></input>
+                    <input type="text" placeholder="Ссылка на раздел" value="<?= $banner['mini_banner_src'] ?>" class="data__list-item-article data__list-item_banner-src input-card"></input>
+                    <input type="text" placeholder="Изображение раздела" value="<?= $banner['mini_banner_image'] ?>" class="data__list-item-title data__list-item_banner-image  input-card"></input>
+                  </li>
+              <? endforeach;
+              } else {
+                echo ('<h2 class="content__cart_empty">Список баннеров пуст</h2>');
+              } ?>
+            </fieldset>
+          </div>
+          <div class="offers box">
+            <h1 class="panel-auto__title panel-subtitle">Лучшие предложения</h1>
+            <ul class="data__list">
+              <?
+              $products = getOffers();
+              if ($products != null) {
+                foreach ($products as $product) : ?>
+                  <li class="data__list-item cart__list-item card" data-good-id="<?= $product['good_id'] ?>" data-id="<?= $product['offer_id'] ?>">
+                    <img src="<? if ($product['good_image']) echo ($product['good_image']);
+                              else echo ("../img/default-product-image.png") ?>" alt="" class="data__list-item-image">
+                    <h5 class="data__list-item-title"><?= $product['good_name'] ?></h5>
+                    <h6 class="data__list-item-price"><?= $product['good_price'] ?></h6>
+                    <h5 class="data__list-item-unit"><?= $product['good_unit'] ?></h5>
+                    <h5 class="data__list-item-article"><?= $product['good_id'] ?></h5>
+                    <input class="data__list-item-check input-card" <? if ($product['offer_good_turn']) echo ('checked') ?> type="checkbox" name="id<?= $product['offer_good_id'] ?>">
+                  </li>
+              <? endforeach;
+              } else {
+                echo ('<h2 class="content__cart_empty">Каталог товаров пуст</h2>');
+              } ?>
+            </ul>
+            <div class="data__actions">
+              <button type="button" class="panel-auto__btn panel-auto__btn-color data__actions__btn data__actions__btn_delete_offers ">
+                Удалить выбранное
+              </button>
+              <button type="button" class="panel-auto__btn panel-auto__btn-color data__actions__btn data__actions__btn_add_offers">
+                Добавить товар
+              </button>
+            </div>
+          </div>
+          <button type="button" class="panel-auto__btn button_save panel-auto__btn-color">
             Сохранить изменения
           </button>
-        </form> -->
+        </form>
 
         <form method="post" action="" class="conteiner-text__account type__frame" id="products">
-          <h1 class="panel-auto__title">Каталог товаров</h1>
+          <h1 id="offers__title" class="panel-auto__title">Каталог товаров</h1>
+          <div class="searchBox">
+            <input class="searchInput" pattern="[a-zA-Zа-яА-ЯёЁ\- ]+" type="text" name="search" placeholder="Поиск по сайту">
+            <button class="searchButton" type="button" href="#">
+              <i class="material-icons">
+              </i>
+            </button>
+          </div>
+          <div class="loader-container">
+            <div class="loader"></div>
+          </div>
           <ul class="data__title-list">
             <li class="data__title-list__item"></li>
             <li class="data__title-list__item">Наименование</li>
@@ -225,7 +314,7 @@ $user = currentUser();
             <li class="data__title-list__item">Артикул</li>
             <li class="data__title-list__item">Выбранные</li>
           </ul>
-          <fieldset class="data__list">
+          <fieldset id="container-search" class="data__list box">
             <legend></legend>
             <?
             $products = getGoods(0);
@@ -246,7 +335,7 @@ $user = currentUser();
             } ?>
           </fieldset>
           <div class="data__actions">
-            <button type="button" class="panel-auto__btn panel-auto__btn-color data__actions__btn data__actions__btn_delete">
+            <button type="button" class="panel-auto__btn panel-auto__btn-color data__actions__btn data__actions__btn_delete_goods">
               Удалить выбранное
             </button>
             <button type="button" class="panel-auto__btn panel-auto__btn-color data__actions__btn data__actions__btn_add">
@@ -486,9 +575,47 @@ $user = currentUser();
             <option value="32">Запасные части к котлам</option>
           </optgroup>
         </select>
-        <!-- <input type="text" placeholder="Артикул" minlength="1" name="article" id="popup__input_type_card-article" class="popup__input popup__input_type_card-article" required> -->
       </fieldset>
       <button class="button popup__button panel-auto__btn-light popup__button_is-invalid" type="submit">Добавить</button>
+    </form>
+  </div>
+  <div class="popup popup__add-banner popup_is-animated">
+    <form name="adding" action="/action/add_card.php" method="post" class="popup__content">
+      <button type="button" class="popup__close"></button>
+      <h4 class="popup__title">Добавление баннера</h4>
+      <fieldset class="popup__container">
+        <input type="text" placeholder="Содержание баннера" minlength="4" maxlength="150" name="name" class="popup__input popup__input_type_card-name" required>
+        <input type="url" placeholder="Ссылка на изображение (https://gray-test.ru/example.png)" minlength="4" name="image" class="popup__input popup__input_type_card-image" required>
+        <input type="text" placeholder="Путь к разделу" minlength="4" name="overview" class="popup__input popup__input_type_card-overview" required>
+      </fieldset>
+      <button class="button popup__button panel-auto__btn-light popup__button_is-invalid" type="button">Добавить</button>
+    </form>
+  </div>
+  <div class="popup popup__add-offer popup_is-animated">
+    <form name="adding" class="popup__content">
+      <button type="button" class="popup__close"></button>
+      <h4 class="popup__title">Добавить товар в лучшие предложения</h4>
+      <ul class="data__list box">
+
+        <?
+        $products = getGoods(0);
+        if ($products != null) {
+          foreach ($products as $product) : ?>
+            <li class="data__list-item cart__list-item card" data-id="<?= $product['good_id'] ?>">
+              <img src="<? if ($product['good_image']) echo ($product['good_image']);
+                        else echo ("../img/default-product-image.png") ?>" alt="" class="data__list-item-image">
+              <h5 class="data__list-item-title"><?= $product['good_name'] ?></h5>
+              <h6 class="data__list-item-price"><?= $product['good_price'] ?></h6>
+              <h5 class="data__list-item-unit"><?= $product['good_unit'] ?></h5>
+              <h5 class="data__list-item-article"><?= $product['good_id'] ?></h5>
+              <input class="popup__input data__list-item-check input-card" type="checkbox" value="<?= $product['good_id'] ?>" name="id<?= $product['good_id'] ?>">
+            </li>
+        <? endforeach;
+        } else {
+          echo ('<h2 class="content__cart_empty">Каталог товаров пуст</h2>');
+        } ?>
+      </ul>
+      <button class="button popup__button panel-auto__btn-light" type="button">Добавить</button>
     </form>
   </div>
   <div class="notification">
@@ -508,13 +635,75 @@ $user = currentUser();
       </button>
     </div>
   </div>
+  <template id="search-card">
+    <li class="data__list-item cart__list-item card">
+      <img src="" alt="" class="data__list-item-image card-image">
+      <h5 class="data__list-item-title card-title"></h5>
+      <h6 class="data__list-item-price card-value"></h6>
+      <h5 class="data__list-item-unit card-unit"></h5>
+      <h5 class="data__list-item-article card-article"></h5>
+      <input class="data__list-item-check" type="checkbox" name="id">
+    </li>
+  </template>
+  <template id="banner-card">
+    <li class="data__list-item list-banners__item banner card">
+      <img src="" alt="" class="data__list-item-image card-image">
+      <h5 class="data__list-item-title card-title"></h5>
+      <h5 class="data__list-item-article card-link"></h5>
+      <input class="data__list-item-check card-value input-card" type="radio" name="banner">
+    </li>
+  </template>
 </body>
 <script src="../script/index.js"></script>
 <script>
-  setHandlerDeleteButton();
+  const containerBanners = document.querySelector('.banners');
+  const bannersList = containerBanners.querySelector('.list-banners');
+  const templateCardBanner = document.querySelector('#banner-card');
+
+  const containerMiniBanners = document.querySelector('.minibanners');
+
+  const containerOffers = document.querySelector('.offers');
+  const offersList = containerOffers.querySelector('.data__list');
+
+  const formContent = document.querySelector('#site_content');
+
   const popupAddCard = document.querySelector('.popup__add-card');
+  const popupAddOffers = document.querySelector('.popup__add-offer');
+  const popupAddBanner = document.querySelector('.popup__add-banner');
+
+  const titlePage = document.querySelector('#offers__title');
+  const container = document.querySelector('#container-search');
+  const template = document.querySelector('#search-card').content;
+  const searchInput = document.querySelector('.searchInput');
+  const loader = document.querySelector('.loader-container');
+
+  const searchConfig = {
+    titlePage: titlePage,
+    containerSearch: container,
+    input: searchInput,
+    method: 'getGoodsBySearch',
+    defaultMethod: 'getGoods',
+    admin: true,
+    templateCard: template,
+  }
+
+  const contentConfig = {
+    banners: containerBanners,
+    minibanners: containerMiniBanners,
+    offers: containerOffers,
+  }
+
+  setHandlerDeleteGoodsButton();
+  setHandlerDeleteBannersButton();
+  setHandlerDeleteOffersButton();
   setHandlerAddCardButtonOpenModal(popupAddCard);
+  setHandlerAddOffersButtonOpenModal(popupAddOffers);
+  setHandlerAddBannerButtonOpenModal(popupAddBanner);
+  setHandlerAddBannerButton(popupAddBanner, templateCardBanner, bannersList);
+  setHandlerAddOffersButton(popupAddOffers, offersList, template);
+  setHandlerSaveContentButton(formContent, contentConfig);
   setHandlerAddCardButton(popupAddCard);
+  setHandlerInputSearch(searchConfig, loader);
 </script>
 
 </html>

@@ -117,4 +117,21 @@
   .content-frame {
     border-radius: 12px;
   }
+
+  .list-banners {
+    overflow-wrap: anywhere;
+  }
+
+  .panel-subtitle {
+    margin-block-end: 20px;
+  }
+
+  .popup__add-offer .popup__content {
+    max-height: 410px;
+  }
+
+  .popup__add-offer .popup__button {
+    padding: 12px;
+    border-radius: 10px;
+  }
 }

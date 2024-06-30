@@ -24,9 +24,9 @@ require_once __DIR__ . './helpers.php';
     <form class="panel-auto" action="/action/login.php" method="post">
       <button class="panel-auto-exit popup__close" id="panel-auto_exit" type="button"></button>
       <h1 class="panel-auto__title">Личный кабинет</h1>
-      <?php if (hasMessage(key: 'error')) : ?>
+      <? if (hasMessage(key: 'error')) : ?>
         <h2 class="panel-auto-error"><?php echo getMessage(key: 'error') ?></h2>
-      <?php endif; ?>
+      <? endif; ?>
       <div class="panel-auto__login">
         <label for="login">Логин</label>
         <span class="incorrect-symbol type__hide<?php if (!empty($_SESSION['validation']['login'])) echo ' type__visible' ?>" id="incorrect-symbol-log">*</span>
@@ -183,58 +183,33 @@ require_once __DIR__ . './helpers.php';
         </div>
       </nav>
       <div class="preview-banner-cards">
+
+        <? $banners = getBannerTurn();
+        $banner = $banners[0]; ?>
         <div class="banner-view">
-          <a href="./content/catalog.php?Value=1&Podcategory=1" class="banner-view-link banner-view-link__type__byrenie">
+          <a href="<?= $banner['banner_link'] ?>" style="background-image: url(<?= $banner['banner_image'] ?>);" class="banner-view-link">
             <ul class="banner-view__list">
-              <li class="banner-view__list-item banner-view__type__byrenie">
+              <li class="banner-view__list-item" data-id="<?= $banner['banner_id'] ?>">
                 <h2 class="banner-view__list-item-title">
-                  Кабельно-проводниковая продукция
+                  <?= $banner['banner_content'] ?>
                 </h2>
                 <button class="banner-view__list-item-button">
                   Подробнее
                 </button>
               </li>
-
-              <!--
-                      <li class="banner-view__list-item">
-                          <h2 class="banner-view__list-item-title">Schneider</h2>
-                          <button class="banner-view__list-item-button">Подробнее</button>
-                      </li>
-                   -->
             </ul>
           </a>
         </div>
 
+        <? $minibanners = getMiniBanners(); ?>
         <ul class="preview__list-cards">
-          <li class="preview__list-item-card card-type__ventilation">
-            <a href="./content/catalog.php?Value=8" class="preview__card-link">
-              <h4 class="preview__card-title">Сантехника</h4>
-            </a>
-          </li>
-
-          <li class="preview__list-item-card card-type__tools">
-            <a href="./content/catalog.php?Value=4" class="preview__card-link">
-              <h4 class="preview__card-title">Инструменты</h4>
-            </a>
-          </li>
-
-          <li class="preview__list-item-card card-type__watersupply">
-            <a href="./content/catalog.php?Value=2" class="preview__card-link">
-              <h4 class="preview__card-title">Водоснабжение</h4>
-            </a>
-          </li>
-
-          <li class="preview__list-item-card card-type__electrical">
-            <a href="./content/catalog.php?Value=1" class="preview__card-link">
-              <h4 class="preview__card-title">Электротовары</h4>
-            </a>
-          </li>
-
-          <li class="preview__list-item-card card-type__chandelier">
-            <a href="./content/catalog.php?Value=3" class="preview__card-link">
-              <h4 class="preview__card-title">Освещение</h4>
-            </a>
-          </li>
+          <? foreach ($minibanners as $minibanner) : ?>
+            <li style="background-image: url(<?= $minibanner['mini_banner_image'] ?>)" class="preview__list-item-card" data-id="<?= $minibanner['mini_banner_id'] ?>">
+              <a href="<?= $minibanner['mini_banner_src'] ?>" class="preview__card-link">
+                <h4 class="preview__card-title"><?= $minibanner['mini_banner_name'] ?></h4>
+              </a>
+            </li>
+          <? endforeach; ?>
         </ul>
       </div>
     </section>
@@ -272,55 +247,26 @@ require_once __DIR__ . './helpers.php';
             </li>
           </ul>
         </div>
+        <? $offers = getTurnedOffers();
+        if($offers != null) :?>
         <div class="content__offers content__section">
           <h1 class="offers__title">Лучшие предложения</h1>
-          <!-- <div class="offers__switches">
-            <button class="offers__card-switch button-type__light"></button>
-            <button class="offers__card-switch button-type__color"></button>
-          </div> -->
           <ul class="offers__cards-list">
-            <li class="offers-card-item card" data-id="56">
-              <a href="#" class="offers__card-link">
-                <img src="https://rndelectro.ru/upload/resize_cache/iblock/d4a/450_450_140cd750bba9870f18aada2478b24840a/5sct4vflcp1pd8qlhnxukyjobi862kc8.jpg" alt="Светильник настольный LE TL-108 RED (Красный, E27, прищепка, пакет) (24)" class="offers__card-image" />
-                <h6 class="offers__card-title">
-                  Светильник настольный LE TL-108 RED (Красный, E27, прищепка, пакет) (24)
-                </h6>
-                <span class="offers__card-provider"></span>
-                <span class="offers__card-value">450.5 ₽/шт</span>
-              </a>
-            </li>
-            <li class="offers-card-item card" data-id="153">
-              <a href="#" class="offers__card-link">
-                <img src="https://rndelectro.ru/upload/resize_cache/iblock/cf0/450_450_140cd750bba9870f18aada2478b24840a/vb67hrpcmn22gg2h3ka0twl1bw41m6n4.jpg" class="offers__card-image" />
-                <h6 class="offers__card-title">
-                  Двухконтурный напольный газовый котел отопления КОВ-16СКВС Сигнал, серия 'S-TERM' (до 160 кв.м)
-                </h6>
-                <span class="offers__card-provider">Сигнал</span>
-                <span class="offers__card-value">30645 ₽/шт</span>
-              </a>
-            </li>
-            <li class="offers-card-item card" data-id="127">
-              <a href="#" class="offers__card-link">
-                <img src="https://rndelectro.ru/upload/resize_cache/iblock/67b/450_450_140cd750bba9870f18aada2478b24840a/3xhpy84zqwfxvd60b40vs3l9ow831f00.jpg" class="offers__card-image" />
-                <h6 class="offers__card-title">
-                  Смеситель для умывальника Milardo Simp SIMSB00M01
-                </h6>
-                <span class="offers__card-provider">Milardo</span>
-                <span class="offers__card-value">2 114 ₽/шт</span>
-              </a>
-            </li>
-            <li class="offers-card-item card" data-id="52">
-              <a href="#" class="offers__card-link">
-                <img src="https://rndelectro.ru/upload/resize_cache/iblock/ca1/450_450_140cd750bba9870f18aada2478b24840a/ykhbin4f527t6e1z0uljh3jw6bfyfu6q.jpg" class="offers__card-image" />
-                <h6 class="offers__card-title">
-                  Прожектор светодиодный STAR 2 220-240В 100вт IP65 6500К, Sparkled
-                </h6>
-                <span class="offers__card-provider">Sparkled</span>
-                <span class="offers__card-value">607.50 ₽/шт</span>
-              </a>
-            </li>
+            <? foreach ($offers as $offer) : ?>
+              <li class="offers-card-item card" data-id="<?= $offer['good_id'] ?>">
+                <a href="#" class="offers__card-link">
+                  <img src="<?= $offer['good_image'] ?>" alt="<?= $offer['good_name'] ?>" class="offers__card-image" />
+                  <h6 class="offers__card-title">
+                  <?= $offer['good_name'] ?>
+                  </h6>
+                  <span class="offers__card-provider"></span>
+                  <span class="offers__card-value"><?= $offer['good_price'] ?> ₽<?= $offer['good_unit'] ?></span>
+                </a>
+              </li>
+            <? endforeach; ?>
           </ul>
         </div>
+        <? endif;?>
         <div class="content__big-cards">
           <ul class="big-cards__list">
             <li class="big-cards__list-item">

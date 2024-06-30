@@ -273,6 +273,7 @@
   background-position: center right;
   background-size: 100%;
   background-repeat: no-repeat;
+  filter: brightness(1.05);
 }
 
 .banner-view-link__type__byrenie {
@@ -323,25 +324,25 @@
   box-shadow: 0 -160px 67px -75px rgb(0 0 0 / 0.4) inset, 0 -70px 67px -75px rgb(0 0 0 / 1) inset;
 }
 
-.card-type__watersupply {
+/* .card-type__watersupply {
   background-image: url(/img/водоснабжение.jpg);
-}
+} */
 
-.card-type__tools {
+/* .card-type__tools {
   background-image: url(/img/tools.jpg);
 }
 
 .card-type__ventilation {
   background-image: url(/img/вент.jpg);
-}
+} */
 
-.card-type__electrical {
+/* .card-type__electrical {
   background-image: url(/img/электротовары.jpg);
-}
+} */
 
-.card-type__chandelier {
+/* .card-type__chandelier {
   background-image: url(/img/люстра.jpg);
-}
+} */
 
 .preview__card-link {
   height: 100%;
@@ -367,6 +368,8 @@
   letter-spacing: 1.98px;
   text-transform: uppercase;
   color: #fff;
+  text-align: center;
+  width: 100%;
 }
 
 .content__section {
@@ -499,12 +502,15 @@
   justify-content: center;
   grid-auto-flow: row;
   gap: 2.1em;
+  max-height: 420px;
+  overflow-x: hidden;
 }
 
 .offers-card-item {
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.4);
   text-align: center;
   border-radius: 12px;
+  margin-block: 30px;
 }
 
 .offers-card-item:hover {
@@ -792,6 +798,7 @@ body {
   color: hsl(0, 0%, 20%);
   overflow-x: hidden;
   padding: 0.25rem;
+  z-index: 10;
 }
 
 /* .notification__bell {

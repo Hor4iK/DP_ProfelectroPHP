@@ -49,10 +49,47 @@ switch ($data['funcName']) {
     $aResult['response'] = getCart();
     echo json_encode($aResult);
     break;
+  case 'getGoods':
+    $aResult['response'] = getGoods($data['arguments']['category']);
+    echo json_encode($aResult);
+    break;
   case 'getGoodsBySearch':
     $aResult['response'] = getGoodsBySearch($data['arguments']['search']);
     echo json_encode($aResult);
     break;
+  case 'addBanner':
+    $aResult['response'] = addBanner($data['arguments']['image'], $data['arguments']['link'], $data['arguments']['content']);
+    echo json_encode($aResult);
+    break;
+  case 'getBanners':
+    $aResult['response'] = getBanners();
+    echo json_encode($aResult);
+    break;
+  case 'deleteBanner':
+    $aResult['response'] = deleteBanners($data['arguments']['cardsId']);
+    echo json_encode($aResult);
+    break;
+  case 'deleteOffers':
+    $aResult['response'] = deleteOffers($data['arguments']['cardsId']);
+    echo json_encode($aResult);
+    break;
+  case 'addOffers':
+    $aResult['response'] = addOffers($data['arguments']['cardsId']);
+    echo json_encode($aResult);
+    break;
+  case 'updateBanners':
+    $aResult['response'] = updateBanners($data['arguments']['idList'], $data['arguments']['obj']);
+    echo json_encode($aResult);
+    break;
+  case 'updateMiniBanners':
+    $aResult['response'] = updateMiniBanners($data['arguments']['idList'], $data['arguments']['obj']);
+    echo json_encode($aResult);
+    break;
+  case 'updateOffers':
+    $aResult['response'] = updateOffers($data['arguments']['idList'], $data['arguments']['obj']);
+    echo json_encode($aResult);
+    break;
+
   default:
     $aResult['error'] = 'Not found function ' . $data['funcName'] . '!';
     echo json_encode($aResult);

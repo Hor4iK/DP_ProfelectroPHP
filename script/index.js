@@ -197,6 +197,22 @@ const setHandlerAddCardButtonOpenModal = (modal) => {
   })
 }
 
+//Set eventListeners to open modal of add card
+const setHandlerAddBannerButtonOpenModal = (modal) => {
+  const buttonAdd = document.querySelector('.data__actions__btn_add_banner');
+  buttonAdd.addEventListener('click', () => {
+    openModal(modal);
+  })
+}
+
+//Set eventListeners to open modal of add card
+const setHandlerAddOffersButtonOpenModal = (modal) => {
+  const buttonAdd = document.querySelector('.data__actions__btn_add_offers');
+  buttonAdd.addEventListener('click', () => {
+    openModal(modal);
+  })
+}
+
 // Finding invalid inputs
 const hasInvalidInput = (inputList) => {
   return inputList.some(inputElement => {
@@ -231,23 +247,227 @@ const setHandlerAddCardButton = (modal) => {
   })
 }
 
-//Set eventListeners deleting to close__button of a product card
-const handlerCallDeleteGoodDB = (evt) => {
-  const cardsList = document.querySelector('.data__list');
+const selectCardsForDelete = (evt) => {
+  const cardsList = evt.target.closest('.box');
   const cardArray = Array.from(cardsList.querySelectorAll('.card'));
   const checkedItemList = cardArray.filter(item => item.querySelector('.data__list-item-check').checked);
+
+  return checkedItemList;
+}
+
+//Set eventListeners deleting of banners
+const handlerCallDeleteBanners = (evt) => {
+  const checkedItemList = selectCardsForDelete(evt);
+  const idList = Array.from(checkedItemList, item => item.dataset.id);
+  const args = {
+    cardsId: idList,
+  }
+  callFunctionAllocator('deleteBanner', args)
+    .then(checkedItemList.forEach(item => item.remove()))
+    .then(generateMessage(messageTitle.success, messageText.successRemoveBanners, 'success'));
+}
+function setHandlerDeleteBannersButton() {
+  const deleteButton = document.querySelector('.data__actions__btn_delete_banners');
+  deleteButton.addEventListener('click', handlerCallDeleteBanners);
+}
+
+const createCardBanner = (template, cardData) => {
+  const cardElement = template.content.querySelector('.card').cloneNode(true);
+  const image = cardElement.querySelector('.card-image');
+  const content = cardElement.querySelector('.card-title');
+  const link = cardElement.querySelector('.card-link');
+  const input = cardElement.querySelector('.card-value');
+
+  cardElement.dataset.id = cardData.banner_id;
+  cardData.banner_image ? image.src = cardData.banner_image : image.src = '../img/default-product-image.png';
+  image.alt = cardData.banner_content;
+  content.textContent = cardData.banner_content;
+  link.textContent = cardData.banner_link;
+  if (cardData.banner_turn != 0) input.checked = true;
+
+  return cardElement;
+}
+
+//Set eventListeners send data of adding card banner
+const setHandlerAddBannerButton = (modal, template, container) => {
+  const form = modal.querySelector('.popup__content');
+  const inputList = Array.from(form.querySelectorAll('.popup__input'));
+  const buttonAdd = modal.querySelector('.popup__button');
+  const inputImage = form.querySelector('.popup__input_type_card-image');
+  const inputLink = form.querySelector('.popup__input_type_card-overview');
+  const inputContent = form.querySelector('.popup__input_type_card-name');
+  inputList.forEach(item => {
+    item.addEventListener('input', () => {
+      if (hasInvalidInput(inputList)) {
+        // buttonAdd.disabled = true;
+        buttonAdd.classList.add('popup__button_is-invalid');
+      }
+      else {
+        // buttonAdd.disabled = false;
+        buttonAdd.classList.remove('popup__button_is-invalid');
+      }
+    })
+  })
+  buttonAdd.addEventListener('click', (evt) => {
+    if (!hasInvalidInput(inputList)) {
+      const args = {
+        image: inputImage.value,
+        link: inputLink.value,
+        content: inputContent.value,
+      }
+      callFunctionAllocator('addBanner', args)
+        .then(res => { generateMessage(messageTitle.success, messageText.successAddBanner, 'success') })
+        .then(closeModal(modal))
+        .then(() => {
+          callFunctionAllocator('getBanners')
+            .then(data => {
+              const res = Array.from(data.response);
+              container.querySelectorAll('.card').forEach(item => { item.remove(); });
+              res.forEach(item => { container.append(createCardBanner(template, item)) })
+            })
+        })
+        .catch(err => { generateMessage(messageTitle.error, messageText.errorAdd, 'danger') });
+    }
+    else {
+      // evt.preventDefault();
+    }
+  })
+}
+
+//Set eventListeners deleting of offers
+const handlerCallDeleteOffers = (evt) => {
+  const checkedItemList = selectCardsForDelete(evt);
+  const idList = Array.from(checkedItemList, item => item.dataset.id);
+  const goodIdList = Array.from(checkedItemList, item => item.dataset.goodId);
+  const args = {
+    cardsId: idList,
+    goodId: goodIdList,
+  }
+  callFunctionAllocator('deleteOffers', args)
+    .then(checkedItemList.forEach(item => item.remove()))
+    .then(generateMessage(messageTitle.success, messageText.successChangesOffers, 'success'));
+}
+function setHandlerDeleteOffersButton() {
+  const deleteButton = document.querySelector('.data__actions__btn_delete_offers');
+  deleteButton.addEventListener('click', handlerCallDeleteOffers);
+}
+
+//Set eventListeners send data of adding cards offer
+const setHandlerAddOffersButton = (modal, container, template) => {
+  const form = modal.querySelector('.popup__content');
+  const cardsList = Array.from(form.querySelectorAll('.card'));
+  const buttonAdd = modal.querySelector('.popup__button');
+  buttonAdd.addEventListener('click', (evt) => {
+    const checkedList = cardsList.map(item => { if (item.querySelector('.popup__input').checked) return item }).filter(item => item != undefined);
+    if (checkedList.length != 0) {
+      const idList = Array.from(checkedList, item => item.dataset.id);
+      const args = {
+        cardsId: idList,
+      }
+      callFunctionAllocator('addOffers', args)
+        .then(data => {
+          const res = Array.from(data.response);
+          container.querySelectorAll('.card').forEach(item => { item.remove(); });
+          res.forEach(item => { container.append(createAdminPanelCard(template, item)) })
+          generateMessage(messageTitle.success, messageText.successChangesOffers, 'success');
+        })
+        .then(closeModal(modal))
+        .catch(err => { generateMessage(messageTitle.error, messageText.errorAdd, 'danger') });
+    }
+    else {
+      generateMessage(messageTitle.error, messageText.selectGoodOffer, 'warning')
+      // evt.preventDefault();
+    }
+  })
+}
+
+const createObjCard = (container) => {
+  const cardsList = Array.from(container.querySelectorAll('.card'));
+  const objData = {}
+  cardsList.forEach(item => {
+    const id = item.dataset.id;
+    const input = item.querySelector('.input-card');
+    if (input.checked) objData[id] = 1;
+    else objData[id] = 0;
+  })
+  return objData;
+}
+
+const createObjIdCard = (container) => {
+  const cardsList = Array.from(container.querySelectorAll('.card'));
+  const listData = []
+  cardsList.forEach(item => { listData.push(item.dataset.id) })
+  return listData;
+}
+
+const createValueObjCard = (container) => {
+  const cardsList = Array.from(container.querySelectorAll('.card'));
+  const objData = {}
+  cardsList.forEach(item => {
+    const id = item.dataset.id;
+    const nameInput = item.querySelector('.data__list-item_banner-name');
+    const srcInput = item.querySelector('.data__list-item_banner-src');
+    const imageInput = item.querySelector('.data__list-item_banner-image');
+    objData[id] = {
+      name: nameInput.value,
+      src: srcInput.value,
+      image: imageInput.value,
+    };
+  })
+  return objData;
+}
+
+//Set eventListeners send data of adding cards offer
+const setHandlerSaveContentButton = (form, contentConfig) => {
+  let args = {
+    obj: {},
+    idList: [],
+  }
+  const buttonSave = form.querySelector('.button_save');
+  buttonSave.addEventListener('click', (evt) => {
+    Object.assign(args.obj, createObjCard(contentConfig.banners));
+    Object.assign(args.idList, createObjIdCard(contentConfig.banners));
+    Promise.all([callFunctionAllocator('updateBanners', args)])
+      .then(() => {
+        args = {
+          obj: {},
+          idList: [],
+        }
+        Object.assign(args.obj, createObjCard(contentConfig.offers));
+        Object.assign(args.idList, createObjIdCard(contentConfig.offers));
+        callFunctionAllocator('updateOffers', args)
+      })
+      .then(() => {
+        args = {
+          obj: {},
+          idList: [],
+        }
+        Object.assign(args.obj, createValueObjCard(contentConfig.minibanners));
+        Object.assign(args.idList, createObjIdCard(contentConfig.minibanners));
+        callFunctionAllocator('updateMiniBanners', args)
+      })
+      .then(res => { generateMessage(messageTitle.success, messageText.saveChanges, 'success') })
+      .catch(err => { generateMessage(messageTitle.error, messageText.errorAdd, 'danger') });
+  })
+}
+
+
+//Set eventListeners deleting to close__button of a product card
+const handlerCallDeleteGoodDB = (evt) => {
+  const checkedItemList = selectCardsForDelete(evt);
   const idList = Array.from(checkedItemList, item => item.dataset.id);
   const args = {
     cardsId: idList,
   }
   callFunctionAllocator('deleteGood', args)
     .then(checkedItemList.forEach(item => item.remove()))
-    .then(generateMessage(messageTitle.success, messageText.successRemove, 'success'));
+    .then(generateMessage(messageTitle.success, messageText.successRemoveGoods, 'success'));
 }
-function setHandlerDeleteButton() {
-  const deleteButton = document.querySelector('.data__actions__btn_delete');
-  deleteButton.addEventListener('click', handlerCallDeleteGoodDB)
+function setHandlerDeleteGoodsButton() {
+  const deleteButton = document.querySelector('.data__actions__btn_delete_goods');
+  deleteButton.addEventListener('click', handlerCallDeleteGoodDB);
 }
+
 
 //Set eventListeners to button of sending order
 const setEventConfirmed = (evt) => {
@@ -271,7 +491,7 @@ const handlerSendOrder = () => {
       }
     })
   })
-  buttonOrder.addEventListener('click',() => {openModal(popupConfirmation)});
+  buttonOrder.addEventListener('click', () => { openModal(popupConfirmation) });
   buttonOk.addEventListener('click', () => {
     callFunctionAllocator('setPaidGood');
   })
@@ -331,31 +551,55 @@ const createCard = (template, cardData, popupConfig, allPriceList) => {
   return cardElement;
 }
 
-function setHandlerInputSearch(searchConfig, loader, template) {
+const createAdminPanelCard = (template, cardData) => {
+  const cardElement = template.querySelector('.card').cloneNode(true);
+  const image = cardElement.querySelector('.card-image');
+  const name = cardElement.querySelector('.card-title');
+  const price = cardElement.querySelector('.card-value');
+  const unit = cardElement.querySelector('.card-unit');
+  const article = cardElement.querySelector('.card-article');
+
+  cardElement.dataset.id = cardData.good_id;
+  cardData.good_image ? image.src = cardData.good_image : image.src = '../img/default-product-image.png';
+  image.alt = cardData.good_name;
+  name.textContent = cardData.good_name;
+  price.textContent = cardData.good_price + ' ';
+  unit.textContent = cardData.good_unit;
+  article.textContent = cardData.good_unit;
+
+  return cardElement;
+}
+
+function setHandlerInputSearch(searchConfig, loader) {
   searchConfig.input.addEventListener('input', () => {
     const args = {
       search: searchConfig.input.value,
+      category: 0,
     }
     searchConfig.containerSearch.querySelectorAll('.card').forEach(item => { item.remove(); });
     if (searchConfig.input.value != "" && searchConfig.input.value != null && searchConfig.input.value != ' ') {
       if (!searchConfig.input.validity.patternMismatch) {
         renderLoading(loader, true);
-        callFunctionAllocator('getGoodsBySearch', args)
+        callFunctionAllocator(searchConfig.method, args)
           .then(data => {
             const res = Array.from(data.response);
             if (res[0]) {
               if (res.length > 1) searchConfig.titlePage.textContent = `Найдено: ${res.length} товаров`;
               else if (res.length = 1) searchConfig.titlePage.textContent = `Найден: ${res.length} товар`;
               else if (res.length > 1 && res.length < 5) searchConfig.titlePage.textContent = `Найдено: ${res.length} товара`;
-              searchConfig.container.classList.add('content__catalog-container_type_hide');
-              res.forEach(item => { searchConfig.containerSearch.append(createCard(template, item, searchConfig.popupConfig, searchConfig.allPriceList)) });
+              if (searchConfig.admin) {
+                res.forEach(item => { searchConfig.containerSearch.append(createAdminPanelCard(searchConfig.templateCard, item)) });
+              } else {
+                searchConfig.container.classList.add('content__catalog-container_type_hide');
+                res.forEach(item => { searchConfig.containerSearch.append(createCard(searchConfig.templateCard, item, searchConfig.popupConfig, searchConfig.allPriceList)) });
+              }
             }
             else {
               searchConfig.titlePage.textContent = `Результаты не найдены`;
               searchConfig.container.classList.add('content__catalog-container_type_hide');
             }
           })
-          .finally(renderLoading(loader, false))
+          .finally(renderLoading(loader, false));
       }
       else {
         searchConfig.titlePage.textContent = `Результаты не найдены`;
@@ -363,8 +607,20 @@ function setHandlerInputSearch(searchConfig, loader, template) {
       }
     }
     else {
-      searchConfig.titlePage.textContent = 'Категории';
-      searchConfig.container.classList.remove('content__catalog-container_type_hide');
+      if (searchConfig.admin) {
+        searchConfig.titlePage.textContent = 'Каталог товаров';
+        renderLoading(loader, true);
+        callFunctionAllocator(searchConfig.defaultMethod, args)
+          .then(data => {
+            const res = Array.from(data.response);
+            res.forEach(item => { searchConfig.containerSearch.append(createAdminPanelCard(searchConfig.templateCard, item)) });
+          })
+          .finally(renderLoading(loader, false));
+      }
+      else {
+        searchConfig.titlePage.textContent = 'Категории';
+        searchConfig.container.classList.remove('content__catalog-container_type_hide');
+      }
     }
   })
 }
@@ -380,7 +636,12 @@ const messageTitle = {
 
 const messageText = {
   successAdd: 'Товар успешно добавлен!',
-  successRemove: 'Товар удалён из базы.',
+  successRemoveGoods: 'Товар удалён из базы.',
+  successAddBanner: 'Баннер добавлен.',
+  successRemoveBanners: 'Баннер удалён из базы.',
+  successChangesOffers: 'Лучшие предложения изменены.',
+  selectGoodOffer: 'Выберите товар для добавления.',
+  saveChanges: 'Сохранения изменены.',
   errorAdd: 'Ошибка добавления товара в базу.',
   errorRemove: 'Ошибка удаления товара из базы.',
 }
@@ -398,7 +659,7 @@ function showMessage() {
 }
 
 function generateMessage(messageTitle, messageText, messageClass) {
-  const delay = Math.floor(Math.random() * 600);
+  const delay = Math.floor(Math.random() * 400);
   const timeoutID = setTimeout(() => {
     const message = document.querySelector('.notification__message');
 
@@ -411,3 +672,6 @@ function generateMessage(messageTitle, messageText, messageClass) {
   }, delay);
 }
 
+const setHandlerSaveButton = () => {
+
+}
